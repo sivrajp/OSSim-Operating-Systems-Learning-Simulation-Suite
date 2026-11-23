@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSSim — Operating Systems Learning & Simulation Suite</title>
+    <!-- Instant Resource Preload for High-Speed Cold Startup -->
+    <link rel="preload" href="js/ossim_bundle.js" as="script">
+    <link rel="preload" href="css/theme.css" as="style">
+    <link rel="preload" href="css/desktop.css" as="style">
+    <link rel="preload" href="css/visualizers.css" as="style">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/desktop.css">
+    <link rel="stylesheet" href="css/visualizers.css">
+</head>
+<body>
+
+    <!-- Master Navigation & Control Bar -->
+    <header class="app-header">
+        <!-- 1. Above the ribbon: Tool Name (no course code) -->
+        <div class="header-top-bar" data-nav="home" style="cursor:pointer;" title="Return to Suite Home">
+            <div class="brand-logo">A</div>
+            <h1 class="tool-title">OPERATING SYSTEMS SUITE (OSSim)</h1>
+        </div>
+
+        <!-- 2. The Ribbon: Navigation Tabs & Clock Controls -->
+        <div class="header-ribbon-row">
+            <nav class="nav-tabs">
+                <button class="nav-tab-btn active" data-tab="home" title="OSSim Suite Home">
+                    <span>🏠</span> Home
+                </button>
+                <button class="nav-tab-btn" data-tab="desktop" title="The Playground">
+                    <span>🎮</span> The Playground
+                </button>
+                <button class="nav-tab-btn" data-tab="workbench" title="The Classroom">
+                    <span>📚</span> The Classroom
+                </button>
+                <button class="nav-tab-btn" data-tab="algorithms" title="The Workshop">
+                    <span>⚙️</span> The Workshop
+                </button>
+                <button class="nav-tab-btn" data-tab="challenge" title="The Test Centre">
+                    <span>🎯</span> The Test Centre
+                </button>
+                <button class="nav-tab-btn" data-tab="quest" title="OS Builder Quest (Levels 0–5)">
+                    <span>🏗️</span> OS Builder Quest
+                </button>
+                <button class="nav-tab-btn" data-tab="capstone" title="The Capstone Studio — App Foundry (Levels 0–5)">
+                    <span>🏭</span> The Capstone Studio
+                </button>
+                <button class="nav-tab-btn" data-tab="capstone-playground" title="The Capstone Playground — Live Synthesized Hardware Stage">
+                    <span>🎮</span> Capstone Playground
+                </button>
+            </nav>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <button class="btn-header-sync" id="header-btn-sync" title="Sync, Backup, and Export Student Progress">
+                    <span>💾</span> Sync Progress
+                </button>
+                <button class="btn-header-docs" id="header-btn-guides" title="Open Complete User &amp; Test Guides">
+                    <span>📖</span> Docs &amp; Guides
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. Below the ribbon: Subtitle strip horizontally -->
+        <div class="header-bottom-bar">
+            <span>Interactive Pedagogical Simulation Suite</span>
+            <span class="inst-divider">•</span>
+            <span>Operating Systems Architecture Laboratory</span>
+        </div>
+    </header>
+
+    <!-- Master Viewport -->
+    <main id="app-viewport">
+        <!-- ================================================================= -->
+        <!-- TIER 0: HOME LANDING PAGE                                         -->
+        <!-- ================================================================= -->
+        <div class="tab-view active" id="tab-view-home">
+            <div class="home-container">
+                <!-- Hero Header Banner -->
+                <div class="home-hero">
+                    <div class="home-hero-badge">
+                        <span class="badge-dot">●</span>
+                        <span>INTERACTIVE OPERATING SYSTEMS PEDAGOGICAL CONTINUUM</span>
+                    </div>
+                    <h1 class="home-hero-title">OPERATING SYSTEMS SUITE (OSSim)</h1>
+                    <p class="home-hero-subtitle">
+                        An Interactive Pedagogical Simulation Suite Bridging Hardware Silicon, Kernel Supervisor Services, and User Applications
+                    </p>
+                    <p class="home-hero-purpose">
+                        <strong>Purpose of the Tool:</strong> In traditional operating systems education, students learn abstract concepts—such as dual-mode CPU rings, interrupt handling, page table translations, thread concurrency, and process scheduling—through disconnected mathematical models and theoretical lectures. <strong>OSSim</strong> transforms these abstractions into an interactive, visual reality. From watching keyboard interrupts traverse low-level device registers to testing race conditions in shared memory and solving complex CPU scheduling Gantt charts, OSSim provides students and engineering learners with an exploratory laboratory for every core concept in the curriculum.
+                    </p>
+                    
+                    <!-- Feature Quick-Stats Strip -->
+                    <div class="home-stats-strip">
+                        <div class="stat-pill"><span class="stat-icon">🛡️</span> <span>100% Offline Standalone (Zero-CORS)</span></div>
+                        <div class="stat-pill"><span class="stat-icon">📖</span> <span>18 Concepts &amp; Real-World Analogies</span></div>
+                        <div class="stat-pill"><span class="stat-icon">⚡</span> <span>Dual-Mode Ring 3 vs 0 &amp; Dual-Storage (HDD/SSD)</span></div>
+                        <div class="stat-pill"><span class="stat-icon">📊</span> <span>19 Verified Solvers (6 CPU + 3 Mem + 4 Paging + 6 Disk)</span></div>
+                        <div class="stat-pill"><span class="stat-icon">🧪</span> <span>18 Automated CI Suites (749/749 Passing 100%)</span></div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- BEGINNER QUICK-START: RECOMMENDED LEARNING PATHWAY        -->
+                <!-- ========================================================= -->
+                <div class="home-quickstart-section">
+                    <div class="quickstart-header">
+                        <div class="quickstart-badge">
+                            <span class="badge-dot">●</span>
+                            <span>RECOMMENDED LEARNING PATHWAY</span>
+                        </div>
+                        <h2>New to OSSim? Start Here</h2>
+                        <p>Follow this 4-step sequence to build your operating systems intuition from live interaction to kernel engineering:</p>
+                    </div>
+
+                    <div class="quickstart-steps-grid">
+                        <!-- Step 1 -->
+                        <div class="quickstart-step-card" data-nav="desktop" tabindex="0" role="button" title="Step 1: The Playground">
+                            <div class="step-card-num">Step 1</div>
+                            <h4 class="step-card-title">Interact in The Playground</h4>
+                            <p class="step-card-desc">
+                                Launch <strong>OSSimDoc</strong>, type text, and click <strong>Save Document</strong> to trace the 7-stage I/O pipeline from user mode down to physical disk.
+                            </p>
+                            <span class="step-card-link">Enter Playground &rarr;</span>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="quickstart-step-card" data-nav="workbench" tabindex="0" role="button" title="Step 2: The Classroom">
+                            <div class="step-card-num">Step 2</div>
+                            <h4 class="step-card-title">Explore Concepts in The Classroom</h4>
+                            <p class="step-card-desc">
+                                Master <strong>Dual-Mode Ring 3 vs 0</strong>, <strong>Process Life Cycles</strong>, and <strong>Memory MMU</strong> through 18 interactive visual sandboxes with real-world analogies.
+                            </p>
+                            <span class="step-card-link">Open Classroom &rarr;</span>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="quickstart-step-card" data-nav="algorithms" tabindex="0" role="button" title="Step 3: The Workshop">
+                            <div class="step-card-num">Step 3</div>
+                            <h4 class="step-card-title">Solve Algorithms in The Workshop</h4>
+                            <p class="step-card-desc">
+                                Simulate and compare <strong>19 verified benchmark solvers</strong> across CPU scheduling, memory placement, page replacement, and disk head movement.
+                            </p>
+                            <span class="step-card-link">Launch Workshop &rarr;</span>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="quickstart-step-card" data-nav="quest" tabindex="0" role="button" title="Step 4: OS Builder Quest">
+                            <div class="step-card-num">Step 4</div>
+                            <h4 class="step-card-title">Build Kernels in OS Builder Quest</h4>
+                            <p class="step-card-desc">
+                                Advance through <strong>Levels 0 to 5</strong> across 10 milestone quests—from 1-click modular integration to bare-metal silicon porting on x86 &amp; RISC-V.
+                            </p>
+                            <span class="step-card-link">Start OS Builder Quest &rarr;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Rooms Section -->
+                <div class="home-modules-section">
+                    <div class="section-heading">
+                        <h2>Explore the 7 Interactive Learning Environments</h2>
+                        <p>Select any room below to enter its specialized interactive workspace (Tiers 1 to 7):</p>
+                    </div>
+
+                    <!-- Four Big Clickable Cards Grid -->
+                    <div class="home-cards-grid">
+                        <!-- Card 1: The Playground -->
+                        <div class="home-big-card card-playground" data-nav="desktop" tabindex="0" role="button" title="Open The Playground: Live OS Desktop">
+                            <div class="card-header">
+                                <div class="card-icon-wrap playground-icon">
+                                    <span class="big-icon">🎮</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 1 • Living OS</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">1. The Playground</h3>
+                                <div class="card-subtitle">Live OS Desktop &amp; Hardware Continuum</div>
+                                <p class="card-desc">
+                                    Step into a simulated living operating system desktop. Interact with <strong>OSSimDoc</strong> (a live word processor), trace the real-time <strong>7-stage I/O pipeline</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, observe CPU register state transitions, track the magnetic hard disk seek arm, and inspect 64 physical RAM frames with the interactive memory inspector.
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>📱</span> <strong>OSSimDoc Word Processor:</strong> Live typing and document persistence</li>
+                                    <li><span>⚡</span> <strong>7-Stage Pipeline Trace:</strong> IRQ 1 ➔ CPL elevation ➔ MMU dirty write</li>
+                                    <li><span>🛡️</span> <strong>With OS vs Bare-Metal:</strong> See why modern computers require an OS</li>
+                                    <li><span>⚙️</span> <strong>Hardware X-Ray:</strong> CPU registers, disk platter, &amp; 64-frame RAM grid</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-playground">Enter The Playground ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: The Classroom -->
+                        <div class="home-big-card card-classroom" data-nav="workbench" tabindex="0" role="button" title="Open The Classroom: OS Concepts Learning">
+                            <div class="card-header">
+                                <div class="card-icon-wrap classroom-icon">
+                                    <span class="big-icon">📚</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 2 • Conceptual Lab</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">2. The Classroom</h3>
+                                <div class="card-subtitle">OS Concepts Learning &amp; Process Lab</div>
+                                <p class="card-desc">
+                                    Master foundational operating system mechanics through interactive visual sandboxes and runtime process controls. Drag and drop assembly into <strong>Dual-Mode rings</strong>, assemble <strong>Stackable OS Architectures</strong> with fault injection, simulate <strong>Polling vs Interrupts vs DMA</strong>, analyze <strong>POSIX Syscalls &amp; OS Evolution</strong>, and manage live <strong>Process Trees, 5-State Life Cycle, Multithreading models (1:1, M:1, M:M)</strong>, and <strong>IPC Channels</strong>.
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>🛡️</span> <strong>Dual-Mode Sandbox:</strong> Ring 3 User vs Ring 0 Kernel instructions</li>
+                                    <li><span>🧱</span> <strong>OS Architecture Builder:</strong> Monolithic, Microkernel &amp; driver crash lab</li>
+                                    <li><span>⚡</span> <strong>Hardware I/O Methods:</strong> Polling, Interrupt-Driven &amp; DMA simulators</li>
+                                    <li><span>🌿</span> <strong>Runtime Process Lab:</strong> Tree, threads, PCB table, 5-state transitions &amp; IPC</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-classroom">Enter The Classroom ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: The Workshop -->
+                        <div class="home-big-card card-workshop" data-nav="algorithms" tabindex="0" role="button" title="Open The Workshop: Algorithm Simulator">
+                            <div class="card-header">
+                                <div class="card-icon-wrap workshop-icon">
+                                    <span class="big-icon">⚙️</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 3 • Simulators</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">3. The Workshop</h3>
+                                <div class="card-subtitle">Algorithm Simulator &amp; Solvers</div>
+                                <p class="card-desc">
+                                    The mathematical and algorithmic laboratory of OSSim. Calculate, simulate, and verify <strong>19 benchmark operating system solvers</strong> with custom workloads and interactive visualizations. Features <strong>6 CPU Schedulers</strong> (FCFS, SJF, SRTF, RR, Priority, MLFQ), <strong>3 Dynamic Memory Placement Policies</strong> (First, Best, Worst Fit), <strong>4 Virtual Memory Page Replacement Policies</strong> (FIFO, LRU, Optimal, Clock), and <strong>6 Disk Arm Schedulers</strong> (FCFS, SSTF, SCAN, C-SCAN, LOOK, C-LOOK), alongside Peterson's lock and Banker's safety.
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>⏱️</span> <strong>6 CPU Schedulers:</strong> FCFS, SJF, SRTF, RR, Priority, MLFQ (Gantt charts)</li>
+                                    <li><span>🧠</span> <strong>3 Memory + 4 Paging:</strong> First/Best/Worst Fit, FIFO, LRU, Optimal, Clock</li>
+                                    <li><span>💾</span> <strong>6 Disk Schedulers:</strong> FCFS, SSTF, SCAN, C-SCAN, LOOK, C-LOOK seek traces</li>
+                                    <li><span>🔒</span> <strong>Synchronization &amp; Deadlocks:</strong> Peterson's, Semaphores &amp; Banker's Safety</li>
+                                </ul>
+                                <div class="solver-verification-note">
+                                    ✓ All 19 benchmark solvers verified against standard datasets in Test Suite 2 (<code>test_workshop_comparison.py</code>)
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-workshop">Enter The Workshop ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Card 4: The Test Centre -->
+                        <div class="home-big-card card-testcentre" data-nav="challenge" tabindex="0" role="button" title="Open The Test Centre: Exam Challenge">
+                            <div class="card-header">
+                                <div class="card-icon-wrap testcentre-icon">
+                                    <span class="big-icon">🎯</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 4 • Assessment</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">4. The Test Centre</h3>
+                                <div class="card-subtitle">Exam Challenge &amp; Problem Sets</div>
+                                <p class="card-desc">
+                                    Evaluate and sharpen your exam readiness with curated numerical problems and analytical scenarios matching <strong>university examination patterns</strong>. Practice with CPU turnaround times, Banker's resource matrices, effective memory access times (EMAT), and disk cylinder seek calculations. Receive instant feedback, automated grading, performance analytics, and complete step-by-step academic solutions.
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>📝</span> <strong>Exam-Pattern Questions:</strong> Authentic university examination problem sets</li>
+                                    <li><span>⚡</span> <strong>Instant Automated Grading:</strong> Real-time score &amp; accuracy metrics</li>
+                                    <li><span>💡</span> <strong>Complete Academic Proofs:</strong> Step-by-step mathematical solutions</li>
+                                    <li><span>📈</span> <strong>Curriculum Mastery:</strong> Track readiness across Units 1, 2, and 3</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-testcentre">Enter The Test Centre ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Card 5: OS Builder Quest -->
+                        <div class="home-big-card card-quest" data-nav="quest" tabindex="0" role="button" title="Open OS Builder Quest: Learn by Building an OS">
+                            <div class="card-header">
+                                <div class="card-icon-wrap quest-icon">
+                                    <span class="big-icon">🏗️</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 5 • OS Engineering Quest</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">5. OS Builder Quest</h3>
+                                <div class="card-subtitle">Learn by Building an OS (Levels 0 to 5)</div>
+                                <p class="card-desc">
+                                    Embark on a gamified journey building a complete operating system across <strong>10 Milestone Quests</strong> encompassing all <strong>28 stages of eXpOS (NITC)</strong>, <strong>4 landmark projects of Pintos (Stanford)</strong>, and <strong>10 algorithmic challenges of xv6 (MIT 6.S081)</strong>. Advance from Level 0 (1-Click Modular Integration) through Level 1 (Logic Flow Cards), Level 2 (Scaffolded C with Hints), Level 3 (API Spec), Level 4 (Pro RFC &amp; Stress Testing), to Level 5 (Master Bare-Metal Porting on x86 IA-32 vs 64-bit RISC-V).
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>🍼</span> <strong>Level 0 (Baby Steps):</strong> 1-Click integration of verified C kernel modules</li>
+                                    <li><span>🧩</span> <strong>Level 1 (Beginner):</strong> Reorder logic cards into correct control flow</li>
+                                    <li><span>📝</span> <strong>Level 2 (Confident):</strong> Write real C code with instant error translator</li>
+                                    <li><span>⚡</span> <strong>Levels 3 &amp; 4 (Pro):</strong> Implement formal specs and pass stress batteries</li>
+                                    <li><span>💎</span> <strong>Level 5 (Master):</strong> Bare-metal silicon porting on x86 Protected Mode &amp; RV64GC</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-quest">Launch OS Builder Quest ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Card 6: The Capstone Studio — App Foundry -->
+                        <div class="home-big-card card-capstone" data-nav="capstone" tabindex="0" role="button" title="Open The Capstone Studio — App Foundry: User-Space Application Engineering">
+                            <div class="card-header">
+                                <div class="card-icon-wrap capstone-icon">
+                                    <span class="big-icon">🏭</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 6 • Capstone Studio</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">6. The Capstone Studio</h3>
+                                <div class="card-subtitle">App Foundry: User-Space Systems &amp; Synthesis (Levels 0–5)</div>
+                                <p class="card-desc">
+                                    Bridge kernel space to user space. Co-evolve and synthesize <strong>4 living applications (OSSimDoc, OSSimTune, MatrixCompiler, Print Spooler)</strong> on top of your built operating system across 6 progressive mastery levels. Master process layout, the system call gateway, dynamic heap allocation, file descriptors, multithreading, and Banker's deadlock safety, culminating in dual-architecture bare-metal execution on <strong>x86 Protected Mode &amp; 64-bit RISC-V</strong>.
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>🍼</span> <strong>Level 0 (Baby Steps):</strong> 1-Click assembly of all 4 applications on ready OS</li>
+                                    <li><span>🧩</span> <strong>Level 1 (Beginner):</strong> Causal cue card sequencing with ABI code snippets</li>
+                                    <li><span>📝</span> <strong>Level 2 (Confident):</strong> Guided C code implementation with parameter linting</li>
+                                    <li><span>📐</span> <strong>Levels 3 &amp; 4 (Pro):</strong> Formal POSIX specs &amp; concurrency stress testing</li>
+                                    <li><span>⚡</span> <strong>Level 5 (Silicon Porting):</strong> Bare-metal execution on x86 VGA &amp; RISC-V UART</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-capstone">Enter The Capstone Studio ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Card 7: The Capstone Playground -->
+                        <div class="home-big-card card-capstone-playground" data-nav="capstone-playground" tabindex="0" role="button" title="Open The Capstone Playground: Live Synthesized Hardware &amp; Application Stage">
+                            <div class="card-header">
+                                <div class="card-icon-wrap capstone-playground-icon">
+                                    <span class="big-icon">🎮</span>
+                                </div>
+                                <div class="card-tier-badge">Tier 7 • Live Synthesis Stage</div>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title">7. The Capstone Playground</h3>
+                                <div class="card-subtitle">Live Synthesized OS &amp; Application Stage</div>
+                                <p class="card-desc">
+                                    Step into the living culmination of your operating systems journey. Power on the simulated machine to host your synthesized EduKernel (deployed from OS Builder Quest Levels 0–5) and run your custom user-space applications (deployed from Capstone Studio). Observe the hardware reset state, launch active applications from the live dock, step through the <strong>8-stage execution cycle pipeline</strong>, and inspect physical memory in the <strong>64-frame physical RAM grid</strong>.
+                                </p>
+                                <ul class="card-features-list">
+                                    <li><span>🖥️</span> <strong>Hardware Standby &amp; Host Boot:</strong> CPU reset state until your OS kernel is deployed</li>
+                                    <li><span>📱</span> <strong>Synthesized Application Dock:</strong> Hosts user apps deployed from Capstone Studio</li>
+                                    <li><span>⚡</span> <strong>8-Stage Execution Cycle:</strong> User App ➔ int 0x80 / ecall ➔ MMU ➔ IRET Return</li>
+                                    <li><span>🧠</span> <strong>Interactive Memory Continuum:</strong> Real-time 64-frame physical RAM inspector</li>
+                                </ul>
+                            </div>
+                            <div class="card-footer">
+                                <button class="card-action-btn btn-capstone-playground">Enter Capstone Playground ➔</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- OFFICIAL GUIDES & VERIFICATION MANUALS STRIP             -->
+                <!-- ========================================================= -->
+                <div class="home-docs-section">
+                    <div class="section-heading" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.75rem;">
+                        <div>
+                            <h2>📚 Official Guides &amp; Verification Manuals</h2>
+                            <p>Read the comprehensive course documentation, lab manuals, and exhaustive test audits directly in your browser:</p>
+                        </div>
+                        <div class="doc-badge-pill">
+                            <span>✨ In-Browser Interactive Reader • 100% Offline</span>
+                        </div>
+                    </div>
+                    <div class="home-docs-grid">
+                        <!-- Guide Card 1: User & Lab Manual -->
+                        <div class="home-doc-card card-doc-user" id="btn-open-user-guide" tabindex="0" role="button" title="Open Complete User &amp; Laboratory Instruction Manual">
+                            <div class="doc-card-top">
+                                <span class="doc-card-badge badge-blue">Operating Systems • Lab Manual</span>
+                                <span class="doc-format-tag">📖 Complete Guide</span>
+                            </div>
+                            <div class="doc-card-body">
+                                <h3 class="doc-card-title">1. Complete User &amp; Laboratory Manual</h3>
+                                <div class="doc-card-subtitle">Comprehensive Operating Systems Course Curriculum Guide</div>
+                                <p class="doc-card-desc">
+                                    Step-by-step documentation detailing system setup, Living OS Desktop 7-stage I/O pipeline, 12 Classroom concepts with textbook analogies, multi-algorithm solvers in The Workshop, exam challenge problem sets, and OS Builder Quest milestone levels 0 to 5.
+                                </p>
+                            </div>
+                            <div class="doc-card-footer">
+                                <button class="doc-card-btn btn-user-guide">Open User &amp; Lab Manual ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Guide Card 2: Test & Validation Guide -->
+                        <div class="home-doc-card card-doc-test" id="btn-open-test-guide" tabindex="0" role="button" title="Open Test &amp; Validation Guide">
+                            <div class="doc-card-top">
+                                <span class="doc-card-badge badge-emerald">Quality Assurance • 749 Tests / 18 Suites</span>
+                                <span class="doc-format-tag">🧪 Verification Audit</span>
+                            </div>
+                            <div class="doc-card-body">
+                                <h3 class="doc-card-title">2. Test &amp; Validation Guide</h3>
+                                <div class="doc-card-subtitle">Domain-Invariant Verification &amp; Automated Testing Audit</div>
+                                <p class="doc-card-desc">
+                                    Exhaustive verification manual establishing formal domain invariants across CPU scheduling, memory management, synchronization, deadlock safety vectors, SeaBIOS/OpenSBI hardware consoles, and the complete 18-suite, 749-test automated continuous integration battery.
+                                </p>
+                            </div>
+                            <div class="doc-card-footer">
+                                <button class="doc-card-btn btn-test-guide">Open Test &amp; Validation Guide ➔</button>
+                            </div>
+                        </div>
+
+                        <!-- Guide Card 3: Step-by-Step Playbook -->
+                        <div class="home-doc-card card-doc-playbook" id="btn-open-playbook-guide" tabindex="0" role="button" title="Open Step-by-Step Learner Workflow Playbook">
+                            <div class="doc-card-top">
+                                <span class="doc-card-badge badge-amber">Hands-On Lab • 8 Rooms Action Protocol</span>
+                                <span class="doc-format-tag">⚡ Action Playbook</span>
+                            </div>
+                            <div class="doc-card-body">
+                                <h3 class="doc-card-title">3. Step-by-Step Learner Playbook</h3>
+                                <div class="doc-card-subtitle">Exhaustive Click-by-Click Action &amp; Observation Manual</div>
+                                <p class="doc-card-desc">
+                                    Granular 3-column action protocol (What to Click ➔ Where to Look / What Changes ➔ How to Understand What Happened) covering every interactive control, slider, button, and command macro across all 8 rooms (Landing Home + 7 specialized environments).
+                                </p>
+                            </div>
+                            <div class="doc-card-footer">
+                                <button class="doc-card-btn btn-playbook-guide">Open Step-by-Step Playbook ➔</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Syllabus Mapping Strip -->
+                <div class="home-syllabus-strip">
+                    <div class="syllabus-header">
+                        <h4>Academic Curriculum Mapping (Operating Systems • Silberschatz Scope)</h4>
+                    </div>
+                    <div class="syllabus-grid">
+                        <div class="syllabus-col">
+                            <strong>Unit 1: Foundations &amp; Concurrency</strong>
+                            <p>OS Services, Dual-Mode CPU, System Calls, Process Hierarchy, 5-State Life Cycle, Threads (1:1, M:1, M:M), and CPU Scheduling (FCFS, SJF, SRTF, RR).</p>
+                        </div>
+                        <div class="syllabus-col">
+                            <strong>Unit 2: Synchronization &amp; Deadlocks</strong>
+                            <p>Critical Section Problem, Peterson's Algorithm, Semaphores, Classic Sync Problems (Bounded Buffer, Dining Philosophers), and Banker's Deadlock Avoidance.</p>
+                        </div>
+                        <div class="syllabus-col">
+                            <strong>Unit 3: Memory &amp; Storage Subsystems</strong>
+                            <p>Contiguous Allocation (First/Best/Worst Fit), Paging &amp; TLB EMAT, Virtual Memory Page Replacement (FIFO, LRU, OPT, Belady's Anomaly), and Disk Arm Scheduling.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Credits & Authorship Section -->
+                <div class="home-credits-section">
+                    <div class="credits-header">
+                        <span class="credits-pill">✨ Project Credits &amp; Attribution</span>
+                        <h3>Authorship, Conceptual Design &amp; Development Credits</h3>
+                        <p>Operating Systems Suite (OSSim) — Developed for Undergraduate Systems &amp; Engineering Education</p>
+                    </div>
+
+                    <div class="credits-grid">
+                        <!-- Credit Card 1: Author, Creator & Designer -->
+                        <div class="credit-card creator-card">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;">
+                                <div class="credit-icon">👨‍🏫</div>
+                                <span class="credit-badge gold-badge">Author &amp; Creator</span>
+                            </div>
+                            <h4 class="credit-name">Sivraj P.</h4>
+                            <div class="credit-role">Concept, Idea, Pedagogical Architecture &amp; System Design</div>
+                            <div class="credit-affiliation">
+                                <span>Author, Creator &amp; Designer</span>
+                            </div>
+                            <p class="credit-desc">
+                                Conceived the vision of an interactive operating systems educational continuum. Designed the multi-tier laboratory architecture (Living OS Desktop, 12-Concept Classroom, Algorithmic Workshop, and Test Centre), syllabus problem sets, interactive hardware-pipeline model, "With OS vs Without OS (Bare-Metal)" contrast methodology, and curricular visual benchmarks.
+                            </p>
+                        </div>
+
+                        <!-- Credit Card 2: AI Co-Developer -->
+                        <div class="credit-card ai-card">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;">
+                                <div class="credit-icon">🤖</div>
+                                <span class="credit-badge blue-badge">AI Assistant &amp; Co-Developer</span>
+                            </div>
+                            <h4 class="credit-name">Antigravity</h4>
+                            <div class="credit-role">Advanced Agentic AI Pair Programmer</div>
+                            <div class="credit-affiliation">
+                                <span>Google DeepMind</span>
+                                <span>Advanced Agentic Coding</span>
+                            </div>
+                            <p class="credit-desc">
+                                Collaborative pair programming, software engineering, client-side architectural implementation, reactive virtual hardware models (VirtualCPU, VirtualMMU, VirtualBus, ProcessManager), algorithmic solvers with pixel-precise Gantt chart engines, 18-concept interactive classroom workbench sandboxes, automated grading engines, zero-CORS bundling, and full 18-suite, 749-test automated continuous integration battery.
+                            </p>
+                        </div>
+
+                        <!-- Credit Card 3: Technologies & Tools -->
+                        <div class="credit-card tools-card">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.4rem;">
+                                <div class="credit-icon">🛠️</div>
+                                <span class="credit-badge emerald-badge">Tools &amp; Technologies</span>
+                            </div>
+                            <h4 class="credit-name">Engineering Stack</h4>
+                            <div class="credit-role">Modern Web Standards &amp; Verification Toolchain</div>
+                            <div class="credit-tools-list">
+                                <span class="tool-tag">HTML5 Semantic UI</span>
+                                <span class="tool-tag">CSS3 Custom Properties</span>
+                                <span class="tool-tag">Vanilla ES6+ JS</span>
+                                <span class="tool-tag">High-DPI SVG Vectors</span>
+                                <span class="tool-tag">KaTeX Math (LaTeX)</span>
+                                <span class="tool-tag">Edge / Chromium CI</span>
+                                <span class="tool-tag">Python Build Harness</span>
+                                <span class="tool-tag">Zero-CORS Offline Engine</span>
+                            </div>
+                            <p class="credit-desc">
+                                Engineered with 100% offline, zero-external-dependency web technologies. Operates locally via standard modern browsers on any platform without requiring local servers, Node.js, or cloud infrastructure.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Academic Course Alignment Strip -->
+                    <div class="credits-footer">
+                        <div><strong>Curricular Foundation:</strong> The syllabus of 23ELC211 Operating Systems, B.Tech. Electrical and Computer Engineering, Department of Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham was used as the basic course to set the structure.</div>
+                        <div>Grounded in foundational principles from <em>Operating System Concepts</em> (Silberschatz, Galvin, and Gagne).</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 1: LIVE OS DESKTOP VIEW (THE PLAYGROUND)                     -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-desktop" style="flex-direction:column;">
+            <div class="living-os-container" style="flex:1;min-height:0;">
+                <!-- Left Pane: Application Switcher Dock & Windows Stage -->
+                <div class="desktop-pane">
+                    <!-- Mini Taskbar / App Dock (2 Rows x 2 Columns) -->
+                    <div class="desktop-taskbar" id="desktop-app-dock">
+                        <button class="dock-app-btn" data-app="doc" id="dock-btn-doc" title="OSSimDoc (PID 101): Interactive word processor. Type text or click 'Save Document' to trigger real-time filesystem I/O, interrupt requests, and DMA disk transfers.">
+                            <div class="dock-app-left"><span class="dock-icon">📄</span><span class="dock-name">OSSimDoc</span></div>
+                            <span class="dock-pid">PID 101</span>
+                        </button>
+                        <button class="dock-app-btn" data-app="tune" id="dock-btn-tune" title="OSSimTune (PID 102): Real-time audio streaming player. Demonstrates continuous audio DMA transfers, ring buffers, and buffer underrun glitch recovery.">
+                            <div class="dock-app-left"><span class="dock-icon">🎵</span><span class="dock-name">OSSimTune</span></div>
+                            <span class="dock-pid">PID 102</span>
+                        </button>
+                        <button class="dock-app-btn" data-app="compiler" id="dock-btn-compiler" title="Matrix Compiler (PID 103): CPU-bound numerical compute worker. Demonstrates 100% CPU core saturation, time-slice preemption, and SIGKILL termination.">
+                            <div class="dock-app-left"><span class="dock-icon">⚡</span><span class="dock-name">Compiler</span></div>
+                            <span class="dock-pid">PID 103</span>
+                        </button>
+                        <button class="dock-app-btn" data-app="spooler" id="dock-btn-spooler" title="Deadlock Lab (PID 104): Multi-resource concurrency laboratory. Demonstrates mutual exclusion locks, circular wait deadlock formation between Printer and NVMe, and OS recovery.">
+                            <div class="dock-app-left"><span class="dock-icon">🖨️</span><span class="dock-name">Deadlock Lab</span></div>
+                            <span class="dock-pid">PID 104</span>
+                        </button>
+                    </div>
+
+                    <!-- App Stage with Standby Screen + 4 Application Windows -->
+                    <div class="desktop-app-stage" id="desktop-app-stage" style="flex:1;min-height:0;display:flex;flex-direction:column;">
+                        <!-- Clean Desktop Standby Screen (Default Initial State) -->
+                        <div id="desktop-standby-screen" class="app-window-pane active" style="flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.5rem;background:radial-gradient(ellipse at center, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.95) 100%);border-radius:8px;border:1px solid rgba(56, 189, 248, 0.25);text-align:center;">
+                            <div style="font-size:2.8rem;margin-bottom:0.5rem;filter:drop-shadow(0 4px 12px rgba(56, 189, 248, 0.4));">🖥️</div>
+                            <h3 style="font-size:1.25rem;font-weight:800;color:#F8FAFC;margin:0 0 0.35rem 0;">EduKernel v2.4 Desktop Standby</h3>
+                            <div style="display:inline-flex;align-items:center;gap:0.4rem;background:rgba(16, 185, 129, 0.12);border:1px solid #10B981;border-radius:20px;padding:0.25rem 0.8rem;font-size:0.75rem;font-weight:700;color:#34D399;margin-bottom:1rem;">
+                                <span style="width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 6px #10B981;"></span>
+                                System Idle: CPU in Low-Power HLT Loop (PID 0 swapper) | Ring 0 / User Mode Ready
+                            </div>
+                            <p style="max-width:500px;color:#94A3B8;font-size:0.82rem;line-height:1.5;margin:0 0 1.25rem 0;">
+                                Select any application from the Dock above or click a button below to launch a process into User Mode. Watch the <strong>Dynamic System I/O &amp; Hardware Pipeline Trace</strong> on the right capture every phase: from your user click, to <code>sys_execve()</code>, ELF loading, MMU page allocation, PCB instantiation, context switching, and Ring 3 execution!
+                            </p>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;max-width:440px;width:100%;">
+                                <button class="btn-standby-launch" data-launch="doc" style="background:#1E293B;border:1px solid rgba(56,189,248,0.4);color:#F8FAFC;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-align:left;">
+                                    <span>📄</span> <div><strong style="color:#38BDF8;display:block;">OSSimDoc</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 101 • Word Processor</span></div>
+                                </button>
+                                <button class="btn-standby-launch" data-launch="tune" style="background:#1E293B;border:1px solid rgba(168,85,247,0.4);color:#F8FAFC;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-align:left;">
+                                    <span>🎵</span> <div><strong style="color:#C084FC;display:block;">OSSimTune</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 102 • Audio Player</span></div>
+                                </button>
+                                <button class="btn-standby-launch" data-launch="compiler" style="background:#1E293B;border:1px solid rgba(234,179,8,0.4);color:#F8FAFC;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-align:left;">
+                                    <span>⚡</span> <div><strong style="color:#FDE047;display:block;">Matrix Compiler</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 103 • Compute Worker</span></div>
+                                </button>
+                                <button class="btn-standby-launch" data-launch="spooler" style="background:#1E293B;border:1px solid rgba(236,72,153,0.4);color:#F8FAFC;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-align:left;">
+                                    <span>🖨️</span> <div><strong style="color:#F472B6;display:block;">Deadlock Lab</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 104 • Concurrency Lab</span></div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 4 Application Windows (Initially Hidden, Loaded on Click) -->
+                        <div id="app-doc-window" class="app-window-pane" style="flex:1;min-height:0;display:none;flex-direction:column;"></div>
+                        <div id="app-tune-window" class="app-window-pane" style="flex:1;min-height:0;display:none;flex-direction:column;"></div>
+                        <div id="app-compiler-window" class="app-window-pane" style="flex:1;min-height:0;display:none;flex-direction:column;"></div>
+                        <div id="app-spooler-window" class="app-window-pane" style="flex:1;min-height:0;display:none;flex-direction:column;"></div>
+                    </div>
+                </div>
+
+                <!-- Right Pane: Hardware & Kernel X-Ray Deck (Compact Dashboard) -->
+                <div class="xray-pane">
+                    <!-- Real-Time Dynamic Pipeline Trace -->
+                    <div id="pipeline-visualizer-container"></div>
+
+                    <!-- Multi-Process Concurrency & Scheduling Queues Deck -->
+                    <div id="process-scheduler-deck-container"></div>
+
+                    <!-- Compact Middle Row: CPU Registers & Disk Platter side-by-side -->
+                    <div class="xray-middle-row">
+                        <!-- CPU Dual-Mode & Architectural Registers -->
+                        <div class="xray-card compact-card">
+                            <div class="xray-card-header">
+                                <div class="xray-title"><span class="icon">⚙️</span> CPU Architectural Registers</div>
+                                <span class="mode-badge user" id="xray-cpu-mode">USER</span>
+                            </div>
+                            <div class="registers-grid" id="xray-registers-grid"></div>
+                        </div>
+
+                        <!-- Storage Subsystem: Dual-Storage Continuum (HDD <-> NVMe SSD) -->
+                        <div class="xray-card compact-card" id="playground-storage-card">
+                            <div class="xray-card-header" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
+                                <div class="xray-title" style="display:flex;align-items:center;gap:6px;">
+                                    <span class="icon" id="storage-deck-icon">💽</span>
+                                    <span id="storage-deck-title">Secondary Storage Controller</span>
+                                </div>
+                                <div style="display:flex;gap:4px;align-items:center;">
+                                    <button class="doc-btn" id="btn-toggle-storage-media" style="font-size:0.65rem;padding:2px 6px;background:#1E293B;color:#38BDF8;border:1px solid #3B82F6;" title="Toggle between Mechanical HDD (SATA) and Solid-State NVMe SSD">
+                                        ⚡ Switch to NVMe SSD
+                                    </button>
+                                    <span class="badge badge-kernel" id="disk-head-pos">Cyl: 53/199 (8.5ms)</span>
+                                </div>
+                            </div>
+                            <!-- Mechanical Platter Monitor View -->
+                            <div class="disk-monitor" id="storage-hdd-monitor">
+                                <!-- Animated SVG Platter -->
+                                <svg class="disk-platter-svg" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="46" fill="#1A2436" stroke="#2B6CB0" stroke-width="2"/>
+                                    <circle cx="50" cy="50" r="34" fill="none" stroke="#2D3D58" stroke-dasharray="3,3"/>
+                                    <circle cx="50" cy="50" r="22" fill="none" stroke="#2D3D58" stroke-dasharray="2,2"/>
+                                    <circle cx="50" cy="50" r="10" fill="#2B6CB0"/>
+                                    <line x1="50" y1="50" x2="85" y2="25" stroke="#D69E2E" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
+                                <div class="disk-info">
+                                    <span style="font-weight:700;color:white;font-size:0.75rem;">Actuator Arm:</span>
+                                    <span style="color:#A0AEC0;font-size:0.7rem;">Tracks 0-199 • Moving Head</span>
+                                    <div class="disk-track-bar">
+                                        <div class="disk-head-indicator" id="disk-head-marker" style="left: 26.5%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- NVMe Solid-State Monitor View (Toggled) -->
+                            <div class="disk-monitor" id="storage-nvme-monitor" style="display:none;padding:6px 0;flex-direction:column;width:100%;">
+                                <div style="display:flex;justify-content:space-between;font-size:0.7rem;color:#94A3B8;margin-bottom:4px;width:100%;">
+                                    <span>NAND Flash Blocks (FTL Active)</span>
+                                    <span style="color:#10B981;font-weight:700;">Latency: 25 µs • WAF: 1.25</span>
+                                </div>
+                                <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:4px;width:100%;">
+                                    <div style="background:#111827;border:1px solid #10B981;padding:4px;border-radius:3px;font-size:0.6rem;text-align:center;">
+                                        <span style="color:#6EE7B7;font-weight:700;">Blk 0</span><br><span style="color:#CBD5E0;">Valid (4KB)</span>
+                                    </div>
+                                    <div style="background:#111827;border:1px solid #3B82F6;padding:4px;border-radius:3px;font-size:0.6rem;text-align:center;">
+                                        <span style="color:#93C5FD;font-weight:700;">Blk 1</span><br><span style="color:#CBD5E0;">Clean (4KB)</span>
+                                    </div>
+                                    <div style="background:#111827;border:1px solid #F59E0B;padding:4px;border-radius:3px;font-size:0.6rem;text-align:center;">
+                                        <span style="color:#FDE68A;font-weight:700;">Blk 2</span><br><span style="color:#CBD5E0;">Dirty (TRIM)</span>
+                                    </div>
+                                    <div style="background:#111827;border:1px solid #10B981;padding:4px;border-radius:3px;font-size:0.6rem;text-align:center;">
+                                        <span style="color:#6EE7B7;font-weight:700;">Blk 3</span><br><span style="color:#CBD5E0;">Valid (4KB)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Physical Memory (RAM) 64-Frame Grid & Interactive Frame Inspector -->
+                    <div class="xray-card">
+                        <div class="xray-card-header">
+                            <div class="xray-title"><span class="icon">🧠</span> Physical RAM Frames (256 KB Total / 4 KB Frames)</div>
+                            <span class="badge badge-hit" id="xray-emat-val">EMAT: 95.0 ns</span>
+                        </div>
+                        <div class="ram-meta">
+                            <span><b style="color:#FEB2B2;">■</b> Kernel (F0-7)</span>
+                            <span><b style="color:#F6AD55;">■</b> Page Tables (F8-9)</span>
+                            <span><b style="color:#D6BCFA;">■</b> VRAM (F10-13)</span>
+                            <span><b style="color:#BEE3F8;">■</b> OSSimDoc (F14-21)</span>
+                            <span><b style="color:#48BB78;">■</b> OSSimTune (F22-25)</span>
+                            <span><b style="color:#9F7AEA;">■</b> Shared IPC (F26)</span>
+                            <span><b style="color:#ED8936;">●</b> Dirty Bit</span>
+                            <span><b style="color:#718096;">■</b> Free</span>
+                        </div>
+                        <div class="ram-frames-grid" id="xray-ram-grid"></div>
+
+                        <!-- Interactive Frame Inspector (Spacious full-width card placed below the memory cells) -->
+                        <div class="ram-inspector-box" id="ram-frame-inspector">
+                            <div class="inspector-header">
+                                <span class="inspector-badge" id="insp-frame-badge">Frame #16 Selected</span>
+                                <span class="inspector-title" id="insp-frame-title">OSSimDoc Heap (Typing Buffer)</span>
+                            </div>
+                            <div class="inspector-grid">
+                                <div><strong>Physical Addr:</strong> <span id="insp-phys-addr">0x00010000 - 0x00010FFF (4 KB)</span></div>
+                                <div><strong>Segment Role:</strong> <span id="insp-role">Heap Data Buffer (Active Keystrokes)</span></div>
+                                <div><strong>Owner:</strong> <span id="insp-owner">PID 101 (OSSimDoc)</span></div>
+                                <div><strong>Permissions:</strong> <span id="insp-perm" style="color:#68D391;">Read/Write (User CPL 3)</span></div>
+                                <div><strong>Dirty State:</strong> <span id="insp-dirty" style="color:#ECC94B;">Clean (Saved)</span></div>
+                                <div><strong>TLB Status:</strong> <span id="insp-tlb" style="color:#63B3ED;">Cached in TLB (Page #2)</span></div>
+                            </div>
+                            <div class="inspector-expl" id="insp-expl">
+                                💡 <em>Click any frame above to inspect its physical memory address range, segment role, and protection rings.</em>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 2: PROCESS & THREAD WORKBENCH (THE CLASSROOM)                -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-workbench" style="flex-direction:column;"></div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 3: ALGORITHM SIMULATORS (THE WORKSHOP)                       -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-algorithms" style="flex-direction:column;"></div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 4: SELF-ASSESSMENT CHALLENGE MODE (THE TEST CENTRE)          -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-challenge" style="flex-direction:column;"></div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 5: OS BUILDER QUEST (LEVELS 0 TO 5 GAMIFIED BUILDER)         -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-quest" style="flex-direction:column;"></div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 6: THE CAPSTONE STUDIO — APP FOUNDRY (LEVELS 0 TO 5)         -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-capstone" style="flex-direction:column;overflow-y:auto;overflow-x:hidden;"></div>
+
+        <!-- ================================================================= -->
+        <!-- TIER 7: THE CAPSTONE PLAYGROUND (LIVE SYNTHESIS STAGE)            -->
+        <!-- ================================================================= -->
+        <div class="tab-view" id="tab-view-capstone-playground" style="flex-direction:column;overflow-y:auto;overflow-x:hidden;"></div>
+    </main>
+
+    <!-- Master Global Bottom Copyright Bar (Permanently visible across all views) -->
+    <footer id="master-footer" class="app-global-footer">
+        <span>© Copyright Sivraj P. All rights reserved.</span>
+    </footer>
+
+    <!-- Master Application Entrypoint (Standalone zero-CORS bundle works offline over file:// and http://) -->
+    <script defer src="js/ossim_bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,908 @@
+/* ==============================================================================
+   Operating Systems Learning & Simulation Suite (OSSim)
+   Author: Sivraj P. | © Copyright Sivraj P. All rights reserved.
+   Desktop & Window Manager Styles - Tier 1 Living OS Mode
+   ============================================================================== */
+
+/* Tier 1 Split Container */
+.living-os-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Left Pane: Desktop & Applications */
+.desktop-pane {
+    flex: 0.42;
+    min-width: 320px;
+    max-width: 440px;
+    background: #09101D;
+    background-image: 
+        radial-gradient(rgba(43, 108, 176, 0.15) 1px, transparent 1px),
+        radial-gradient(rgba(214, 158, 46, 0.08) 1px, #09101D 1px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 0.6rem;
+    gap: 0.5rem;
+    overflow: hidden;
+    border-right: 2px solid var(--border-color);
+}
+
+/* Right Pane: OS Internals & Hardware X-Ray */
+.xray-pane {
+    flex: 1;
+    min-width: 0;
+    background: var(--bg-surface);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 0.5rem 0.75rem;
+    gap: 0.5rem;
+}
+
+/* Window Component */
+.os-window {
+    background: #FFFFFF;
+    color: #2D3748;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.os-window.word-app {
+    flex: 1;
+    min-height: 0;
+}
+
+.os-window.terminal-app {
+    height: 190px;
+    background: #111827;
+    color: #10B981;
+    flex-shrink: 0;
+}
+
+/* Window Titlebar */
+.window-titlebar {
+    background: linear-gradient(90deg, #1B365D 0%, #2B6CB0 100%);
+    color: white;
+    padding: 0.45rem 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    font-weight: 600;
+    user-select: none;
+}
+
+.window-title-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.window-title-icon {
+    font-size: 0.9rem;
+}
+
+.window-controls {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.win-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.win-dot.close { background: #E53E3E; }
+.win-dot.min { background: #D69E2E; }
+.win-dot.max { background: #38A169; }
+
+/* OSSimDoc App Toolbar */
+.doc-ribbon {
+    background: #F1F5F9;
+    border-bottom: 1px solid #CBD5E1;
+    padding: 0.35rem 0.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.ribbon-group {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.doc-btn {
+    background: white;
+    border: 1px solid #CBD5E1;
+    color: #334155;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    transition: all 0.15s;
+}
+
+.doc-btn:hover {
+    background: #E2E8F0;
+    border-color: #94A3B8;
+}
+
+.doc-btn.btn-save {
+    background: #1B365D;
+    color: white;
+    border-color: #1B365D;
+}
+.doc-btn.btn-save:hover {
+    background: #2B6CB0;
+}
+
+/* Document Canvas / Text Area */
+.doc-content-area {
+    flex: 1;
+    padding: 1rem 1.25rem;
+    overflow-y: auto;
+    background: #FAFAFA;
+    position: relative;
+    cursor: text;
+}
+
+.doc-page {
+    background: white;
+    min-height: 100%;
+    padding: 1.25rem 1.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    outline: none;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #1E293B;
+}
+
+.doc-page:focus {
+    box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.4);
+}
+
+.doc-statusbar {
+    background: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    color: #64748B;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Terminal Console Window */
+.terminal-body {
+    padding: 0.5rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.term-line {
+    word-break: break-all;
+    line-height: 1.35;
+}
+
+.term-input-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.term-prompt {
+    color: #10B981;
+    font-weight: 700;
+}
+
+.term-input {
+    background: transparent;
+    border: none;
+    color: #F9FAFB;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    flex: 1;
+    outline: none;
+}
+
+/* X-Ray Section Cards */
+.xray-card {
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.xray-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.4rem;
+}
+
+.xray-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.xray-title span.icon {
+    color: var(--accent);
+}
+
+/* Middle Row: CPU Registers & Disk Platter Side-by-Side (Compact & On-Screen!) */
+.xray-middle-row {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 0.5rem;
+}
+
+.compact-card {
+    padding: 0.45rem 0.6rem;
+    gap: 0.25rem;
+}
+
+.compact-card .xray-card-header {
+    padding-bottom: 0.25rem;
+}
+
+.compact-card .registers-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+    padding: 0.2rem;
+}
+
+.compact-card .reg-box {
+    padding: 0.15rem 0.25rem;
+}
+
+.compact-card .reg-box .reg-name {
+    font-size: 0.58rem;
+}
+
+.compact-card .reg-box .reg-val {
+    font-size: 0.68rem;
+}
+
+/* Interactive RAM Frame Inspector (Spacious full-width card placed below the memory cells) */
+.ram-inspector-box {
+    background: #0A101D;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.55rem 0.8rem;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    animation: fadeIn 0.2s ease;
+}
+
+.inspector-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.35rem;
+    margin-bottom: 0.15rem;
+}
+
+.inspector-badge {
+    font-size: 0.68rem;
+    font-weight: 800;
+    background: #1B365D;
+    color: #90CDF4;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+    border: 1px solid #2B6CB0;
+}
+
+.inspector-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: white;
+}
+
+.inspector-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem 0.85rem;
+    font-size: 0.72rem;
+    color: var(--text-primary);
+}
+
+.inspector-grid strong {
+    color: var(--text-muted);
+}
+
+.inspector-expl {
+    font-size: 0.68rem;
+    color: #A0AEC0;
+    line-height: 1.4;
+    background: #0E1624;
+    padding: 0.3rem 0.5rem;
+    border-radius: 2px;
+}
+
+/* ========================================================================== */
+/* MULTI-APP DESKTOP DOCK & TASKBAR (2 ROWS X 2 COLUMNS)                      */
+/* ========================================================================== */
+.desktop-taskbar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.35rem;
+    margin-bottom: 0.45rem;
+    background: #0B121E;
+    padding: 0.35rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+}
+
+.dock-app-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.35rem;
+    background: #131E31;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 0.35rem 0.5rem;
+    color: #A0AEC0;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 0.72rem;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dock-app-left {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dock-app-btn:hover {
+    background: #1B2942;
+    color: white;
+    border-color: #4A5568;
+}
+
+.dock-app-btn.active {
+    background: #1B365D;
+    color: #90CDF4;
+    border-color: #3182CE;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dock-pid {
+    font-size: 0.58rem;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 0.1rem 0.25rem;
+    border-radius: 2px;
+    color: #E2E8F0;
+}
+
+.app-window-pane {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Pipeline Mode Pills */
+.pipe-mode-bar {
+    display: flex;
+    gap: 0.2rem;
+}
+
+.pipe-mode-btn {
+    background: #0F172A;
+    border: 1px solid #2D3D58;
+    color: #A0AEC0;
+    font-size: 0.65rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+}
+
+.pipe-mode-btn:hover {
+    color: white;
+    border-color: #4A5568;
+}
+
+.pipe-mode-btn.active {
+    background: #2B6CB0;
+    color: white;
+    border-color: #63B3ED;
+    font-weight: 700;
+}
+
+/* ========================================================================== */
+/* MULTI-PROCESS SCHEDULER DECK                                               */
+/* ========================================================================== */
+.scheduler-deck-card {
+    padding: 0.5rem 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.scheduler-policy-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.sched-select {
+    background: #09101D;
+    color: var(--accent);
+    border: 1px solid var(--border-color);
+    font-size: 0.68rem;
+    padding: 0.15rem 0.35rem;
+    border-radius: 3px;
+}
+
+.queue-matrix-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr 1.15fr;
+    gap: 0.45rem;
+}
+
+.queue-col {
+    background: #0A101D;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-height: 85px;
+}
+
+.queue-col-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 0.2rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+}
+
+.col-count, .quantum-badge {
+    font-size: 0.6rem;
+    color: #68D391;
+    background: rgba(72, 187, 120, 0.15);
+    padding: 0.1rem 0.3rem;
+    border-radius: 2px;
+}
+
+.proc-queue-badge {
+    background: #131E31;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.25rem 0.35rem;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.68rem;
+    margin-bottom: 0.25rem;
+}
+
+.proc-queue-badge.waiting-badge {
+    opacity: 0.85;
+}
+
+.proc-running-card {
+    background: #101E36;
+    border: 1px solid #3182CE;
+    padding: 0.4rem;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.running-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.running-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: white;
+}
+
+.running-sub {
+    font-size: 0.62rem;
+    color: #A0AEC0;
+}
+
+.running-pc-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.62rem;
+    color: #E2E8F0;
+    background: #09101D;
+    padding: 0.15rem 0.3rem;
+    border-radius: 2px;
+}
+
+.empty-slot-msg {
+    font-size: 0.65rem;
+    color: #718096;
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.sched-telemetry-bar {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #A0AEC0;
+    background: #0B121E;
+    padding: 0.25rem 0.45rem;
+    border-radius: 2px;
+}
+
+/* ========================================================================== */
+/* OSSIMTUNE, COMPILER & SPOOLER WINDOW STYLING                              */
+/* ========================================================================== */
+.audio-app, .compiler-app, .spooler-app {
+    flex: 1;
+    min-height: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+}
+
+.tune-body, .compiler-body, .spooler-body {
+    padding: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.tune-player-header, .compiler-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.4rem;
+}
+
+.track-title, .task-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: white;
+}
+
+.track-meta, .task-sub {
+    font-size: 0.65rem;
+    color: #A0AEC0;
+}
+
+.tune-controls, .compiler-actions {
+    display: flex;
+    gap: 0.3rem;
+}
+
+.tune-btn, .compiler-btn, .spooler-btn {
+    background: #1A2436;
+    border: 1px solid var(--border-color);
+    color: white;
+    font-size: 0.68rem;
+    padding: 0.25rem 0.45rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.tune-btn:hover, .compiler-btn:hover, .spooler-btn:hover {
+    background: #2B6CB0;
+    border-color: #63B3ED;
+}
+
+.tune-btn.btn-play.active, .compiler-btn.btn-start.active {
+    background: #276749;
+    border-color: #48BB78;
+    color: white;
+}
+
+.tune-visualizer-box {
+    background: #09101D;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 0.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.tune-spectrum {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 48px;
+    background: #0B121E;
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tune-spectrum .bar {
+    flex: 1;
+    background: linear-gradient(180deg, #48BB78, #2B6CB0);
+    border-radius: 2px 2px 0 0;
+    transition: height 0.1s ease;
+}
+
+.tune-now-playing {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #A0AEC0;
+}
+
+.buffer-deck-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.buffer-progress-bar {
+    height: 8px;
+    background: #131E31;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.25rem 0;
+}
+
+.buffer-fill {
+    height: 100%;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.buffer-explain {
+    font-size: 0.62rem;
+    color: #A0AEC0;
+    line-height: 1.35;
+}
+
+.tune-alert-box {
+    background: rgba(229, 62, 62, 0.2);
+    border: 1px solid #E53E3E;
+    padding: 0.4rem 0.6rem;
+    border-radius: 3px;
+    display: flex;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+    color: #FEB2B2;
+}
+
+.flash-alert {
+    animation: flash-red 0.5s infinite alternate;
+}
+
+@keyframes flash-red {
+    from { background: rgba(229, 62, 62, 0.1); }
+    to { background: rgba(229, 62, 62, 0.4); }
+}
+
+.tune-telemetry, .comp-telemetry {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.65rem;
+    color: #A0AEC0;
+    background: #0B121E;
+    padding: 0.25rem 0.45rem;
+    border-radius: 2px;
+}
+
+/* Compiler console */
+.comp-console {
+    height: 90px;
+    background: #080D16;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 0.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.console-line {
+    color: #E2E8F0;
+    line-height: 1.3;
+}
+.console-line.tip { color: #D69E2E; }
+.console-line.info { color: #90CDF4; }
+
+.comp-progress-bar {
+    height: 8px;
+    background: #131E31;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.2rem;
+}
+
+.comp-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #D69E2E, #ED8936);
+    transition: width 0.2s ease;
+}
+
+.comp-options-strip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.68rem;
+}
+
+.comp-select {
+    background: #0D1624;
+    color: white;
+    border: 1px solid var(--border-color);
+    font-size: 0.65rem;
+    padding: 0.15rem 0.3rem;
+    border-radius: 2px;
+}
+
+/* Spooler & Deadlock */
+.spooler-card {
+    background: #0A101D;
+    border: 1px solid var(--border-color);
+    border-radius: 3px;
+    padding: 0.45rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.spooler-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.spooler-controls-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.68rem;
+    margin: 0.3rem 0;
+}
+
+.counter-display-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0D1624;
+    padding: 0.35rem 0.5rem;
+    border-radius: 2px;
+    font-size: 0.68rem;
+}
+
+.deadlock-resources-grid {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.4rem 0;
+}
+
+.res-box {
+    background: #131E31;
+    border: 1px solid var(--border-color);
+    padding: 0.35rem 0.6rem;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 0.65rem;
+}
+
+.res-icon { font-size: 1.1rem; }
+.res-owner { font-size: 0.62rem; color: #68D391; font-weight: 700; margin-top: 0.15rem; }
+
+.deadlock-action-btns {
+    display: flex;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+}
+
+.btn-danger {
+    background: #742A2A !important;
+    border-color: #E53E3E !important;
+}
+
+.btn-recover {
+    background: #276749 !important;
+    border-color: #48BB78 !important;
+}
+
+.deadlock-alert {
+    background: rgba(229, 62, 62, 0.25);
+    border: 1px solid #E53E3E;
+    padding: 0.4rem 0.55rem;
+    border-radius: 3px;
+    font-size: 0.68rem;
+    color: #FEB2B2;
+    margin-top: 0.35rem;
+}
+
+/* RAM Frame App Classes */
+.ram-frame.tune-app { background: #1C4532; color: #9AE6B4; border-color: #276749; }
+.ram-frame.compiler-app { background: #7B341E; color: #FBD38D; border-color: #C05621; }
+.ram-frame.ipc-shared { background: repeating-linear-gradient(45deg, #2A4365, #2A4365 4px, #44337A 4px, #44337A 8px); color: #E9D8FD; border-color: #6B46C1; }
+.ram-frame.spooler-app { background: #3B2456; color: #D6BCFA; border-color: #553C9A; }
+.ram-frame.bare-ivt { background: #334155; color: #CBD5E1; border-color: #475569; }
+.ram-frame.bare-code { background: #7F1D1D; color: #FECACA; border-color: #DC2626; }
+.ram-frame.bare-data { background: #78350F; color: #FDE68A; border-color: #D97706; }
+.ram-frame.bare-stack { background: #713F12; color: #FEF08A; border-color: #CA8A04; }
+.ram-frame.pulse-active { transform: scale(1.4) !important; border-color: #FAF089 !important; box-shadow: 0 0 10px #FAF089; z-index: 20; }
+
+
+
+
+/* Desktop Standby Screen & Launch Triggers */
+#desktop-standby-screen {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.btn-standby-launch {
+    transition: all 0.2s ease;
+}
+
+.btn-standby-launch:hover {
+    background: #233554 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.btn-standby-launch:active {
+    transform: translateY(0);
+}
