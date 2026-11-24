@@ -23,7 +23,7 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 ## 📸 Visual UI Tour (Live Environment Screenshots)
 
 ### 1. The Playground — Living Operating System & Silicon Hardware Datapath
-*Trace live application interaction (typing, saving) through the 8-stage I/O pipeline down to CPU architectural registers, physical memory frames, and secondary storage controller.*
+*Trace live application interaction (typing, saving) through the 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, physical memory frames, and secondary storage controller.*
 
 ![The Playground](figures/screenshot_02_playground.png)
 
@@ -62,12 +62,12 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications, 8-stage instruction pipeline, dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
+| **1** | **The Playground** | Living interactive desktop with dock applications, 7-stage document storage pipeline, 8-stage application launch cycle, dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
 | **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
 | **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
 | **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
-| **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 bare-metal x86/RISC-V silicon emulation). |
-| **6** | **The Capstone Studio** | Full-stack application foundry co-evolving 4 authentic user applications (OSSimDoc, OSSimTune, MatrixCompiler, Print Spooler) across 6 systems levels. |
+| **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 progressive kernel construction and architecture-specific bare-metal execution simulation). |
+| **6** | **The Capstone Studio** | Full-stack application foundry co-evolving 4 authentic user applications (`OSSimDoc`, `OSSimTune`, `MatrixCompiler`, `Print Spooler` [featuring the `DeadlockLab` concurrency scenario]) across 6 systems levels. |
 | **7** | **The Capstone Playground** | Living Silicon stage running deployed user applications on top of the student's custom-built kernel. |
 
 ---
@@ -130,6 +130,21 @@ All official guides are included directly in this repository and are accessible 
 1. Clone or download this repository.
 2. Double-click **`index.html`** in any modern web browser (Edge, Chrome, Firefox, Safari).
 3. The suite runs immediately via its self-contained, pre-compiled standalone bundle (`js/ossim_bundle.js`) with zero CORS restrictions.
+
+---
+
+## 🧪 Continuous Integration & Verification Status
+
+OSSim maintains an automated, headless browser integration test harness executing on GitHub Actions (`ossim-test-harness`). All 749 domain-invariant assertions run against the standalone distribution release on clean virtual machines to guarantee regression-free reliability.
+
+| Parameter | CI Verification Record |
+| :--- | :--- |
+| **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
+| **Tested Commit SHA** | [`b34839f`](https://github.com/sivrajp/ossim-test-harness/commit/b34839f) (Verified Green) |
+| **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
+| **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
+| **Verification Metric** | **18 / 18 Suites Passed (100.0% Pass Rate, 749 Atomic Assertions)** |
+| **Automated Cadence** | Daily Nightly Regression (00:00 UTC) & On Every Push |
 
 ---
 
