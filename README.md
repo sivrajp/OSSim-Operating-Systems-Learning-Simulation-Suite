@@ -3,8 +3,7 @@
 
 [![Platform: Browser-Native](https://img.shields.io/badge/Platform-Browser--Native%20(Zero--CORS)-blue.svg)]()
 [![License: Academic & Educational](https://img.shields.io/badge/License-Academic%20%26%20Educational-green.svg)](LICENSE)
-[![CI Build & Verification](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/actions/workflows/ci.yml)
-[![Tests: 749/749 Verified](https://img.shields.io/badge/Tests-749%2F749%20Verified%20(18%20Suites)-brightgreen.svg)](TEST_GUIDE.md)
+[![Tests: 749/749 Verified](https://img.shields.io/badge/Tests-749%2F749%20Verified%20(Automated%20Harness)-brightgreen.svg)](TEST_GUIDE.md)
 [![Test Pool: 100 Problems](https://img.shields.io/badge/Test%20Pool-100%20Tested%20Problems-blue.svg)](SOLUTIONS_MANUAL.md)
 
 > **🚀 [Launch Live Interactive Simulator](https://sivrajp.github.io/OSSim-Operating-Systems-Learning-Simulation-Suite/)**  
@@ -88,9 +87,7 @@ OSSim Engineering Architecture
     ├── index.html                          (Zero-dependency standalone entry point)
     ├── js/ossim_bundle.js                  (Production protected runtime bundle)
     ├── css/                                (Responsive dark-mode stylesheets)
-    ├── figures/                            (High-resolution UI visualizers)
-    ├── test_dist_smoke.py                  (Automated CI smoke test runner)
-    └── .github/workflows/ci.yml            (GitHub Actions CI verification workflow)
+    └── figures/                            (High-resolution UI visualizers)
 ```
 
 ---
