@@ -1,22 +1,51 @@
-Distribution & License Agreement
 ================================================================================
 OPERATING SYSTEMS SUITE (OSSim)
-Interactive Pedagogical Simulation Suite • Architecture Laboratory
+Academic & Educational Evaluation License
+================================================================================
 
 Author, Creator & Designer: Sivraj P.
-Co-Developed & Engineered with: Antigravity (Google DeepMind)
-Curricular Foundation: The syllabus of 23ELC211 Operating Systems, B.Tech. Electrical and Computer Engineering, Department of Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham was used as the basic course to set the structure.
+Co-Developer & Engineering Verification: Antigravity (Google DeepMind)
+Curricular Foundation: The syllabus of 23ELC211 Operating Systems, B.Tech. Electrical
+and Computer Engineering, Department of Electrical and Electronics Engineering,
+Amrita Vishwa Vidyapeetham.
 
-(C) Copyright Sivraj P. All rights reserved.
+Copyright (C) 2026 Sivraj P. All rights reserved.
 
-TERMS OF USE:
-1. Permission is granted to run and evaluate this educational simulation software
-   for non-commercial academic, teaching, and self-study purposes.
-2. The runtime distribution bundle and code obfuscation protections must remain
-   intact. Unauthorized decompilation, reverse engineering, unauthorized extraction,
-   or relicensing of underlying modules without express written permission
-   of Sivraj is strictly prohibited.
-3. Any publication, research paper, course syllabus, or presentation referencing
+PERMITTED USES (What Students & Educators May Freely Do):
+1. Academic Instruction & Demonstration:
+   Permission is granted to run, demonstrate, and evaluate this simulation software
+   free of charge in classrooms, university computer laboratories, lecture halls,
+   and online academic sessions.
+2. Coursework, Labs & Self-Study:
+   Students, teaching assistants, and independent learners may freely execute,
+   explore, study, and solve problems using this suite offline or online for coursework,
+   lab assignments, exam preparation, and non-commercial educational research.
+3. Offline Distribution for Enrolled Students:
+   Instructors and institutional lab administrators may distribute unmodified copies
+   of this standalone distribution (index.html, js/, css/, documentation) to enrolled
+   students for academic coursework without royalty or charge.
+4. Academic Citation:
+   Any publication, research paper, course syllabus, or presentation referencing
    this tool must cite:
-   "OSSim: Operating Systems Simulation Suite, Designed by Sivraj P. (2026)."
+   "Sivraj P., OSSim: Operating Systems Simulation & Learning Suite, Department of
+   Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham, 2026."
+
+CONDITIONS & PROHIBITIONS (What is Restricted):
+1. Source Protection & Obfuscation Integrity:
+   The compiled runtime distribution bundle (js/ossim_bundle.js) and code obfuscation
+   protections must remain intact. Unauthorized decompilation, reverse engineering,
+   unauthorized extraction of visualizers, or redistribution of de-obfuscated source code
+   is strictly prohibited without prior written consent from Sivraj P.
+2. Non-Commercial Restriction:
+   This software and its documentation may NOT be sold, bundled into paid commercial
+   courses, or included in commercial EdTech products without explicit commercial
+   licensing from the author.
+3. Attribution Preservation:
+   All author copyright notices, academic institutional affiliations, and licensing
+   headers must remain unmodified in all copies.
+
+DISCLAIMER:
+THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM THE USE OF THIS SOFTWARE.
 ================================================================================

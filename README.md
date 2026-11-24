@@ -2,8 +2,10 @@
 ### Interactive Pedagogical Simulation Suite & Architecture Laboratory
 
 [![Platform: Browser-Native](https://img.shields.io/badge/Platform-Browser--Native%20(Zero--CORS)-blue.svg)]()
-[![License: Academic Use](https://img.shields.io/badge/License-Academic%20Evaluation-green.svg)]()
-[![Tests: 749/749 Passing](https://img.shields.io/badge/Tests-749%2F749%20Passing%20(100%25)-brightgreen.svg)]()
+[![License: Academic & Educational](https://img.shields.io/badge/License-Academic%20%26%20Educational-green.svg)](LICENSE)
+[![CI Build & Verification](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/actions/workflows/ci.yml/badge.svg)](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/actions/workflows/ci.yml)
+[![Tests: 749/749 Verified](https://img.shields.io/badge/Tests-749%2F749%20Verified%20(18%20Suites)-brightgreen.svg)](TEST_GUIDE.md)
+[![Test Pool: 100 Problems](https://img.shields.io/badge/Test%20Pool-100%20Tested%20Problems-blue.svg)](SOLUTIONS_MANUAL.md)
 
 > **🚀 [Launch Live Interactive Simulator](https://sivrajp.github.io/OSSim-Operating-Systems-Learning-Simulation-Suite/)**  
 > *Runs 100% in your browser with zero installation, zero server dependencies, and full offline capability.*
@@ -12,7 +14,46 @@
 
 ## 📖 Overview
 
-**OSSim** is a comprehensive, standalone educational operating systems simulation platform and architecture laboratory. Grounded in canonical literature (*Silberschatz, Galvin & Gagne; Tanenbaum & Bos; Stallings; Patterson & Hennessy; OSTEP*) and premier university curricula (*MIT xv6, Stanford Pintos, NITC eXpOS, ACM/IEEE CS2023*), OSSim provides students and instructors with transparent, step-by-step visual observability into invisible silicon and kernel datapaths.
+**OSSim** is an integrated, browser-based educational operating systems simulation platform and architecture laboratory. Grounded in canonical academic literature (*Silberschatz, Galvin & Gagne; Tanenbaum & Bos; Stallings; Patterson & Hennessy; OSTEP*) and premier university curricula (*MIT xv6, Stanford Pintos, NITC eXpOS, ACM/IEEE CS2023*), OSSim provides students and instructors with transparent, step-by-step visual observability into invisible silicon and kernel datapaths.
+
+From observing keyboard hardware interrupts traverse CPU registers to executing side-by-side algorithmic Gantt charts, exploring 18 structured conceptual workbenches, and solving 100 curricular exam problems, OSSim bridges theoretical abstraction and physical execution mechanics.
+
+---
+
+## 📸 Visual UI Tour (Live Environment Screenshots)
+
+### 1. The Playground — Living Operating System & Silicon Hardware Datapath
+*Trace live application interaction (typing, saving) through the 8-stage I/O pipeline down to CPU architectural registers, physical memory frames, and secondary storage controller.*
+
+![The Playground](figures/screenshot_02_playground.png)
+
+---
+
+### 2. The Classroom — 18 Interactive Conceptual Workbenches
+*Explore system initialization, dual-mode execution, process trees, multi-threading, and paging with live Tri-Pillar pedagogical feedback ("What / Why / Principle") and real-world analogies.*
+
+![The Classroom](figures/screenshot_03_classroom.png)
+
+---
+
+### 3. The Workshop — Side-by-Side Unified Algorithmic Comparisons
+*Simulate and benchmark 19 algorithms across CPU scheduling, memory placement, page replacement, and disk seeking on identical workloads with millisecond Gantt rulers and percentage delta efficiency metrics.*
+
+![The Workshop](figures/screenshot_04_workshop.png)
+
+---
+
+### 4. The Test Centre — 100 Tested Curricular Problems & Solutions Manual
+*Self-assessment challenge mode featuring 100 verified examination problems across Units 1–4, instant diagnostic misconception feedback, cognitive Struggle Index tracking, and full mathematical derivation keys.*
+
+![The Test Centre](figures/screenshot_05_test_centre.png)
+
+---
+
+### 5. Home Hub & Mastery Dashboard
+*Central landing suite providing a recommended 4-step learning pathway, 5-pillar composite course readiness telemetry, and cross-room navigation.*
+
+![Home Hub](figures/screenshot_01_home.png)
 
 ---
 
@@ -21,13 +62,57 @@
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications, 8-stage instruction pipeline, dual-mode execution (With OS vs. Bare-Metal Ring 0), and dual-storage continuum. |
-| **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and POSIX CLI terminal. |
-| **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and solid-state NVMe SSD/FTL simulator with analytical KPI scorecards. |
-| **4** | **The Test Centre** | 36 randomized challenge questions across 10 curriculum domains with instant derivations and scorecard telemetry. |
+| **1** | **The Playground** | Living interactive desktop with dock applications, 8-stage instruction pipeline, dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
+| **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
+| **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
+| **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
 | **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 bare-metal x86/RISC-V silicon emulation). |
 | **6** | **The Capstone Studio** | Full-stack application foundry co-evolving 4 authentic user applications (OSSimDoc, OSSimTune, MatrixCompiler, Print Spooler) across 6 systems levels. |
 | **7** | **The Capstone Playground** | Living Silicon stage running deployed user applications on top of the student's custom-built kernel. |
+
+---
+
+## 🏛️ Repository Architecture & Distribution Model
+
+This repository (`sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite`) represents the **Official Standalone Distribution Release (`ossim_dist`)** of OSSim, engineered for zero-install, zero-CORS browser execution on GitHub Pages and offline university lab machines.
+
+```
+OSSim Engineering Architecture
+├── 📦 Development Core (Modular ES2022 Visualizers)
+│   ├── visualizers/ClassroomProtocols.js   (Tri-Pillar feedback & laboratory protocols)
+│   ├── visualizers/ProcessWorkbenchView.js (18-concept interactive workbenches)
+│   ├── visualizers/AlgorithmSimView.js     (Unified comparative solvers & delta metrics)
+│   ├── visualizers/ChallengePoolData.js    (100 curricular problems & derivations)
+│   └── visualizers/OSBuilderQuestView.js   (Levels 0–5 silicon kernel synthesis)
+└── 🚀 Standalone Distribution (This Repository)
+    ├── index.html                          (Zero-dependency standalone entry point)
+    ├── js/ossim_bundle.js                  (Production protected runtime bundle)
+    ├── css/                                (Responsive dark-mode stylesheets)
+    ├── figures/                            (High-resolution UI visualizers)
+    ├── test_dist_smoke.py                  (Automated CI smoke test runner)
+    └── .github/workflows/ci.yml            (GitHub Actions CI verification workflow)
+```
+
+---
+
+## 🏫 Curricular Adoption & Classroom Guidelines
+
+OSSim is specifically structured for undergraduate engineering courses in Operating Systems (e.g., **23ELC211 Operating Systems**).
+
+* **For Professors & Instructors:** You may freely project OSSim during lectures, utilize its real-world analogies, and assign lab experiments from The Workshop and Test Centre.
+* **For Lab Administrators:** Place `index.html` on desktop machines in computer laboratories. It requires zero Node.js, Python, or local web server dependencies and functions with 100% fidelity without an internet connection.
+* **Academic Citation:** If you adopt OSSim in your course or research, please cite:
+  > Sivraj P. (2026). *OSSim: Operating Systems Simulation Suite*. Department of Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham.
+
+---
+
+## 🤝 Community Feedback & Contribution Guidelines
+
+While the core simulation engine is released as a compiled distribution to protect author novelty and intellectual property, academic contributions are warmly welcomed:
+
+1. **Submit Challenge Problems:** Propose new university end-semester questions or GATE problems with derivations via [GitHub Issues](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/issues) for inclusion in the Test Centre pool.
+2. **Report Edge Cases & Anomalies:** If you discover a mathematical corner case or browser rendering discrepancy, please submit an issue with the specific input dataset.
+3. **Curriculum Integration Inquiries:** Universities seeking customized syllabus mapping, joint pedagogical studies, or institutional adoption may contact the author directly.
 
 ---
 
@@ -55,4 +140,4 @@ All official guides are included directly in this repository and are accessible 
 - **Author, Creator & Designer:** Sivraj P.
 - **Co-Developer & Engineering Verification:** Antigravity (Google DeepMind)
 - **Curricular Foundation:** The syllabus of **23ELC211 Operating Systems**, B.Tech. Electrical and Computer Engineering, Department of Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham was used as the basic course to set the structure.
-- **Copyright:** © Copyright Sivraj P. All rights reserved.
+- **License:** Licensed under the [OSSim Academic & Educational Evaluation License](LICENSE). Free for academic instruction, laboratory coursework, and self-study.
