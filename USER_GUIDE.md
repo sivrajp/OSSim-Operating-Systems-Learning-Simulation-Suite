@@ -74,7 +74,7 @@ The Home page prominently features four large, interactive cards styled with ded
 
 1. **🎮 1. The Playground — Live OS Desktop** (`data-nav="desktop"`):
    - *Role:* Interactive System Pipeline & Hardware X-Ray
-   - *Pedagogical Focus:* Real-time 7-stage I/O to display pipeline trace, "With OS" vs "Without OS (Bare-Metal)" comparison, CPU registers (`PC`, `SP`, `CPL`, `FLAGS`, `R0-R3`), 64-frame physical RAM grid with interactive frame inspector, and magnetic disk platter seek visualization.
+   - *Pedagogical Focus:* Real-time 7-stage document storage I/O pipeline and 8-stage application launch hardware pipeline, "With OS" vs "Without OS (Bare-Metal)" comparison, CPU registers (`PC`, `SP`, `CPL`, `FLAGS`, `R0-R3`), 64-frame physical RAM grid with interactive frame inspector, and magnetic disk platter seek visualization.
 2. **📚 2. The Classroom — OS Concepts Learning** (`data-nav="workbench"`):
    - *Role:* Dual-Mode Sandbox, OS Architectures & Runtime Lab
    - *Pedagogical Focus:* Visual learning aids mapped to Silberschatz Chapters 1–5 (Dual-Mode CPU ring sandbox, Stackable OS Architecture Builder with fault injection, Polling vs Interrupt vs DMA hardware simulation, POSIX Syscall Matrix, OS Evolution timeline), plus the Runtime Process Lab (Hierarchical process tree, `pthread_create()`, 5-state lifecycle engine, PCB Table, 1:1 / M:1 / M:M multithreading models, UNIX Pipes, POSIX Shared Memory with mutex lock toggle, and EduKernel Terminal `tty1`).
@@ -136,7 +136,7 @@ To provide students with a clear, visceral understanding of why an Operating Sys
 | **File Persistence** | **Virtual File System (VFS):** `sys_write()` safely handles inodes, directory entries, and disk arm seek commands. | **Raw Disk Sector Writing:** App must issue low-level ATA commands to Cylinder 53, Head 0, Sector 1. A single bug wipes the whole disk! |
 
 #### Multi-Application Mode Switch & Execution Synchronization
-To maintain absolute logical and pedagogical consistency, OSSim enforces ground-truth state synchronization across all 4 dock applications (`OSSimDoc`, `OSSimTune`, `MatrixCompiler`, and `DeadlockLab`):
+To maintain absolute logical and pedagogical consistency, OSSim enforces ground-truth state synchronization across all 4 dock applications (`OSSimDoc`, `OSSimTune`, `MatrixCompiler`, and `Print Spooler` [featuring the `DeadlockLab` concurrency scenario]):
 - **Preserved Awaiting-Input State:** When switching from "Without OS" back to "With OS", the pipeline inspects the actual ground-truth state of the application. If the application is idle, the pipeline strictly parks at Stage 1 in its `Awaiting Input` state (`isAutoPlay = false`), preventing phantom execution traces, fake audio streaming, or unrequested benchmark looping.
 - **Automatic Background Suspension:** Switching into Bare-Metal mode immediately pauses active audio streaming (`tuneApp.pause()`), aborts active matrix compilations (`compilerApp.abortCompilation()`), and terminates automated typist loops (`docApp.stopTyping()`), ensuring that unprotected hardware never executes orphaned OS user-space threads.
 

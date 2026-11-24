@@ -95,7 +95,7 @@ The Playground provides a real-time, 4-layer hardware X-ray demonstrating why an
 | **1.2.4:** Click `[▶ Play]` in OSSimTune, then toggle between `Sine`, `Square`, and `Sawtooth` waveforms. | The sound waveform updates dynamically. The Audio Ring Buffer displays head/tail indices advancing synchronously. | Demonstrates Single-Producer Single-Consumer (SPSC) circular lock-free buffer synchronization between audio worker threads and DAC hardware. |
 | **1.2.5:** In the Dock, click **MatrixCompiler (IDE)**. | Compiler IDE opens (`PID 103`). Source code editor displays a matrix multiplication benchmark (`matmul.c`). | Compute-bound batch process requiring CPU-intensive arithmetic bursts and dynamic memory heap expansion. |
 | **1.2.6:** Click `[⚡ Compile & Run Matrix]`. | Terminal log reports: `Parsing AST ➔ Allocating Arena ➔ Executing GEMM [64x64]`. RAM Frame #18 highlights purple. | Demonstrates process creation (`fork`), compilation passes, dynamic heap memory arena growth via `sys_brk()`, and child reaping. |
-| **1.2.7:** In the Dock, click **DeadlockLab (Concurrency)**. | Concurrency workbench opens (`PID 104`), showing dual processes competing for Laser Printer and Scanner resources. | Resource contention scenario designed to illustrate mutual exclusion and Coffman circular wait conditions. |
+| **1.2.7:** In the Dock, click **Print Spooler (DeadlockLab Concurrency)**. | Concurrency workbench opens (`PID 104`), showing dual processes competing for Laser Printer and Scanner resources. | Resource contention scenario designed to illustrate mutual exclusion and Coffman circular wait conditions. |
 
 ### Protocol 1.3: The 8-Stage Execution Pipeline Controls
 
