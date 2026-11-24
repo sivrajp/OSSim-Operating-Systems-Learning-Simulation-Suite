@@ -5,6 +5,7 @@
 [![License: Academic & Educational](https://img.shields.io/badge/License-Academic%20%26%20Educational-green.svg)](LICENSE)
 [![Tests: 749/749 Verified](https://img.shields.io/badge/Tests-749%2F749%20Verified%20(Automated%20Harness)-brightgreen.svg)](TEST_GUIDE.md)
 [![Test Pool: 100 Problems](https://img.shields.io/badge/Test%20Pool-100%20Tested%20Problems-blue.svg)](SOLUTIONS_MANUAL.md)
+[![Private Automated Regression Battery](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml/badge.svg)](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)
 
 > **🚀 [Launch Live Interactive Simulator](https://sivrajp.github.io/OSSim-Operating-Systems-Learning-Simulation-Suite/)**  
 > *Runs 100% in your browser with zero installation, zero server dependencies, and full offline capability.*
