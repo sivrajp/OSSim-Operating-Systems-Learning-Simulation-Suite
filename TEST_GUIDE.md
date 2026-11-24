@@ -474,6 +474,17 @@ Empirical Verification Status: VERIFIED (47 / 47 PASSED, 100% PASS)
 The complete automated integration battery executes across all 18 test suites. Every test runs headlessly in Edge/Chromium, introspecting the live DOM, virtual hardware registers, kernel memory frames, and process queue states. The table below details the official test audit results:
 
 
+### 4.6 Pedagogical Depth & 100-Question Assessment Suite Verification (v3.2)
+
+| Test Identifier | Verified Domain Invariant | Assertion Criteria | Status |
+| :--- | :--- | :--- | :---: |
+| `CHAL_01` – `CHAL_06` | 100-Question Pool Assembly & DOM Mounting | 100 distinct cards rendered across 10 filter categories | **PASS** |
+| `CHAL_07` – `CHAL_09` | Scorecard Metric Scaling | Dynamic calculation across 100 questions (Pool, Attempted, Score, Accuracy) | **PASS** |
+| `CHAL_10` – `CHAL_11` | Curricular Topic Filtering | Exact category slicing (`unit1-sched`: 12 questions, `unit2-deadlock`: 10 questions) | **PASS** |
+| `CHAL_12` – `CHAL_16` | Algorithmic Evaluation & Derivations | Preemptive SRTF Gantt chart derivation (AWT = 3.00 ms) | **PASS** |
+| `CHAL_22` – `CHAL_23` | Diagnostic Cognitive Misconception Detection | Distractor detection, Struggle Index tracking, and 50% accuracy evaluation | **PASS** |
+| `CHAL_25` | Zero Benchmark Duplication | Verification of non-trivial unique curricular problem parameters | **PASS** |
+
 ## 📚 5. Academic References & Canonical Literature
 
 - Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating System Concepts (10th ed.). John Wiley & Sons. [Primary Curricular Reference].

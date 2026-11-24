@@ -35,7 +35,7 @@ Unlike conventional simulators that isolate theoretical scheduling or page repla
    18. Grand Capstone CLI Terminal & Comprehensive Command Sandbox
    The 3/4th Right Main Stage mounts interactive simulators, step-by-step workout scenarios with analytical calculations, mathematical formulas, and visual aids for each selected concept.
 3. **Tier 3 — Multi-Module Algorithmic Simulators (The Workshop):** Mathematical solvers and visualizers for all syllabus algorithms across Units 1, 2, and 3. Features selective algorithm comparison (any subset chosen via checkboxes), a millisecond-precise Gantt chart ruler marking every single millisecond ($0, 1, 2, 3, \dots, T_{max}$), and formal academic report export (`🖨️ Print / Save PDF`, `📋 Copy Summary`).
-4. **Tier 4 — Self-Assessment & Exam Challenge Mode (The Test Centre):** Interactive numerical problems matching university examination patterns with immediate automated grading and step-by-step academic solutions.
+4. **Tier 4 — Self-Assessment & Exam Challenge Mode (The Test Centre):** 100 tested and verified curricular problems across Units 1–4 matching GATE CSE and University End-Semester examination patterns, featuring real-time diagnostic cognitive misconception analysis, Struggle Index tracking, and an interactive and exportable Master Solutions Manual (`SOLUTIONS_MANUAL.md`).
 
 OSSim requires **zero external dependencies** (no Node.js, npm, Python packages, or external CDN connections required). It operates 100% offline directly in any standard modern web browser via `file:///` or HTTP.
 
@@ -510,6 +510,40 @@ While classical operating systems courses rightly anchor foundational theory in 
 - **Unified Command-Line Interface:** Providing an interactive POSIX terminal environment connected directly to the reactive simulation core, allowing students to inspect system state using authentic shell commands (ps, 	op, mmu, cgroup, ssd).
 
 ---
+
+### 15.5 Pedagogical Depth Enhancements & Cognitive Analytics
+
+In OSSim v3.2+, six major pedagogical enhancements deepen the educational scaffolding:
+
+1. **Tri-Pillar Pedagogical Feedback ("What / Why / Principle"):**
+   Every interactive concept and visualizer features dynamic tripartite feedback:
+   - *What Happened?* Observable hardware/software transition (e.g., trap generation, context save, dirty frame evictions).
+   - *Why Did It Happen?* Immediate causal mechanism (e.g., timer interrupt expiration, lack of free frames, page table dirty bit).
+   - *What OS Principle Does This Demonstrate?* Canonical computer systems abstraction (e.g., preemptive multitasking, hardware memory protection, inclusion property).
+
+2. **Unified Workload Comparisons Across Algorithmic Suites:**
+   In The Workshop, identical benchmark workloads are executed simultaneously across competing algorithms, highlighting:
+   - *CPU Scheduling:* Exact percentage waiting time reduction ($\Delta 	ext{ WT vs FCFS}$) in the unified KPI table.
+   - *Memory Placement:* Best-Fit allocation champion status (100% success) versus First-Fit/Worst-Fit external fragmentation failure on identical hole distributions.
+   - *Page Replacement:* Belady's Anomaly alert and efficiency delta comparing FIFO/LRU/Clock against Belady's Optimal theoretical lower bound.
+   - *Disk Scheduling:* Total head travel savings ($\Delta 	ext{ THM vs FCFS}$) and cylindrical boundary turn-around insights.
+
+3. **Structured Laboratory Protocols:**
+   Every experiment presents an academic protocol card:
+   - *Objective:* Specific conceptual invariant verified.
+   - *Prerequisites:* Silberschatz chapter alignment.
+   - *Actionable Procedure:* Step-by-step student interaction sequence.
+   - *Expected Observation:* Quantitative and qualitative benchmarks.
+   - *Core Technical Takeaway:* Formal theoretical invariant.
+
+4. **Diagnostic Learning Analytics & Struggle Index:**
+   The Test Centre and Progress Dashboard continuously log student choices, diagnosing specific cognitive traps (e.g., reversing semaphore wait orders, confusing user vs kernel mode transitions). The platform calculates a **Struggle Index** ($100 - 	ext{Accuracy}$) and routes students via a 1-click router directly to the relevant Classroom concept.
+
+5. **100 Tested Curricular Problems:**
+   Test Centre spans Units 1, 2, 3, and 4 with 100 problems covering all Bloom's taxonomy levels.
+
+6. **Master Solutions Manual (`SOLUTIONS_MANUAL.md`):**
+   Full step-by-step mathematical derivations, formulas, Gantt charts, and misconception keys for all 100 problems, printable and exportable via browser print stylesheets.
 
 ## 16. Conclusion & References
 

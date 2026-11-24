@@ -276,7 +276,8 @@ The Classroom is an 18-Concept interactive laboratory mapped directly to canonic
 | **2.12.1:** Observe the **Directed Resource Allocation Graph (RAG)**. Click `[Trigger Deadlock / Circular Wait]`. | Tarjan's cycle detection highlights the closed loop ($P_0 	o R_1 	o P_1 	o R_2 	o P_0$) in **crimson**. System status flags `DEADLOCK DETECTED`. | Coffman's 4th condition (Circular Wait) verified: directed cycle in single-instance RAG guarantees deadlock. |
 | **2.12.2:** Click `[Preempt Process & Recover]`. | The engine preempts $P_1$, recovers held resources, and breaks the directed cycle, returning to green `SAFE STATE`. | Deadlock recovery via victim selection and resource preemption. |
 | **2.12.3:** Inspect the **Banker's Algorithm Matrix**. | Table displays Allocation, Max, Need ($	ext{Max} - 	ext{Alloc}$), and Available vectors. | Mathematical state tracking for multi-unit resource deadlock avoidance. |
-| **2.12.4:** Click `[Simulate Safe Request]`. | Safety algorithm derives safe sequence $\langle P_0 	o P_2 	o P_3 	o P_4 	o P_1 angle$. Request granted. | Avoidance: system grants requests only if the resulting state maintains at least one safe completion sequence. |
+| **2.12.4:** Click `[Simulate Safe Request]`. | Safety algorithm derives safe sequence $\langle P_0 	o P_2 	o P_3 	o P_4 	o P_1 
+angle$. Request granted. | Avoidance: system grants requests only if the resulting state maintains at least one safe completion sequence. |
 
 ---
 
@@ -364,7 +365,8 @@ The Workshop provides mathematical solvers and comparison benchmarks across 6 de
 
 | Step # & User Action | Visual & System Target | Operating Systems Concept |
 | :--- | :--- | :--- |
-| **3.2.1:** In Module 3, observe the **Banker's Algorithm Solver**. Click `[Verify Safety State]`. | System computes Need Matrix ($Need = Max - Alloc$) and tracks Work vector to derive safe sequence $\langle P_0 	o P_2 	o P_3 	o P_4 	o P_1 angle$. | Dijkstra's safety algorithm evaluating whether system is in a safe execution state. |
+| **3.2.1:** In Module 3, observe the **Banker's Algorithm Solver**. Click `[Verify Safety State]`. | System computes Need Matrix ($Need = Max - Alloc$) and tracks Work vector to derive safe sequence $\langle P_0 	o P_2 	o P_3 	o P_4 	o P_1 
+angle$. | Dijkstra's safety algorithm evaluating whether system is in a safe execution state. |
 | **3.2.2:** Click `[Resource Allocation Graph (RAG)]` tab in Module 3. | Interactive RAG visualizer mounts with processes ($P_0-P_3$) and multi-unit resources ($R_1-R_3$). | Directed graph model for deadlock characterization. |
 | **3.2.3:** Click `[Trigger Circular Wait Cycle]`. | Tarjan's SCC algorithm flags directed cycle in crimson. Click `[Preempt Resource & Recover]` to resolve. | Automated cycle detection and preemption recovery. |
 
