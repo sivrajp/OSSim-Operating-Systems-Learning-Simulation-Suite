@@ -55,6 +55,9 @@
 
             <!-- Header Actions -->
             <div class="header-actions">
+                <button class="btn-header-dashboard" id="header-btn-dashboard" title="Student Mastery Dashboard &amp; Learning Transcript">
+                    <span>📊</span> Mastery Dashboard
+                </button>
                 <button class="btn-header-sync" id="header-btn-sync" title="Sync, Backup, and Export Student Progress">
                     <span>💾</span> Sync Progress
                 </button>
@@ -90,7 +93,7 @@
                         An Interactive Pedagogical Simulation Suite Bridging Hardware Silicon, Kernel Supervisor Services, and User Applications
                     </p>
                     <p class="home-hero-purpose">
-                        <strong>Purpose of the Tool:</strong> In traditional operating systems education, students learn abstract concepts—such as dual-mode CPU rings, interrupt handling, page table translations, thread concurrency, and process scheduling—through disconnected mathematical models and theoretical lectures. <strong>OSSim</strong> transforms these abstractions into an interactive, visual reality. From watching keyboard interrupts traverse low-level device registers to testing race conditions in shared memory and solving complex CPU scheduling Gantt charts, OSSim provides students and engineering learners with an exploratory laboratory for every core concept in the curriculum.
+                        <strong>Purpose of the Tool:</strong> OSSim transforms these abstractions—dual-mode CPU rings, interrupt vectors, page tables, and process scheduling—into an interactive visual reality. From observing keyboard interrupts traverse device registers to solving multi-algorithm Gantt charts and assembling bootable kernels, explore core systems concepts through live simulation.
                     </p>
                     
                     <!-- Feature Quick-Stats Strip -->
@@ -107,13 +110,20 @@
                 <!-- BEGINNER QUICK-START: RECOMMENDED LEARNING PATHWAY        -->
                 <!-- ========================================================= -->
                 <div class="home-quickstart-section">
-                    <div class="quickstart-header">
-                        <div class="quickstart-badge">
-                            <span class="badge-dot">●</span>
-                            <span>RECOMMENDED LEARNING PATHWAY</span>
+                    <div class="quickstart-header" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.75rem;">
+                        <div>
+                            <div class="quickstart-badge">
+                                <span class="badge-dot">●</span>
+                                <span>RECOMMENDED LEARNING PATHWAY</span>
+                            </div>
+                            <h2>New to OSSim? Start Here</h2>
+                            <p>Follow this 4-step sequence to build your operating systems intuition from live interaction to kernel engineering:</p>
                         </div>
-                        <h2>New to OSSim? Start Here</h2>
-                        <p>Follow this 4-step sequence to build your operating systems intuition from live interaction to kernel engineering:</p>
+                        <div>
+                            <button class="btn-dashboard-pill" id="btn-open-student-dashboard" title="View Full Student Progress &amp; Mastery Dashboard">
+                                <span>📊</span> View Mastery Dashboard &rarr;
+                            </button>
+                        </div>
                     </div>
 
                     <div class="quickstart-steps-grid">
@@ -180,7 +190,7 @@
                                 <h3 class="card-title">1. The Playground</h3>
                                 <div class="card-subtitle">Live OS Desktop &amp; Hardware Continuum</div>
                                 <p class="card-desc">
-                                    Step into a simulated living operating system desktop. Interact with <strong>OSSimDoc</strong> (a live word processor), trace the real-time <strong>7-stage I/O pipeline</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, observe CPU register state transitions, track the magnetic hard disk seek arm, and inspect 64 physical RAM frames with the interactive memory inspector.
+                                    Step into an interactive simulated desktop. Run <strong>OSSimDoc</strong>, trace the <strong>7-stage I/O pipeline</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, track magnetic disk seek mechanics, and inspect physical memory in the 64-frame RAM grid.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>📱</span> <strong>OSSimDoc Word Processor:</strong> Live typing and document persistence</li>
@@ -206,7 +216,7 @@
                                 <h3 class="card-title">2. The Classroom</h3>
                                 <div class="card-subtitle">OS Concepts Learning &amp; Process Lab</div>
                                 <p class="card-desc">
-                                    Master foundational operating system mechanics through interactive visual sandboxes and runtime process controls. Drag and drop assembly into <strong>Dual-Mode rings</strong>, assemble <strong>Stackable OS Architectures</strong> with fault injection, simulate <strong>Polling vs Interrupts vs DMA</strong>, analyze <strong>POSIX Syscalls &amp; OS Evolution</strong>, and manage live <strong>Process Trees, 5-State Life Cycle, Multithreading models (1:1, M:1, M:M)</strong>, and <strong>IPC Channels</strong>.
+                                    Master operating system principles through 18 visual workbenches and real-world analogies. Test <strong>Dual-Mode Ring 3 vs 0</strong> assembly, assemble <strong>Stackable Architectures</strong>, simulate <strong>DMA vs Interrupts</strong>, and manage runtime process trees and IPC.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>🛡️</span> <strong>Dual-Mode Sandbox:</strong> Ring 3 User vs Ring 0 Kernel instructions</li>
@@ -261,7 +271,7 @@
                                 <h3 class="card-title">4. The Test Centre</h3>
                                 <div class="card-subtitle">Exam Challenge &amp; Problem Sets</div>
                                 <p class="card-desc">
-                                    Evaluate and sharpen your exam readiness with curated numerical problems and analytical scenarios matching <strong>university examination patterns</strong>. Practice with CPU turnaround times, Banker's resource matrices, effective memory access times (EMAT), and disk cylinder seek calculations. Receive instant feedback, automated grading, performance analytics, and complete step-by-step academic solutions.
+                                    Sharpen exam readiness with curated problem sets matching university patterns. Practice CPU turnaround times, Banker's resource matrices, EMAT calculations, and disk seeks with instant automated grading and step-by-step proofs.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>📝</span> <strong>Exam-Pattern Questions:</strong> Authentic university examination problem sets</li>
@@ -287,7 +297,7 @@
                                 <h3 class="card-title">5. OS Builder Quest</h3>
                                 <div class="card-subtitle">Learn by Building an OS (Levels 0 to 5)</div>
                                 <p class="card-desc">
-                                    Embark on a gamified journey building a complete operating system across <strong>10 Milestone Quests</strong> encompassing all <strong>28 stages of eXpOS (NITC)</strong>, <strong>4 landmark projects of Pintos (Stanford)</strong>, and <strong>10 algorithmic challenges of xv6 (MIT 6.S081)</strong>. Advance from Level 0 (1-Click Modular Integration) through Level 1 (Logic Flow Cards), Level 2 (Scaffolded C with Hints), Level 3 (API Spec), Level 4 (Pro RFC &amp; Stress Testing), to Level 5 (Master Bare-Metal Porting on x86 IA-32 vs 64-bit RISC-V).
+                                    Build a complete operating system across <strong>10 Milestone Quests</strong> spanning eXpOS, Pintos, and xv6. Advance from Level 0 (1-Click Modular Integration) through scaffolded C coding to Level 5 bare-metal porting on x86 &amp; 64-bit RISC-V.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>🍼</span> <strong>Level 0 (Baby Steps):</strong> 1-Click integration of verified C kernel modules</li>
@@ -314,7 +324,7 @@
                                 <h3 class="card-title">6. The Capstone Studio</h3>
                                 <div class="card-subtitle">App Foundry: User-Space Systems &amp; Synthesis (Levels 0–5)</div>
                                 <p class="card-desc">
-                                    Bridge kernel space to user space. Co-evolve and synthesize <strong>4 living applications (OSSimDoc, OSSimTune, MatrixCompiler, Print Spooler)</strong> on top of your built operating system across 6 progressive mastery levels. Master process layout, the system call gateway, dynamic heap allocation, file descriptors, multithreading, and Banker's deadlock safety, culminating in dual-architecture bare-metal execution on <strong>x86 Protected Mode &amp; 64-bit RISC-V</strong>.
+                                    Bridge kernel space to user space. Synthesize <strong>4 authentic applications (OSSimDoc, OSSimTune, MatrixCompiler, Print Spooler)</strong> on top of your custom operating system across 6 progressive mastery levels.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>🍼</span> <strong>Level 0 (Baby Steps):</strong> 1-Click assembly of all 4 applications on ready OS</li>
@@ -341,7 +351,7 @@
                                 <h3 class="card-title">7. The Capstone Playground</h3>
                                 <div class="card-subtitle">Live Synthesized OS &amp; Application Stage</div>
                                 <p class="card-desc">
-                                    Step into the living culmination of your operating systems journey. Power on the simulated machine to host your synthesized EduKernel (deployed from OS Builder Quest Levels 0–5) and run your custom user-space applications (deployed from Capstone Studio). Observe the hardware reset state, launch active applications from the live dock, step through the <strong>8-stage execution cycle pipeline</strong>, and inspect physical memory in the <strong>64-frame physical RAM grid</strong>.
+                                    The living culmination of your systems journey. Boot the simulated machine with your synthesized EduKernel and launch custom user-space applications with live hardware telemetry, 8-stage execution cycles, and memory frames.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>🖥️</span> <strong>Hardware Standby &amp; Host Boot:</strong> CPU reset state until your OS kernel is deployed</li>
