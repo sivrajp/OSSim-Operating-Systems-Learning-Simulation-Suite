@@ -23,7 +23,7 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 ## 📸 Visual UI Tour (Live Environment Screenshots)
 
 ### 1. The Playground — Living Operating System & Silicon Hardware Datapath
-*Trace live application interaction (typing, saving) through the 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, physical memory frames, and secondary storage controller.*
+*Trace live application interaction (typing, saving) through the 8-stage interactive keyboard pipeline and 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, physical memory frames, and secondary storage controller.*
 
 ![The Playground](figures/screenshot_02_playground.png)
 
@@ -62,7 +62,7 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications, 7-stage document storage pipeline, 8-stage application launch cycle, dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
+| **1** | **The Playground** | Living interactive desktop with dock applications, 8-stage interactive keyboard & 7-stage storage persistence pipelines, 8-stage application launch cycle, dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
 | **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
 | **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
 | **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
@@ -141,16 +141,18 @@ OSSim maintains an automated, headless browser integration test harness executin
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
 | **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` |
-| **Public Distribution SHA** | [`f9d5ae4`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/f9d5ae4) (Verified Green • Release Candidate) |
-| **Test Harness SHA** | [`3df4a8a`](https://github.com/sivrajp/ossim-test-harness/commit/3df4a8a) (Release Consistency & Invariant Verification Suite) |
+| **Public Distribution SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Verified Green • Release Candidate) |
+| **Test Harness SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
 | **Runtime & Encoding** | Python 3.10+, `PYTHONUTF8=1`, `PYTHONIOENCODING=utf-8` |
 | **Canonical Baseline Assertions** | **18 / 18 Suites Passed (100.0% Pass Rate, 749 Atomic Assertions)** |
-| **Extended Permutation Sweep** | **810+ Checks Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
+| **Extended Permutation Sweep** | **810 / 810 Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
+| **Release Consistency Audit** | **68 / 68 Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
+| **Total Automated System Checks** | **878 / 878 Passed (100.0% Pass Rate)** |
 | **Automated Cadence** | Daily Nightly Regression (00:00 UTC) & On Every Push |
 
-> **Note on Test Counts:** The core release baseline comprises **749 atomic assertions** across 18 automated CI suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). Extended combinatorial sweeps in the private test harness (all-app mode-switch permutations BM_26–BM_86 and bundle checksum audits) execute **810+ total checks**, all passing at 100.0%.
+> **Note on Exact Test Counts:** The core release baseline comprises **749 atomic assertions** across 18 automated CI suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). Extended combinatorial sweeps in the private test harness (evaluating Suite 10 across all 4 dock application mode-switch matrices `BM_01`–`BM_86`) execute **exactly 810 atomic assertions**, all passing at 100.0% ($749 + 61 = 810$). When including the automated release consistency audit suite (`verify_release_consistency.py` with 68 checks), the codebase passes **878 automated checks**.
 
 ---
 
@@ -159,4 +161,5 @@ OSSim maintains an automated, headless browser integration test harness executin
 - **Author, Creator & Designer:** Sivraj P.
 - **Co-Developer & Engineering Verification:** Antigravity (Google DeepMind)
 - **Curricular Foundation:** The syllabus of **23ELC211 Operating Systems**, B.Tech. Electrical and Computer Engineering, Department of Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham was used as the basic course to set the structure.
-- **License:** Licensed under the [OSSim Academic & Educational Evaluation License](LICENSE). Free for academic instruction, laboratory coursework, and self-study.
+- **Software Classification:** Publicly available, source-protected educational software distribution.
+- **License & Permitted Rights:** Licensed under the [OSSim Academic & Educational Evaluation License](LICENSE). Free for academic instruction, laboratory coursework, and self-study. Faculty may freely distribute unmodified offline bundles to enrolled students; institutions may host internal LMS/intranet mirrors; researchers may reproduce simulation metrics and figures with scholarly attribution.

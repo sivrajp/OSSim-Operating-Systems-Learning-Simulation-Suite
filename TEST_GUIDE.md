@@ -30,7 +30,7 @@ In educational systems engineering, an operating systems simulator that compiles
 
 
 
-OSSim establishes a high benchmark for academic rigor by replacing superficial mechanism-presence testing with **First-Principles Domain-Invariant Testing**. Every test case in the OSSim verification battery mathematically asserts that the simulator obeys the physical, temporal, and architectural rules of authentic computing systems.
+OSSim establishes a high benchmark for academic rigor by replacing superficial mechanism-presence testing with a rigorous, layered verification methodology. OSSim employs a layered verification framework combining domain-invariant testing, algorithmic reference validation, subsystem integration, hardware-state inspection, UI verification, and end-to-end workflow testing.
 
 
 
@@ -144,93 +144,82 @@ Below is the exhaustive, feature-by-feature verification matrix for all componen
 
 
 
-### 3.2 Architectural Pipeline Traces: 8-Stage Launch vs 7-Stage Document I/O
+### 3.2 Architectural Pipeline Traces: Three Distinct Hardware/Kernel Pipelines
 
+To avoid conflation between interactive I/O, process creation, and storage persistence, OSSim explicitly models and differentiates three distinct hardware and kernel execution pipelines:
 
-
-OSSim models two distinct hardware/kernel pipelines serving complementary pedagogical purposes:
-
-
+1. **8-Stage Application Launch & Process Inception Pipeline Trace** (Desktop shell click to running user-mode application);
+2. **7-Stage Document Storage & I/O Persistence Pipeline Trace** (`sys_save` filesystem writeback to secondary storage);
+3. **8-Stage Interactive Keyboard & Display Framebuffer Pipeline Trace** (`IRQ 1` keystroke to VRAM screen draw).
 
 #### 3.2A 8-Stage Application Launch & Process Inception Pipeline Trace
 
-- **Theoretical Subsystem:** Dynamic Process Inception, POSIX `execve()`, Privilege Transition, System Call Traps, VFS ELF Loading, MMU Page Directory Setup, and User Mode Return (`IRET`).
-
-- **Authoritative Literature Citation:** Silberschatz, Chapter 2.3 (System Calls) & 3.1 (Process Creation); Bovet & Cesati, Chapter 20 (Program Execution).
-
+- **Theoretical Subsystem:** Dynamic Process Inception, POSIX `execve()`, Dual-Mode Privilege Transition, System Call Traps, VFS ELF Loading, MMU Page Directory Setup, and User-Mode Return.
+- **Authoritative Literature Citation:** Silberschatz, Chapter 2.3 (System Calls) & 3.1 (Process Creation); Bovet & Cesati, Chapter 20 (Program Execution); Patterson & Hennessy (RISC-V Edition), Chapter 5.
 - **Domain Invariant & Inception Rule:**
-
-  - **[TI]** Application launching must trace 8 discrete hardware/kernel stages:
-
-    1. **Shell Click:** Desktop GUI shell detects launch event;
-
-    2. **Trap `INT 0x80` / `ecall`:** CPU traps from CPL 3 (User) to CPL 0 (Kernel);
-
-    3. **VFS ELF Read:** Inode lookup and ELF header parsing from disk;
-
-    4. **MMU Virtual Page Mapping:** Allocates physical frames, sets up Page Directory (CR3);
-
-    5. **PCB Instantiation:** Kernel instantiates Process Control Block and assigns PID;
-
-    6. **Scheduler Dispatch:** Scheduler admits process to `READY` and dispatches to `RUNNING`;
-
-    7. **`IRET` Return:** Kernel executes `IRET`, returning CPU privilege CPL 0 $\rightarrow$ 3;
-
-    8. **Framebuffer Mount:** User application active window mounts and enters execution.
-
+  - **[TI]** Application launching follows an 8-stage sequence defined at a conceptual architecture-independent level, with concrete hardware mechanisms mapped for x86 and RISC-V targets:
+    1. **Stage 1 (Shell Click):** Desktop GUI shell detects user launch event and prepares executable argument vector.
+    2. **Stage 2 (System Call Trap):** CPU traps from unprivileged user mode to supervisor/kernel mode.
+       - *x86 Architecture Model:* Executes `INT 0x80` (or `SYSCALL`), transitioning privilege from User (CPL 3) to Kernel (CPL 0) via the Interrupt Descriptor Table (IDT).
+       - *RISC-V Architecture Model (RV64):* Executes `ECALL`, transitioning privilege from User Mode (U-mode) to Supervisor Mode (S-mode) via the `stvec` trap vector.
+    3. **Stage 3 (VFS ELF Header Read):** Virtual File System resolves executable path, parses ELF header, verifies magic bytes (`0x7F 'E' 'L' 'F'`), and inspects `PT_LOAD` program headers.
+    4. **Stage 4 (MMU Virtual Page Directory Setup):** Kernel allocates physical memory frames and establishes the process page table hierarchy.
+       - *x86 Architecture Model:* Configures two-level page directory and loads base physical frame into `CR3`.
+       - *RISC-V Architecture Model (RV64):* Configures Sv39 page tables and initializes the `satp` (Supervisor Address Translation and Protection) register.
+    5. **Stage 5 (PCB Instantiation & Queue Admission):** Kernel allocates the Process Control Block (PCB), assigns PID, and formally admits the process from `NEW` to the `READY` queue.
+    6. **Stage 6 (Scheduler Selection & CPU Dispatch):** Operating system scheduler algorithm selects the admitted process from `READY` and dispatches it to `RUNNING` on Core 0.
+    7. **Stage 7 (Privilege Return):** Kernel executes architectural return instruction, restoring CPU context and dropping privilege back to user mode.
+       - *x86 Architecture Model:* Executes `IRET` (or `SYSRET`), popping EFLAGS, CS, and EIP, returning CPL 0 $\rightarrow$ CPL 3.
+       - *RISC-V Architecture Model (RV64):* Executes `SRET`, restoring status from `sstatus.SPP` and program counter from `sepc`, returning S-mode $\rightarrow$ U-mode.
+    8. **Stage 8 (Application Framebuffer Mount):** User-mode application process begins instruction execution and mounts its active window interface into the desktop framebuffer.
 - **Automated Verification Test IDs:** `PIPE-LAUNCH-01`, `PIPE-LAUNCH-02`, `PIPE-LAUNCH-03`, `PIPE-STAGE-1` through `PIPE-STAGE-8`, `DESK-LAUNCH-WIN` (Executed via `tests/test_desktop_launch_and_pc.py`).
-
 - **Empirical Verification Status:** VERIFIED (100% PASS).
-
-
 
 #### 3.2B 7-Stage Document Storage & I/O Persistence Pipeline Trace
 
-- **Theoretical Subsystem:** Storage Subsystem, Synchronous File Writes (`sys_save`), Dirty Page Flushing, and Device Controller Transfers.
-
-- **Authoritative Literature Citation:** Silberschatz, Chapter 10 & 13 (I/O Systems); OSTEP, Chapter 36 & 39.
-
+- **Theoretical Subsystem:** Storage Subsystem, Synchronous File Writes (`sys_save`), Buffer Cache Dirty Page Flushing, and Device Controller DMA Transfers.
+- **Authoritative Literature Citation:** Silberschatz, Chapter 10 & 13 (I/O Systems); OSTEP, Chapter 36 & 39 (I/O Devices & Files).
 - **Domain Invariant & Inception Rule:**
-
   - **[TI]** Document saving in The Playground (`OSSimDoc`) traces 7 discrete I/O persistence stages:
-
-    1. **Shell Input:** Keystroke buffer or Save button clicked;
-
-    2. **Trap `sys_save`:** User trap `INT 0x80` with sys_save vector;
-
-    3. **VFS Inode Lookup:** Path resolution and directory entry update;
-
-    4. **MMU Dirty Translation:** MMU sets dirty bit on mapped buffer frames;
-
-    5. **Driver I/O Queue:** Block device driver schedules transfer request;
-
-    6. **Hardware Transfer:** Storage controller executes DMA write (HDD cylinder seek or NVMe SSD FTL page write);
-
-    7. **Framebuffer Confirmation:** Framebuffer receives I/O status acknowledgment.
-
+    1. **Stage 1 (Shell Input):** User clicks "Save Document" button in `OSSimDoc` (or invokes `sys_save`).
+    2. **Stage 2 (Trap `sys_save`):** CPU traps from user mode to kernel supervisor mode with `sys_save` vector (`INT 0x80` / `ECALL`).
+    3. **Stage 3 (VFS Inode Lookup):** Virtual File System resolves target file path, locates inode, and updates directory entry metadata.
+    4. **Stage 4 (Buffer Cache & Dirty Page Identification):** Virtual memory manager traverses process memory buffer frames (marked dirty `D=1` by MMU silicon hardware during prior user typing) and marshals unwritten dirty pages into filesystem block I/O buffer headers (`struct bio` / `buffer_head`). *(Note: In the educational visualization, this stage illustrates the critical pedagogical link between virtual memory dirty bits and filesystem writeback flushes).*
+    5. **Stage 5 (Block Driver I/O Queue):** Block device driver queues transfer request into the disk elevator scheduler (e.g., SSTF / SCAN queue).
+    6. **Stage 6 (Hardware Controller DMA Transfer):** Storage controller initiates DMA bus-master data transfer to secondary storage (simulating magnetic cylinder seek on HDD, or Flash Translation Layer FTL page write and wear-leveling on NVMe SSD).
+    7. **Stage 7 (Framebuffer Confirmation):** Storage controller asserts completion interrupt, kernel marks buffer clean, and GUI framebuffer renders I/O persistence acknowledgment.
 - **Automated Verification Test IDs:** `IO-PIPE-01` to `IO-PIPE-07`, `TEST-SAVE-PIPELINE` (Executed via `tests/test_desktop_launch_and_pc.py` & `tests/test_full_stack_live_audit.py`).
-
 - **Empirical Verification Status:** VERIFIED (100% PASS).
 
+#### 3.2C 8-Stage Interactive Keyboard & Display Framebuffer Pipeline Trace
 
+- **Theoretical Subsystem:** Asynchronous Hardware Interrupts (`IRQ 1`), Dual-Mode Transition, Kernel TTY Ring Buffers, Scheduler Wakeup, and Framebuffer VRAM Drawing.
+- **Authoritative Literature Citation:** Silberschatz, Chapter 1.2 & 13.2 (Interrupt-Driven I/O); Bovet & Cesati, Chapter 4 (Interrupts & Exceptions).
+- **Domain Invariant & Inception Rule:**
+  - **[TI]** Interactive keystroke processing in `OSSimDoc` traces 8 discrete hardware/kernel stages:
+    1. **Stage 1 (Keyboard Controller IRQ 1):** Physical keyboard controller detects keypress, generates hardware scan-code, and asserts Interrupt Request line `IRQ 1`.
+    2. **Stage 2 (CPU Mode Switch):** CPU interrupt controller acknowledges `IRQ 1`, pushes EFLAGS/CS/EIP onto kernel stack, and switches privilege from CPL 3 to CPL 0.
+    3. **Stage 3 (Keyboard Driver ISR):** Interrupt Service Routine executes, reading raw scan-code from I/O port `0x60` and issuing End-of-Interrupt (EOI) to the PIC.
+    4. **Stage 4 (TTY Queue Buffer):** Line discipline converts scan-code to ASCII character and appends it to the kernel TTY circular ring buffer.
+    5. **Stage 5 (OS Scheduler & PCB Wakeup):** Kernel unblocks `OSSimDoc` (transitioning PCB from `WAITING` $\rightarrow$ `READY`), yielding or preempting the idle loop to dispatch the editor process on Core 0.
+    6. **Stage 6 (Application Document Buffer):** `OSSimDoc` user-space process executes `read()` syscall, dequeues character from TTY buffer, and appends it to in-memory document text buffer.
+    7. **Stage 7 (Virtual MMU Paging):** CPU MMU translates virtual address of modified document buffer to physical frame, automatically setting the Dirty bit (`D=1`) in the Page Table Entry.
+    8. **Stage 8 (Display VRAM Draw):** Video graphics driver maps font glyph bitmap into video RAM (VRAM) framebuffer, and display hardware refreshes the visual canvas.
+- **Automated Verification Test IDs:** `ANIM-DOC-01`, `ANIM-DOC-02`, `ANIM-DOC-03`, `PIPE-AWAITING-INPUT`, `INVARIANT-WAKEUP-RUNNING` (Executed via `tests/test_desktop_launch_and_pc.py`).
+- **Empirical Verification Status:** VERIFIED (100% PASS).
 
 ### 3.3 Canonical 5-State Process Model Realization (`NEW` $\neq$ `WAITING`)
 
 - **Theoretical Subsystem:** Silberschatz 5-State Process Lifecycle (`NEW` $\rightarrow$ `READY` $\leftrightarrow$ `RUNNING` $\rightarrow$ `TERMINATED`; `RUNNING` $\rightarrow$ `WAITING` $\rightarrow$ `READY`).
-
 - **Authoritative Literature Citation:** Silberschatz, Galvin & Gagne, Chapter 3.1.2 (Process State).
-
 - **Domain Invariant & Inception Rule:**
-
-- **[TI]** Operating systems theory requires process inception to strictly separate binary discovery and loading from scheduler admission.
-
-  - **[SI]** Under OSSim's simulated launch pipeline, during Stages 1–4 of launch, 	arget.state === 'NEW'. The unadmitted binary must NOT appear in #sched-waiting-slots or the ready queue. At Stage 5, PCB creation admits the process to READY. At Stage 6, the scheduler dispatches it to RUNNING on Core 0.
-
+  - **[TI]** Operating systems theory requires process inception to strictly separate binary discovery and image loading from scheduler admission. Under a standard multi-programmed operating system model, a binary undergoing initialization or loading resides in the `NEW` state and must not be scheduled for CPU execution until its Process Control Block (PCB) is created and formally admitted to the `READY` queue.
+  - **[SI]** Under OSSim's modeled launch pipeline (assuming a demand-paged ELF executable format and single-core preemptive scheduler):
+    - During Stages 1–4 of inception, `target.state === 'NEW'`. The unadmitted binary is strictly excluded from `#sched-waiting-slots` and the ready queue.
+    - At Stage 5, kernel PCB instantiation formally admits the process from `NEW` to `READY`.
+    - At Stage 6, the scheduler selects the admitted process and dispatches it from `READY` to `RUNNING` on Core 0.
 - **Automated Verification Test IDs:** `SCHED-STAGE-1-LOAD`, `INVARIANT-NEW-NOT-WAITING`, `SCHED-STAGE-5-READY`, `SCHED-STAGE-6-DISPATCH` (Executed via `tests/test_desktop_launch_and_pc.py`).
-
 - **Empirical Verification Status:** VERIFIED (100% PASS).
-
-
 
 ### 3.4 Blocking Interactive I/O & Event-Driven Scheduler Wakeup
 
@@ -688,26 +677,28 @@ $$\mathbf{1\text{ Master Battery}} \quad\longrightarrow\quad \mathbf{18\text{ Au
 
 
 
-> **Note on Canonical Baseline (749 Assertions) vs. Extended Permutation Sweeps (810+ Checks):**
-> - **The 749 Baseline Battery:** The authoritative continuous integration battery published in the table above consists of **749 atomic assertions** across 18 specialized suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). This constitutes the formal release verification baseline required for zero-regression deployment.
-> - **The 738 Historical Draft:** An earlier draft of the documentation table summarized Suite 10 (	est_bare_metal_mode.py) at 14 assertions (counting only through BM_14), accidentally omitting the 11 mode-switch and state-restoration assertions (BM_15–BM_25). Correcting Suite 10 to its true baseline count of 25 precisely reconciles the column sum to 749.
-> - **The 810+ Extended Parametric Sweep:** In addition to the 749 baseline assertions, the private test harness repository (sivrajp/ossim-test-harness) contains extended edge-case combinatorial checks—including all-app mode-switch permutations (BM_26–BM_86), internal bundle checksum audits, and stress timing variations. When executing with --all-permutations, the harness executes **810+ total checks** (all 100% passing). Both the canonical 749 baseline and the 810+ extended sweep pass with zero failures.
+> **Note on Canonical Baseline (749 Assertions) vs. Extended Permutation Sweeps (810 Assertions):**
+> - **The 749 Baseline Battery:** The authoritative continuous integration battery published in the table above consists of **exactly 749 atomic assertions** across 18 specialized suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). This constitutes the formal release verification baseline required for zero-regression deployment.
+> - **The 738 Historical Draft:** An earlier draft of the documentation table summarized Suite 10 (`test_bare_metal_mode.py`) at 14 assertions (counting only through `BM_14`), accidentally omitting the 11 mode-switch and state-restoration assertions (`BM_15`–`BM_25`). Correcting Suite 10 to its true baseline count of 25 precisely reconciles the column sum to 749.
+> - **The 810 Extended Parametric Sweep:** In addition to the 749 baseline assertions, the private test harness repository (`sivrajp/ossim-test-harness`) contains extended edge-case combinatorial checks. When Suite 10 executes across all four dock application mode-switch matrices (`BM_26`–`BM_86`), it adds exactly 61 additional atomic assertions ($749 + 61 = 810$). The extended harness executes **exactly 810 atomic assertions**, all passing at 100.0%. Furthermore, the release consistency audit suite (`verify_release_consistency.py`) adds 68 automated cross-entity checks, bringing the grand total of verified automated checks across the codebase to **878 checks**.
 
 ### 4.3 Published Continuous Integration (CI) Execution Summary
 
 | Parameter | Official CI Verification Record |
 | :--- | :--- |
-| **CI Orchestrator** | GitHub Actions (.github/workflows/regression.yml) |
+| **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
 | **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` |
-| **Public Distribution Commit SHA** | [`f9d5ae4`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/f9d5ae4) (Verified Green • Release Candidate) |
-| **Test Harness Commit SHA** | [`3df4a8a`](https://github.com/sivrajp/ossim-test-harness/commit/3df4a8a) (Release Consistency & Invariant Verification Suite) |
+| **Public Distribution Commit SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Verified Green • Release Candidate) |
+| **Test Harness Commit SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
 | **Runtime & Encoding** | Python 3.10+, `PYTHONUTF8=1`, `PYTHONIOENCODING=utf-8` |
 | **Suites Executed** | **18 / 18 Continuous Integration Suites** |
 | **Canonical Baseline Assertions** | **749 / 749 Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
-| **Extended Combinatorial Assertions** | **810+ Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
-| **Automated Execution Cadence** | Nightly Regression at 00:00 UTC & on every push to main |
+| **Extended Permutation Sweep** | **810 / 810 Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
+| **Release Consistency Audit** | **68 / 68 Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
+| **Total Automated System Checks** | **878 / 878 Passed (100.0% Pass Rate)** |
+| **Automated Execution Cadence** | Nightly Regression at 00:00 UTC & on every push to `main` |
 
 ---
 
@@ -766,7 +757,7 @@ To establish a structured, defensible verification architecture, OSSim organizes
 
 4. **Layer 4 — End-to-End Student Workflow:** Automation of the complete student learning journey (launching the tool, exploring concepts in Classroom, solving algorithms in Workshop, synthesizing a kernel in Quest, and booting applications in Capstone Playground).
 
-5. **Layer 5 — Learning Validation:** Pedagogical assessment via the 100-question formative assessment pool, diagnostic struggle tracking, and step-by-step mathematical derivation feedback.
+5. **Layer 5 — Formative Assessment & Pedagogical Analytics:** Verified delivery of formative assessment and diagnostic analytics via the 100-question curricular problem pool, immediate mathematical derivations, misconception tracking, and student progress synchronization. *(Note: While formative assessment and learning analytics instrumentation are fully implemented and verified within the platform, formal educational effectiveness validation—demonstrating superior learning outcomes—will be established through planned longitudinal classroom pilot studies utilizing pre/post-test interventions and peer-group comparative analytics).*
 
 
 

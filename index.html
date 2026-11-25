@@ -132,7 +132,7 @@
                             <div class="step-card-num">Step 1</div>
                             <h4 class="step-card-title">Interact in The Playground</h4>
                             <p class="step-card-desc">
-                                Launch <strong>OSSimDoc</strong>, type text, and click <strong>Save Document</strong> to trace the 8-stage instruction and I/O pipeline from user mode down to physical disk.
+                                Launch <strong>OSSimDoc</strong>, type text to trace the <strong>8-stage interactive keyboard & display pipeline</strong>, and click <strong>Save Document</strong> to observe the <strong>7-stage storage persistence I/O pipeline</strong> down to physical disk.
                             </p>
                             <span class="step-card-link">Enter Playground &rarr;</span>
                         </div>
@@ -214,6 +214,96 @@
                     </div>
                 </div>
 
+                <!-- ========================================================= -->
+                <!-- THREE PROGRESSIVE LEVELS OF SIMULATION                    -->
+                <!-- ========================================================= -->
+                <div class="home-levels-section">
+                    <div class="levels-header">
+                        <div class="levels-badge">
+                            <span class="badge-dot">●</span>
+                            <span>PEDAGOGICAL FIDELITY SPECTRUM</span>
+                        </div>
+                        <h2>The Three Progressive Levels of Simulation</h2>
+                        <p>
+                            To prevent conceptual confusion, OSSim explicitly distinguishes three distinct depths of systems representation across its environments:
+                        </p>
+                    </div>
+
+                    <div class="levels-grid">
+                        <!-- Level 1 -->
+                        <div class="level-card">
+                            <div class="level-card-tier">LEVEL 1</div>
+                            <h3 class="level-card-title">Conceptual &amp; Algorithmic Modeling</h3>
+                            <div class="level-card-env">The Classroom &bull; The Workshop &bull; The Test Centre</div>
+                            <p class="level-card-desc">
+                                High-level interactive analogies, theoretical state-machine transitions, step-by-step boot phase animations, and 19 comparative algorithm solvers evaluated against analytical reference solutions with Gantt charts.
+                            </p>
+                        </div>
+
+                        <!-- Level 2 -->
+                        <div class="level-card">
+                            <div class="level-card-tier">LEVEL 2</div>
+                            <h3 class="level-card-title">Subsystem &amp; OS Mechanics Simulation</h3>
+                            <div class="level-card-env">The Playground &bull; Capstone Playground</div>
+                            <p class="level-card-desc">
+                                Live white-box architectural simulation: cycle-accurate simulated silicon registers (<code>PC</code>, <code>SP</code>, <code>FLAGS</code>, <code>R0</code>–<code>R3</code>), MMU multi-level page tables with dirty-bit tracking, TLB hits/misses, dual-storage HDD cylinder seeks vs NVMe SSD wear-leveling, and dual-mode CPU ring switches.
+                            </p>
+                        </div>
+
+                        <!-- Level 3 -->
+                        <div class="level-card">
+                            <div class="level-card-tier">LEVEL 3</div>
+                            <h3 class="level-card-title">Architecture-Specific Systems Construction</h3>
+                            <div class="level-card-env">OS Builder Quest &bull; The Capstone Studio</div>
+                            <p class="level-card-desc">
+                                Authentic low-level systems engineering: students write and synthesize C kernel modules, interrupt vector tables, and device drivers, generating hardware abstraction layer (HAL) code tailored for <strong>x86 VGA</strong> and <strong>RISC-V UART</strong> target architectures within the browser execution runtime.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- FULL-STACK ARCHITECTURAL FLOW DIAGRAM                     -->
+                <!-- ========================================================= -->
+                <div class="home-arch-flow-section">
+                    <div class="arch-flow-header">
+                        <div class="arch-flow-badge">
+                            <span class="badge-dot">●</span>
+                            <span>SYSTEMS HIERARCHY MAP</span>
+                        </div>
+                        <h2>Full-Stack Hardware-to-OS Architectural Flow</h2>
+                        <p>
+                            How user-space applications, supervisor kernel services, hardware abstraction layers, and physical hardware interact within OSSim:
+                        </p>
+                    </div>
+
+                    <div class="arch-flow-diagram">
+                        <div class="arch-flow-step flow-user">
+                            <div class="flow-step-tag">USER SPACE (CPL 3 / U-MODE)</div>
+                            <div class="flow-step-title">Interactive Applications</div>
+                            <div class="flow-step-desc">OSSimDoc &bull; OSSimTune &bull; MatrixCompiler &bull; Print Spooler</div>
+                        </div>
+                        <div class="arch-flow-arrow">&darr; <span>Traps (<code>INT 0x80</code> / <code>ECALL</code>)</span></div>
+                        <div class="arch-flow-step flow-kernel">
+                            <div class="flow-step-tag">KERNEL SUPERVISOR (CPL 0 / S-MODE)</div>
+                            <div class="flow-step-title">Operating System Core Services</div>
+                            <div class="flow-step-desc">Process Manager (PCB) &bull; Virtual Memory &amp; Page Cache &bull; VFS &bull; Mutex &amp; IPC Engine</div>
+                        </div>
+                        <div class="arch-flow-arrow">&darr; <span>Hardware Abstraction Layer (HAL)</span></div>
+                        <div class="arch-flow-step flow-hal">
+                            <div class="flow-step-tag">SUBSYSTEM CONTROLLERS</div>
+                            <div class="flow-step-title">Schedulers, MMU &amp; Device Drivers</div>
+                            <div class="flow-step-desc">Preemptive CPU Scheduler &bull; MMU CR3 / satp Page Tables &bull; Keyboard/Audio/Disk Drivers</div>
+                        </div>
+                        <div class="arch-flow-arrow">&darr; <span>System Bus &amp; Interrupt Lines</span></div>
+                        <div class="arch-flow-step flow-hw">
+                            <div class="flow-step-tag">SIMULATED HARDWARE &amp; SILICON</div>
+                            <div class="flow-step-title">Dual-Core Silicon, RAM &amp; Dual-Storage Continuum</div>
+                            <div class="flow-step-desc">Registers (PC, SP, FLAGS) &bull; 64-Frame Physical RAM &bull; Magnetic HDD (Cylinders) &bull; NVMe SSD (FTL Blocks)</div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Main Rooms Section -->
                 <div class="home-modules-section">
                     <div class="section-heading">
@@ -235,11 +325,11 @@
                                 <h3 class="card-title">1. The Playground</h3>
                                 <div class="card-subtitle">Live OS Desktop &amp; Hardware Continuum</div>
                                 <p class="card-desc">
-                                    Step into an interactive simulated desktop. Run <strong>OSSimDoc</strong>, trace the <strong>8-stage instruction and I/O pipeline</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, track magnetic disk seek mechanics, and inspect physical memory in the 64-frame RAM grid.
+                                    Step into an interactive simulated desktop. Run <strong>OSSimDoc</strong>, trace the <strong>8-stage interactive keyboard & 7-stage storage persistence pipelines</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, track magnetic disk seek mechanics, and inspect physical memory in the 64-frame RAM grid.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>📱</span> <strong>OSSimDoc Word Processor:</strong> Live typing and document persistence</li>
-                                    <li><span>⚡</span> <strong>8-Stage Pipeline Trace:</strong> IRQ 1 ➔ CPL elevation ➔ MMU dirty write ➔ VRAM</li>
+                                    <li><span>⚡</span> <strong>8-Stage Input Pipeline:</strong> IRQ 1 ➔ CPL elevation ➔ TTY buffer ➔ App ➔ MMU dirty page ➔ VRAM draw</li>
                                     <li><span>🛡️</span> <strong>With OS vs Bare-Metal:</strong> See why modern computers require an OS</li>
                                     <li><span>⚙️</span> <strong>Hardware X-Ray:</strong> CPU registers, disk platter, &amp; 64-frame RAM grid</li>
                                 </ul>
@@ -401,7 +491,7 @@
                                 <ul class="card-features-list">
                                     <li><span>🖥️</span> <strong>Hardware Standby &amp; Host Boot:</strong> CPU reset state until your OS kernel is deployed</li>
                                     <li><span>📱</span> <strong>Synthesized Application Dock:</strong> Hosts user apps deployed from Capstone Studio</li>
-                                    <li><span>⚡</span> <strong>8-Stage Execution Cycle:</strong> User App ➔ int 0x80 / ecall ➔ MMU ➔ IRET Return</li>
+                                    <li><span>⚡</span> <strong>8-Stage Launch Pipeline:</strong> Shell Click ➔ Trap ➔ ELF Load ➔ MMU CR3 ➔ PCB Ready ➔ Dispatch ➔ Return ➔ Framebuffer</li>
                                     <li><span>🧠</span> <strong>Interactive Memory Continuum:</strong> Real-time 64-frame physical RAM inspector</li>
                                 </ul>
                             </div>
@@ -436,7 +526,7 @@
                                 <h3 class="doc-card-title">1. Complete User &amp; Laboratory Manual</h3>
                                 <div class="doc-card-subtitle">Comprehensive Operating Systems Course Curriculum Guide</div>
                                 <p class="doc-card-desc">
-                                    Step-by-step documentation detailing system setup, Living OS Desktop 8-stage instruction pipeline, 18 Classroom concepts with textbook analogies, multi-algorithm solvers in The Workshop, exam challenge problem sets, and OS Builder Quest milestone levels 0 to 5.
+                                    Step-by-step documentation detailing system setup, Living OS Desktop hardware & I/O pipelines, 18 Classroom concepts with textbook analogies, multi-algorithm solvers in The Workshop, exam challenge problem sets, and OS Builder Quest milestone levels 0 to 5.
                                 </p>
                             </div>
                             <div class="doc-card-footer">
