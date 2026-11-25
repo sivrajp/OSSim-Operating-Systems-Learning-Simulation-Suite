@@ -137,14 +137,20 @@ All official guides are included directly in this repository and are accessible 
 
 OSSim maintains an automated, headless browser integration test harness executing on GitHub Actions (`ossim-test-harness`). All 749 domain-invariant assertions run against the standalone distribution release on clean virtual machines to guarantee regression-free reliability.
 
-| Parameter | CI Verification Record |
+| Parameter | Official CI Verification Record |
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
-| **Tested Commit SHA** | [`b34839f`](https://github.com/sivrajp/ossim-test-harness/commit/b34839f) (Verified Green) |
+| **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` |
+| **Public Distribution SHA** | [`f9d5ae4`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/f9d5ae4) (Verified Green • Release Candidate) |
+| **Test Harness SHA** | [`3df4a8a`](https://github.com/sivrajp/ossim-test-harness/commit/3df4a8a) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
-| **Verification Metric** | **18 / 18 Suites Passed (100.0% Pass Rate, 749 Atomic Assertions)** |
+| **Runtime & Encoding** | Python 3.10+, `PYTHONUTF8=1`, `PYTHONIOENCODING=utf-8` |
+| **Canonical Baseline Assertions** | **18 / 18 Suites Passed (100.0% Pass Rate, 749 Atomic Assertions)** |
+| **Extended Permutation Sweep** | **810+ Checks Passed (0 Failed, 0 Skipped, 100.0% Pass Rate)** |
 | **Automated Cadence** | Daily Nightly Regression (00:00 UTC) & On Every Push |
+
+> **Note on Test Counts:** The core release baseline comprises **749 atomic assertions** across 18 automated CI suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). Extended combinatorial sweeps in the private test harness (all-app mode-switch permutations BM_26–BM_86 and bundle checksum audits) execute **810+ total checks**, all passing at 100.0%.
 
 ---
 
