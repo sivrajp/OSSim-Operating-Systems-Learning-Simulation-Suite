@@ -132,7 +132,7 @@
                             <div class="step-card-num">Step 1</div>
                             <h4 class="step-card-title">Interact in The Playground</h4>
                             <p class="step-card-desc">
-                                Launch <strong>OSSimDoc</strong>, type text, and click <strong>Save Document</strong> to trace the 7-stage I/O pipeline from user mode down to physical disk.
+                                Launch <strong>OSSimDoc</strong>, type text, and click <strong>Save Document</strong> to trace the 8-stage instruction and I/O pipeline from user mode down to physical disk.
                             </p>
                             <span class="step-card-link">Enter Playground &rarr;</span>
                         </div>
@@ -190,11 +190,11 @@
                                 <h3 class="card-title">1. The Playground</h3>
                                 <div class="card-subtitle">Live OS Desktop &amp; Hardware Continuum</div>
                                 <p class="card-desc">
-                                    Step into an interactive simulated desktop. Run <strong>OSSimDoc</strong>, trace the <strong>7-stage I/O pipeline</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, track magnetic disk seek mechanics, and inspect physical memory in the 64-frame RAM grid.
+                                    Step into an interactive simulated desktop. Run <strong>OSSimDoc</strong>, trace the <strong>8-stage instruction and I/O pipeline</strong>, compare execution <strong>With OS vs Without OS (Bare-Metal)</strong>, track magnetic disk seek mechanics, and inspect physical memory in the 64-frame RAM grid.
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>📱</span> <strong>OSSimDoc Word Processor:</strong> Live typing and document persistence</li>
-                                    <li><span>⚡</span> <strong>7-Stage Pipeline Trace:</strong> IRQ 1 ➔ CPL elevation ➔ MMU dirty write</li>
+                                    <li><span>⚡</span> <strong>8-Stage Pipeline Trace:</strong> IRQ 1 ➔ CPL elevation ➔ MMU dirty write ➔ VRAM</li>
                                     <li><span>🛡️</span> <strong>With OS vs Bare-Metal:</strong> See why modern computers require an OS</li>
                                     <li><span>⚙️</span> <strong>Hardware X-Ray:</strong> CPU registers, disk platter, &amp; 64-frame RAM grid</li>
                                 </ul>
@@ -277,7 +277,7 @@
                                     <li><span>📝</span> <strong>Exam-Pattern Questions:</strong> Authentic university examination problem sets</li>
                                     <li><span>⚡</span> <strong>Instant Automated Grading:</strong> Real-time score &amp; accuracy metrics</li>
                                     <li><span>💡</span> <strong>Complete Academic Proofs:</strong> Step-by-step mathematical solutions</li>
-                                    <li><span>📈</span> <strong>Curriculum Mastery:</strong> Track readiness across Units 1, 2, and 3</li>
+                                    <li><span>📈</span> <strong>Curriculum Mastery:</strong> Track readiness across Units 1, 2, 3, and 4 (including Modern Virtualization &amp; Containers)</li>
                                 </ul>
                             </div>
                             <div class="card-footer">
@@ -391,7 +391,7 @@
                                 <h3 class="doc-card-title">1. Complete User &amp; Laboratory Manual</h3>
                                 <div class="doc-card-subtitle">Comprehensive Operating Systems Course Curriculum Guide</div>
                                 <p class="doc-card-desc">
-                                    Step-by-step documentation detailing system setup, Living OS Desktop 7-stage I/O pipeline, 12 Classroom concepts with textbook analogies, multi-algorithm solvers in The Workshop, exam challenge problem sets, and OS Builder Quest milestone levels 0 to 5.
+                                    Step-by-step documentation detailing system setup, Living OS Desktop 8-stage instruction pipeline, 18 Classroom concepts with textbook analogies, multi-algorithm solvers in The Workshop, exam challenge problem sets, and OS Builder Quest milestone levels 0 to 5.
                                 </p>
                             </div>
                             <div class="doc-card-footer">
@@ -455,6 +455,10 @@
                             <strong>Unit 3: Memory &amp; Storage Subsystems</strong>
                             <p>Contiguous Allocation (First/Best/Worst Fit), Paging &amp; TLB EMAT, Virtual Memory Page Replacement (FIFO, LRU, OPT, Belady's Anomaly), and Disk Arm Scheduling.</p>
                         </div>
+                        <div class="syllabus-col">
+                            <strong>Unit 4: Modern Virtualization &amp; Containers</strong>
+                            <p>Hypervisors vs OS Containers, Linux Namespaces (PID, Mount, Net), Control Groups (cgroups v2), CFS Bandwidth Throttling, and Solid-State NVMe SSD / FTL Mechanics.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -479,7 +483,7 @@
                                 <span>Author, Creator &amp; Designer</span>
                             </div>
                             <p class="credit-desc">
-                                Conceived the vision of an interactive operating systems educational continuum. Designed the multi-tier laboratory architecture (Living OS Desktop, 12-Concept Classroom, Algorithmic Workshop, and Test Centre), syllabus problem sets, interactive hardware-pipeline model, "With OS vs Without OS (Bare-Metal)" contrast methodology, and curricular visual benchmarks.
+                                Conceived the vision of an interactive operating systems educational continuum. Designed the multi-tier laboratory architecture (Living OS Desktop, 18-Concept Classroom, Algorithmic Workshop, and Test Centre), syllabus problem sets, interactive hardware-pipeline model, "With OS vs Without OS (Bare-Metal)" contrast methodology, and curricular visual benchmarks.
                             </p>
                         </div>
 
@@ -554,8 +558,8 @@
                             <div class="dock-app-left"><span class="dock-icon">⚡</span><span class="dock-name">Compiler</span></div>
                             <span class="dock-pid">PID 103</span>
                         </button>
-                        <button class="dock-app-btn" data-app="spooler" id="dock-btn-spooler" title="Deadlock Lab (PID 104): Multi-resource concurrency laboratory. Demonstrates mutual exclusion locks, circular wait deadlock formation between Printer and NVMe, and OS recovery.">
-                            <div class="dock-app-left"><span class="dock-icon">🖨️</span><span class="dock-name">Deadlock Lab</span></div>
+                        <button class="dock-app-btn" data-app="spooler" id="dock-btn-spooler" title="Print Spooler (PID 104): Resource contention and concurrency laboratory. Demonstrates mutual exclusion locks, circular wait deadlock formation between Printer and Scanner, and OS recovery.">
+                            <div class="dock-app-left"><span class="dock-icon">🖨️</span><span class="dock-name">Print Spooler</span></div>
                             <span class="dock-pid">PID 104</span>
                         </button>
                     </div>
@@ -584,7 +588,7 @@
                                     <span>⚡</span> <div><strong style="color:#FDE047;display:block;">Matrix Compiler</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 103 • Compute Worker</span></div>
                                 </button>
                                 <button class="btn-standby-launch" data-launch="spooler" style="background:#1E293B;border:1px solid rgba(236,72,153,0.4);color:#F8FAFC;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.8rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:0.4rem;text-align:left;">
-                                    <span>🖨️</span> <div><strong style="color:#F472B6;display:block;">Deadlock Lab</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 104 • Concurrency Lab</span></div>
+                                    <span>🖨️</span> <div><strong style="color:#F472B6;display:block;">Print Spooler</strong><span style="font-size:0.7rem;color:#94A3B8;">PID 104 • Spooler / DeadlockLab</span></div>
                                 </button>
                             </div>
                         </div>

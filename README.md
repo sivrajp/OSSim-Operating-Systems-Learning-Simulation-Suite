@@ -119,7 +119,7 @@ While the core simulation engine is released as a compiled distribution to prote
 All official guides are included directly in this repository and are accessible inside the application via the built-in reader:
 
 1. [**User Manual (USER_GUIDE.md)**](USER_GUIDE.md) — 16 chapters covering full architecture, all 18 concepts, dual-storage continuum, and curricular lineage.
-2. [**Test & Validation Guide (TEST_GUIDE.md)**](TEST_GUIDE.md) — 33 technical verification sections detailing formal domain invariants, testing methodologies, and 18 automated suites.
+2. [**Test & Validation Guide (TEST_GUIDE.md)**](TEST_GUIDE.md) — 25 feature-level verification sections detailing formal domain invariants, testing methodologies, and 18 automated suites.
 3. [**Step-by-Step Learner Workflow Playbook (LEARNER_WORKFLOW_GUIDE.md)**](LEARNER_WORKFLOW_GUIDE.md) — Exhaustive hands-on action run-book with 3-column matrices (*What To Click $\to$ Where To Look $\to$ How To Understand What Happened*).
 4. [**Master Solutions Manual & Key (SOLUTIONS_MANUAL.md)**](SOLUTIONS_MANUAL.md) — 100 tested and verified curricular problems across Units 1–4 with full mathematical derivations and cognitive misconception analyses.
 
