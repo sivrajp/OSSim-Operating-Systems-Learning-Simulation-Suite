@@ -132,7 +132,7 @@
                             <div class="step-card-num">Step 1</div>
                             <h4 class="step-card-title">Interact in The Playground</h4>
                             <p class="step-card-desc">
-                                Launch <strong>OSSimDoc</strong>, type text to trace the <strong>8-stage interactive keyboard & display pipeline</strong>, and click <strong>Save Document</strong> to observe the <strong>7-stage storage persistence I/O pipeline</strong> down to physical disk.
+                                Launch <strong>OSSimDoc</strong> and type text to observe the <strong>8-stage keyboard/input processing pipeline</strong>. Then click <strong>Save Document</strong> to trace the <strong>7-stage storage-persistence pipeline</strong> from the application through the filesystem and storage controller.
                             </p>
                             <span class="step-card-link">Enter Playground &rarr;</span>
                         </div>
@@ -190,7 +190,7 @@
                             <div class=pillar-card-badge>🔬 PILLAR 1</div>
                             <h3 class=pillar-card-title>Hardware-to-OS Observability</h3>
                             <p class=pillar-card-desc>
-                                Direct, cycle-accurate inspection of simulated silicon registers (<code>PC</code>, <code>SP</code>, <code>FLAGS</code>, <code>R0</code>–<code>R3</code>), MMU multi-level page tables, TLB hits and misses, system bus contention, and hardware peripheral I/O controllers operating synchronously alongside kernel data structures and process lifecycles.
+                                Direct, cycle-stepped architectural inspection of simulated silicon registers (<code>PC</code>, <code>SP</code>, <code>FLAGS</code>, <code>R0</code>–<code>R3</code>), MMU multi-level page tables, TLB hits and misses, system bus contention, and hardware peripheral I/O controllers operating synchronously alongside kernel data structures and process lifecycles.
                             </p>
                         </div>
 
@@ -246,7 +246,7 @@
                             <h3 class="level-card-title">Subsystem &amp; OS Mechanics Simulation</h3>
                             <div class="level-card-env">The Playground &bull; Capstone Playground</div>
                             <p class="level-card-desc">
-                                Live white-box architectural simulation: cycle-accurate simulated silicon registers (<code>PC</code>, <code>SP</code>, <code>FLAGS</code>, <code>R0</code>–<code>R3</code>), MMU multi-level page tables with dirty-bit tracking, TLB hits/misses, dual-storage HDD cylinder seeks vs NVMe SSD wear-leveling, and dual-mode CPU ring switches.
+                                Live white-box architectural simulation: cycle-stepped simulated silicon registers (<code>PC</code>, <code>SP</code>, <code>FLAGS</code>, <code>R0</code>–<code>R3</code>), MMU multi-level page tables with dirty-bit tracking, TLB hits/misses, dual-storage HDD cylinder seeks vs NVMe SSD wear-leveling, and dual-mode CPU ring switches.
                             </p>
                         </div>
 
@@ -300,6 +300,63 @@
                             <div class="flow-step-tag">SIMULATED HARDWARE &amp; SILICON</div>
                             <div class="flow-step-title">Dual-Core Silicon, RAM &amp; Dual-Storage Continuum</div>
                             <div class="flow-step-desc">Registers (PC, SP, FLAGS) &bull; 64-Frame Physical RAM &bull; Magnetic HDD (Cylinders) &bull; NVMe SSD (FTL Blocks)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- THREE EXECUTION JOURNEYS IN THE PLAYGROUND                -->
+                <!-- ========================================================= -->
+                <div class="home-journeys-section">
+                    <div class="journeys-header">
+                        <div class="journeys-badge">
+                            <span class="badge-dot">●</span>
+                            <span>THREE EXECUTION JOURNEYS</span>
+                        </div>
+                        <h2>Three Distinct Hardware/Kernel Pipelines</h2>
+                        <p>
+                            Rather than treating all system interactions as one generic pipeline, The Playground and Capstone Playground explicitly model three distinct architectural journeys:
+                        </p>
+                    </div>
+
+                    <div class="journeys-grid">
+                        <!-- Journey 1 -->
+                        <div class="journey-card">
+                            <div class="journey-badge">8 STAGES • INTERACTIVE INPUT</div>
+                            <h3 class="journey-title">Keyboard &amp; Display Pipeline</h3>
+                            <div class="journey-env">The Playground &bull; Live Interaction</div>
+                            <div class="journey-flow">
+                                <code>IRQ 1</code> &rarr; Mode Switch &rarr; ISR Port 0x60 &rarr; TTY Buffer &rarr; Sched Wakeup &rarr; App Buffer &rarr; MMU Dirty &rarr; VRAM Blit
+                            </div>
+                            <p class="journey-desc">
+                                Illustrates how physical hardware interrupts wake a sleeping process, traverse kernel character queues, modify virtual memory frames, and blit glyphs to video memory.
+                            </p>
+                        </div>
+
+                        <!-- Journey 2 -->
+                        <div class="journey-card">
+                            <div class="journey-badge">7 STAGES • PERSISTENCE</div>
+                            <h3 class="journey-title">Storage Persistence Pipeline</h3>
+                            <div class="journey-env">The Playground &bull; Save Document</div>
+                            <div class="journey-flow">
+                                Shell Save &rarr; <code>sys_save</code> &rarr; VFS Inode &rarr; Page Cache Flush &rarr; Driver Queue &rarr; DMA Transfer &rarr; Ack
+                            </div>
+                            <p class="journey-desc">
+                                Demonstrates the synchronous filesystem persistence path: identifying dirty memory buffer frames, queueing disk block requests, and executing bus-master DMA transfers.
+                            </p>
+                        </div>
+
+                        <!-- Journey 3 -->
+                        <div class="journey-card">
+                            <div class="journey-badge">8 STAGES • INCEPTION &amp; LAUNCH</div>
+                            <h3 class="journey-title">Process Inception Pipeline</h3>
+                            <div class="journey-env">Capstone Playground &bull; App Launch</div>
+                            <div class="journey-flow">
+                                Shell Click &rarr; Syscall Trap &rarr; ELF Load &rarr; MMU CR3/satp &rarr; PCB Ready &rarr; Dispatch &rarr; Return &rarr; Framebuffer
+                            </div>
+                            <p class="journey-desc">
+                                Traces authentic process creation from desktop click, executable segment mapping, and PCB queue admission to scheduler dispatch and dual-mode user-space return.
+                            </p>
                         </div>
                     </div>
                 </div>

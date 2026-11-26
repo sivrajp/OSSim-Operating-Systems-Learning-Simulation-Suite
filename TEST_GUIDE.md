@@ -30,7 +30,7 @@ In educational systems engineering, an operating systems simulator that compiles
 
 
 
-OSSim establishes a high benchmark for academic rigor by replacing superficial mechanism-presence testing with a rigorous, layered verification methodology. OSSim employs a layered verification framework combining domain-invariant testing, algorithmic reference validation, subsystem integration, hardware-state inspection, UI verification, and end-to-end workflow testing.
+OSSim establishes a high benchmark for academic rigor by replacing superficial mechanism-presence testing with a rigorous, layered verification methodology. OSSim employs a layered verification methodology combining theoretical domain invariants, algorithmic reference validation, hardware-state inspection, subsystem integration, UI verification, and end-to-end workflow testing.
 
 
 
@@ -161,7 +161,7 @@ To avoid conflation between interactive I/O, process creation, and storage persi
     1. **Stage 1 (Shell Click):** Desktop GUI shell detects user launch event and prepares executable argument vector.
     2. **Stage 2 (System Call Trap):** CPU traps from unprivileged user mode to supervisor/kernel mode.
        - *x86 Architecture Model:* Executes `INT 0x80` (or `SYSCALL`), transitioning privilege from User (CPL 3) to Kernel (CPL 0) via the Interrupt Descriptor Table (IDT).
-       - *RISC-V Architecture Model (RV64):* Executes `ECALL`, transitioning privilege from User Mode (U-mode) to Supervisor Mode (S-mode) via the `stvec` trap vector.
+       - *RISC-V Architecture Model (RV64):* Executes `ECALL`, transitioning privilege from User Mode (U-mode) to the configured supervisor trap target (Supervisor Mode, S-mode) via `stvec`. *(Note: Under RISC-V privileged architecture, user-mode `ECALL` traps to Machine Mode (M-mode) unless explicitly delegated to S-mode via the `medeleg` Machine Exception Delegation Register; in OSSim's modeled operating system environment, environment calls from U-mode are delegated to the S-mode handler registered in `stvec`).*
     3. **Stage 3 (VFS ELF Header Read):** Virtual File System resolves executable path, parses ELF header, verifies magic bytes (`0x7F 'E' 'L' 'F'`), and inspects `PT_LOAD` program headers.
     4. **Stage 4 (MMU Virtual Page Directory Setup):** Kernel allocates physical memory frames and establishes the process page table hierarchy.
        - *x86 Architecture Model:* Configures two-level page directory and loads base physical frame into `CR3`.
@@ -182,7 +182,9 @@ To avoid conflation between interactive I/O, process creation, and storage persi
 - **Domain Invariant & Inception Rule:**
   - **[TI]** Document saving in The Playground (`OSSimDoc`) traces 7 discrete I/O persistence stages:
     1. **Stage 1 (Shell Input):** User clicks "Save Document" button in `OSSimDoc` (or invokes `sys_save`).
-    2. **Stage 2 (Trap `sys_save`):** CPU traps from user mode to kernel supervisor mode with `sys_save` vector (`INT 0x80` / `ECALL`).
+    2. **Stage 2 (Trap `sys_save`):** CPU traps from user mode to kernel supervisor mode with `sys_save` syscall vector:
+       - *x86 Architecture Model:* Executes `INT 0x80` (or `SYSCALL`) with `sys_save` syscall number in EAX/RAX, trapping to CPL 0.
+       - *RISC-V Architecture Model (RV64):* Executes `ECALL` with `sys_save` syscall ID in `a7`, trapping from U-mode to the configured supervisor trap target (S-mode via `stvec`).
     3. **Stage 3 (VFS Inode Lookup):** Virtual File System resolves target file path, locates inode, and updates directory entry metadata.
     4. **Stage 4 (Buffer Cache & Dirty Page Identification):** Virtual memory manager traverses process memory buffer frames (marked dirty `D=1` by MMU silicon hardware during prior user typing) and marshals unwritten dirty pages into filesystem block I/O buffer headers (`struct bio` / `buffer_head`). *(Note: In the educational visualization, this stage illustrates the critical pedagogical link between virtual memory dirty bits and filesystem writeback flushes).*
     5. **Stage 5 (Block Driver I/O Queue):** Block device driver queues transfer request into the disk elevator scheduler (e.g., SSTF / SCAN queue).
@@ -191,7 +193,7 @@ To avoid conflation between interactive I/O, process creation, and storage persi
 - **Automated Verification Test IDs:** `IO-PIPE-01` to `IO-PIPE-07`, `TEST-SAVE-PIPELINE` (Executed via `tests/test_desktop_launch_and_pc.py` & `tests/test_full_stack_live_audit.py`).
 - **Empirical Verification Status:** VERIFIED (100% PASS).
 
-#### 3.2C 8-Stage Interactive Keyboard & Display Framebuffer Pipeline Trace
+#### 3.2C 8-Stage Keyboard Input and Display Update Pipeline Trace
 
 - **Theoretical Subsystem:** Asynchronous Hardware Interrupts (`IRQ 1`), Dual-Mode Transition, Kernel TTY Ring Buffers, Scheduler Wakeup, and Framebuffer VRAM Drawing.
 - **Authoritative Literature Citation:** Silberschatz, Chapter 1.2 & 13.2 (Interrupt-Driven I/O); Bovet & Cesati, Chapter 4 (Interrupts & Exceptions).

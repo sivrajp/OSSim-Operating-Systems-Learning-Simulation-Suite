@@ -62,11 +62,11 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications, 8-stage interactive keyboard & 7-stage storage persistence pipelines, 8-stage application launch cycle, dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
+| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline, and application creation through the eight-stage launch and process-inception pipeline; dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
 | **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
 | **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
 | **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
-| **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 progressive kernel construction and architecture-specific bare-metal execution simulation). |
+| **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 progressive kernel construction and architecture-specific in-browser cycle-stepped bare-metal architectural simulation). |
 | **6** | **The Capstone Studio** | Full-stack application foundry co-evolving 4 authentic user applications (`OSSimDoc`, `OSSimTune`, `MatrixCompiler`, `Print Spooler` [featuring the `DeadlockLab` concurrency scenario]) across 6 systems levels. |
 | **7** | **The Capstone Playground** | Living Silicon stage running deployed user applications on top of the student's custom-built kernel. |
 
