@@ -436,19 +436,19 @@ Capstone Studio bridges kernel space to user space by allowing learners to co-ev
 
 ## 9. Tab 8: The Capstone Playground (`tab-view-capstone-playground`)
 
-The Capstone Playground simulates the booted physical machine executing the learner's own synthesized OS and applications.
+The Capstone Playground simulates the booted machine executing the learner's own synthesized OS and applications within the browser simulation engine.
 
 ### Protocol 10.1: Living Hardware Stage & Dual-Storage Continuum
 
 | Step # & User Action | Visual & System Target | Operating Systems Concept |
 | :--- | :--- | :--- |
-| **10.1.1:** Observe the initial state if no OS is built: **State A (Hardware Standby)**. | Power supply is ON, but CPU registers and memory are in uninitialized standby. Prompts user to complete OS Builder Quest 10. | Demonstrates that physical silicon hardware cannot execute software without an operating system kernel. |
+| **10.1.1:** Observe the initial state if no OS is built: **State A (Hardware Standby)**. | Power supply is ON, but CPU registers and memory are in uninitialized standby. Prompts user to complete OS Builder Quest 10. | Demonstrates that bare hardware cannot execute user software without an operating system kernel. |
 | **10.1.2:** Once OS is deployed: observe **State B (Kernel Active)**. | Kernel boots into Ring 0. CPU Core 0 executes idle loop (`PID 0 swapper`). Taskbar dock indicates waiting for user applications. | Demonstrates operating system initialization: kernel sits in idle wait loop ready to spawn user tasks. |
 | **10.1.3:** Once applications are deployed: observe **State C (Full Living Desktop)**. | Deployed apps (`OSSimDoc`, `OSSimTune`, `MatrixCompiler`, `Print Spooler`) appear in the taskbar dock. | Complete booted operating system with interactive user applications. |
 | **10.1.4:** Click `OSSimDoc` in the dock. | Word processor window opens running in **User Mode (CPL 3)** with isolated 64 KB user stack at `0x7FFEFFC0`. | User-space application process execution under operating system isolation. |
 | **10.1.5:** Inspect the **Systems Synthesis Provenance Inspector** outside the window. | Reports: Inode #42 binding, dynamic heap expansion via `sys_brk()`, mutex serialization, and interactive QoS priority. | Complete traceability proving how the application utilizes the synthesized operating system kernel. |
-| **10.1.6:** Click `[⌨️ IRQ 1 Keystroke]` in OSSimDoc and click `[⏯️ Step Phase]` on the 8-stage pipeline. | Pipeline traces from User App $	o$ Syscall Trap $	o$ VFS Inode #42 $	o$ MMU Paging $	o$ Silicon I/O $	o$ IRET Return. Frame #16 dirty bit lights up. | Demonstrates round-trip system call execution: user keystroke transitions through kernel to physical RAM and storage. |
-| **10.1.7:** Locate the **Secondary Storage Subsystem Deck** on Capstone Playground. | Displays active storage medium backing Inode #42. | Physical storage controller management. |
+| **10.1.6:** Click `[⌨️ IRQ 1 Keystroke]` in OSSimDoc and click `[⏯️ Step Phase]` on the 8-stage pipeline. | Pipeline traces from User App $\to$ Syscall Trap $\to$ VFS Inode #42 $\to$ MMU Paging $\to$ Simulated I/O $\to$ Privilege Return. Frame #16 dirty bit lights up. | Demonstrates round-trip system call execution: user keystroke transitions through kernel to simulated RAM and storage. |
+| **10.1.7:** Locate the **Secondary Storage Subsystem Deck** on Capstone Playground. | Displays active storage medium backing Inode #42. | Secondary storage controller management. |
 | **10.1.8:** Click `[⚡ Switch to Solid-State NVMe SSD]` (`#btn-capstone-toggle-storage`). | Platter seek view switches to the 16-block NAND Flash grid, displaying out-of-place writes, FTL remapping, $15	ext{ }\mu	ext{s}$ latency, WAF gauge, and TRIM status. | Proves that the Virtual File System (VFS) abstracts underlying storage media: application file I/O works identically over mechanical disks or solid-state flash. |
 | **10.1.9:** Click `[📄 Technical Synthesis Report]`. | Modal displays a consolidated technical report certifying kernel completion, app synthesis, and hardware execution metrics. | Capstone synthesis evaluation and portfolio artifact generation. |
 | **10.1.10:** Click `[🔄 Reset Playground Hardware]`. | Clears virtual RAM, disconnects deployed systems, and returns the playground to State A for clean re-experimentation. | Cold hardware reset and memory wipe. |
@@ -466,7 +466,7 @@ The Capstone Playground simulates the booted physical machine executing the lear
 | **Tab 4** | Numerical Exam Self-Assessment | Solve randomized questions | Instant score update and step-by-step math proof |
 | **Tab 5** | Build the Kernel (10 Quests) | Click `[Snap Module]` & `[Run Verification]` | Sequential quest unlock and GDT/MMU/VFS activation |
 | **Tab 7** | Synthesize 4 Applications | Link 6 quests per app | Status switches to `Synthesized (Ready)` |
-| **Tab 8** | Execute Synthesized OS on Silicon | Step 8-stage pipeline & toggle NVMe SSD | Live hardware execution and Inode #42 persistence |
+| **Tab 8** | Execute Synthesized OS in Capstone Playground | Step 8-stage pipeline & toggle NVMe SSD | Live hardware execution and Inode #42 persistence |
 
 ---
 *© Copyright Sivraj P. All rights reserved. Curricular foundation: 23ELC211 Operating Systems, Department of Electrical and Electronics Engineering, Amrita Vishwa Vidyapeetham.*

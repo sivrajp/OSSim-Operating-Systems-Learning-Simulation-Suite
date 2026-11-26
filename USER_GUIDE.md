@@ -118,7 +118,7 @@ Directly above the pipeline visualizer, the **Actor Ribbon** represents the four
 1. **📱 Application Task:** OSSimDoc (`PID 101`) executes in unprivileged User Mode (`CPL 3`). It references isolated virtual memory addresses (e.g., `0x00002100`) and cannot access hardware ports directly.
 2. **🛡️ Operating System Kernel:** EduKernel acts as the privileged master resource manager (`CPL 0`). It handles system calls, manages process scheduling and PCB states, controls MMU page tables, and oversees the Virtual File System (VFS).
 3. **🔌 Device Drivers (HAL):** Low-level software modules that translate high-level OS commands into device-specific hardware register protocols (e.g., Keyboard Driver at port `0x60`, Display Driver blitting to VRAM at `0xB8000`).
-4. **⚙️ Physical Hardware:** The underlying electronic silicon: Dual-Mode x86 CPU, Memory Management Unit (MMU) with TLB cache, Physical RAM (64 frames), and Magnetic Hard Disk Platter.
+4. **⚙️ Simulated Hardware:** The underlying simulated architectural state: Dual-Mode CPU, Memory Management Unit (MMU) with TLB cache, Simulated RAM (64 physical frames), and Magnetic Hard Disk Platter.
 
 ---
 
@@ -399,7 +399,7 @@ To eliminate undergraduate "abstraction shock"—where students struggle to visu
 #### 10. 🔀 IPC (Interprocess Communication) (Silberschatz Ch 3.5 & Ch 3.6)
 - **Interactive Operation:**
   - *UNIX Anonymous Pipe:* 6-slot circular ring buffer. Step `write fd[1]`, step `read fd[0]`, fill to capacity (triggers writer sleep), drain buffer (triggers reader wait). Visualizes double memory copies: User Producer $\rightarrow$ Kernel Ring Buffer $\rightarrow$ User Consumer.
-  - *POSIX Shared Memory:* Zero-copy physical silicon mapping. Physical RAM Frame #26 mapped into PID 101 (`0x00004000`) and PID 102 (`0x00007000`).
+  - *POSIX Shared Memory:* Zero-copy shared frame mapping. Physical RAM Frame #26 mapped into PID 101 (`0x00004000`) and PID 102 (`0x00007000`).
   - *Race Condition & Mutex Toggle:* Live race condition without mutex (deposit +$20 and withdrawal -$30 overwrite each other, balance corrupts to $70). Enable mutex (`pthread_mutex_lock()`) to observe clean serialization (balance = $90).
   - *Live Benchmark (10,000 Messages):* Compares Pipe (20,000 syscalls, 20,000 memory copies, 2.40 µs latency, 1.35 GB/s throughput) vs Shared Memory (0 syscalls, 0 copies, 0.06 µs latency, 16.8 GB/s throughput).
 - **Sample Workout Scenario:** Message Passing vs Shared Memory Tradeoff.
