@@ -16,13 +16,13 @@
 
 **OSSim** is an integrated, browser-based educational operating systems simulation platform and architecture laboratory. Grounded in canonical academic literature (*Silberschatz, Galvin & Gagne; Tanenbaum & Bos; Stallings; Patterson & Hennessy; OSTEP*) and premier university curricula (*MIT xv6, Stanford Pintos, NITC eXpOS, ACM/IEEE CS2023*), OSSim provides students and instructors with transparent, step-by-step visual observability into invisible silicon and kernel datapaths.
 
-From observing keyboard hardware interrupts traverse CPU registers to executing side-by-side algorithmic Gantt charts, exploring 18 structured conceptual workbenches, and solving 100 curricular exam problems, OSSim bridges theoretical abstraction and concrete architectural execution mechanics.
+From observing keyboard hardware interrupts traverse CPU registers to executing side-by-side algorithmic Gantt charts, exploring 18 structured conceptual workbenches, and solving 100 curricular exam problems, OSSim bridges theoretical abstraction and simulated hardware execution mechanisms and architectural state transitions.
 
 ---
 
 ## 📸 Visual UI Tour (Live Environment Screenshots)
 
-### 1. The Playground — Living Operating System & Silicon Hardware Datapath
+### 1. The Playground — Living Operating System & Architectural Hardware Datapath
 *Trace live application interaction (typing, saving) through the 8-stage interactive keyboard pipeline and 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, simulated physical memory frames, and secondary storage controller.*
 
 ![The Playground](figures/screenshot_02_playground.png)

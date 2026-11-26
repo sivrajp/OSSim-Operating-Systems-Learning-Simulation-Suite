@@ -326,22 +326,22 @@
                                 <tr>
                                     <td><strong>Kernel Privilege Level</strong></td>
                                     <td><code>CPL 0</code> (Ring 0 Kernel Mode)</td>
-                                    <td><code>S-mode</code> (Supervisor Mode; or <code>M-mode</code> bare-metal)</td>
+                                    <td><code>S-mode</code> (Supervisor OS); <code>M-mode</code> (machine-mode firmware or machine-mode-only implementation)</td>
                                 </tr>
                                 <tr>
                                     <td><strong>System Call Entry</strong></td>
-                                    <td><code>INT 0x80</code> (via IDT) or <code>SYSCALL</code> (via MSR <code>IA32_LSTAR</code>)</td>
-                                    <td><code>ECALL</code> (delegated to S-mode via <code>medeleg</code>)</td>
+                                    <td><code>INT 0x80</code> (transfers via IDT gate) or <code>SYSCALL</code> (transfers via MSR <code>IA32_LSTAR</code>)</td>
+                                    <td><code>ECALL</code> (traps to handler; delegated to S-mode via <code>medeleg</code>)</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Page-Table Control Register</strong></td>
-                                    <td><code>CR3</code> (Page Directory Base Register)</td>
-                                    <td><code>satp</code> (Supervisor Address Translation &amp; Protection)</td>
+                                    <td><code>CR3</code> (Paging-structure root pointer: PDBR in 32-bit / PML4 in 64-bit)</td>
+                                    <td><code>satp</code> (Supervisor Address Translation &amp; Protection root)</td>
                                 </tr>
                                 <tr>
                                     <td><strong>Privilege Return</strong></td>
-                                    <td><code>IRET / IRETQ</code> (pops frame) or <code>SYSRET</code> (restores RCX/R11)</td>
-                                    <td><code>SRET</code> (restores <code>sstatus.SPP</code> &amp; <code>sepc</code>) or <code>MRET</code></td>
+                                    <td><code>IRET / IRETQ</code> (restores frame from stack) or <code>SYSRET</code> (restores RIP from RCX, RFLAGS from R11)</td>
+                                    <td><code>SRET</code> (restores <code>sstatus.SPP</code> &amp; <code>sepc</code>) or <code>MRET</code> (Machine Return)</td>
                                 </tr>
                             </tbody>
                         </table>
