@@ -23,7 +23,7 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 ## 📸 Visual UI Tour (Live Environment Screenshots)
 
 ### 1. The Playground — Living Operating System & Architectural Hardware Datapath
-*Trace live application interaction (typing, saving) through the 8-stage interactive keyboard pipeline and 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, simulated physical memory frames, and secondary storage controller.*
+*Trace live application interaction (typing, saving) through the 8-stage interactive keyboard pipeline and 7-stage storage persistence I/O pipeline (ending in simulated I/O completion and user-interface acknowledgement), and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, simulated physical memory frames, and secondary storage controller.*
 
 ![The Playground](figures/screenshot_02_playground.png)
 
@@ -62,13 +62,13 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline, and application creation through the eight-stage launch and process-inception pipeline; dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, simulated 64-frame physical RAM grid, and dual-storage continuum (HDD/SSD). |
+| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline (ending in simulated I/O completion and user-interface acknowledgement), and application creation through the eight-stage launch and process-inception pipeline; dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, simulated 64-frame physical RAM grid, and dual-storage continuum (HDD/SSD). |
 | **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
 | **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
 | **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
-| **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 progressive kernel construction and architecture-specific in-browser cycle-stepped bare-metal architectural simulation). |
+| **5** | **OS Builder Quest** | 10 milestone kernel engineering quests across 5 scaffolding levels (Level 0 blocks to Level 5 progressive kernel construction and architecture-specific bare-metal simulation). |
 | **6** | **The Capstone Studio** | Full-stack application foundry co-evolving 4 authentic user applications (`OSSimDoc`, `OSSimTune`, `MatrixCompiler`, `Print Spooler` [featuring the `DeadlockLab` concurrency scenario]) across 6 systems levels. |
-| **7** | **The Capstone Playground** | Living Silicon stage running deployed user applications on top of the student's custom-built kernel. |
+| **7** | **The Capstone Playground** | Living simulated hardware stage running deployed user applications on top of the student's custom-built kernel. |
 
 ---
 

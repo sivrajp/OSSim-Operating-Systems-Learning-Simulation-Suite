@@ -74,7 +74,7 @@ The Home page prominently features four large, interactive cards styled with ded
 
 1. **🎮 1. The Playground — Live OS Desktop** (`data-nav="desktop"`):
    - *Role:* Interactive System Pipeline & Hardware X-Ray
-   - *Pedagogical Focus:* Real-time 8-stage keyboard/input pipeline, 7-stage storage persistence pipeline, and 8-stage application launch pipeline, "With OS" vs "Without OS (Bare-Metal)" comparison, CPU registers (`PC`, `SP`, `CPL`, `FLAGS`, `R0-R3`), 64-frame physical RAM grid with interactive frame inspector, and magnetic disk platter seek visualization.
+   - *Pedagogical Focus:* Real-time 8-stage keyboard/input pipeline, 7-stage storage persistence pipeline (ending in simulated I/O completion and acknowledgement), and 8-stage application launch pipeline, "With OS" vs "Without OS (Bare-Metal)" comparison, CPU registers (`PC`, `SP`, `CPL`, `FLAGS`, `R0-R3`), 64-frame physical RAM grid with interactive frame inspector, and magnetic disk platter seek visualization.
 2. **📚 2. The Classroom — OS Concepts Learning** (`data-nav="workbench"`):
    - *Role:* Dual-Mode Sandbox, OS Architectures & Runtime Lab
    - *Pedagogical Focus:* Visual learning aids mapped to Silberschatz Chapters 1–5 (Dual-Mode CPU ring sandbox, Stackable OS Architecture Builder with fault injection, Polling vs Interrupt vs DMA hardware simulation, POSIX Syscall Matrix, OS Evolution timeline), plus the Runtime Process Lab (Hierarchical process tree, `pthread_create()`, 5-state lifecycle engine, PCB Table, 1:1 / M:1 / M:M multithreading models, UNIX Pipes, POSIX Shared Memory with mutex lock toggle, and EduKernel Terminal `tty1`).
