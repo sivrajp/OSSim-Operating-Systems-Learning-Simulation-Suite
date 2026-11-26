@@ -256,14 +256,14 @@
                             <h3 class="level-card-title">Architecture-Specific Systems Construction</h3>
                             <div class="level-card-env">OS Builder Quest &bull; The Capstone Studio</div>
                             <p class="level-card-desc">
-                                Authentic low-level systems engineering: students write and synthesize C kernel modules, interrupt vector tables, and device drivers, generating hardware abstraction layer (HAL) code tailored for <strong>x86 VGA</strong> and <strong>RISC-V UART</strong> target architectures within the browser execution runtime.
+                                Authentic low-level systems engineering: students write and synthesize C kernel modules, interrupt vector tables, and device drivers, generating hardware abstraction layer (HAL) code tailored for <strong>x86 VGA</strong> and <strong>RISC-V UART</strong> target architectures. All code synthesis and architectural execution are modeled within the browser simulation engine, without executing on actual physical host or target hardware.
                             </p>
                         </div>
                     </div>
                 </div>
 
                 <!-- ========================================================= -->
-                <!-- FULL-STACK ARCHITECTURAL FLOW DIAGRAM                     -->
+                <!-- FULL-STACK ARCHITECTURAL FLOW DIAGRAM & MAPPINGS          -->
                 <!-- ========================================================= -->
                 <div class="home-arch-flow-section">
                     <div class="arch-flow-header">
@@ -273,34 +273,78 @@
                         </div>
                         <h2>Full-Stack Hardware-to-OS Architectural Flow</h2>
                         <p>
-                            How user-space applications, supervisor kernel services, hardware abstraction layers, and physical hardware interact within OSSim:
+                            How user-space applications, supervisor kernel services, hardware abstraction layers, and simulated hardware components interact within OSSim:
                         </p>
                     </div>
 
                     <div class="arch-flow-diagram">
                         <div class="arch-flow-step flow-user">
-                            <div class="flow-step-tag">USER SPACE (CPL 3 / U-MODE)</div>
+                            <div class="flow-step-tag">USER SPACE &bull; x86: CPL 3 | RISC-V: U-mode</div>
                             <div class="flow-step-title">Interactive Applications</div>
                             <div class="flow-step-desc">OSSimDoc &bull; OSSimTune &bull; MatrixCompiler &bull; Print Spooler</div>
                         </div>
-                        <div class="arch-flow-arrow">&darr; <span>Traps (<code>INT 0x80</code> / <code>ECALL</code>)</span></div>
+                        <div class="arch-flow-arrow">&darr; <span>System Traps &bull; x86: <code>INT 0x80</code> / <code>SYSCALL</code> &bull; RISC-V: <code>ECALL</code></span></div>
                         <div class="arch-flow-step flow-kernel">
-                            <div class="flow-step-tag">KERNEL SUPERVISOR (CPL 0 / S-MODE)</div>
+                            <div class="flow-step-tag">KERNEL SUPERVISOR &bull; x86: CPL 0 | RISC-V: S-mode</div>
                             <div class="flow-step-title">Operating System Core Services</div>
                             <div class="flow-step-desc">Process Manager (PCB) &bull; Virtual Memory &amp; Page Cache &bull; VFS &bull; Mutex &amp; IPC Engine</div>
                         </div>
                         <div class="arch-flow-arrow">&darr; <span>Hardware Abstraction Layer (HAL)</span></div>
                         <div class="arch-flow-step flow-hal">
-                            <div class="flow-step-tag">SUBSYSTEM CONTROLLERS</div>
+                            <div class="flow-step-tag">SUBSYSTEM CONTROLLERS &amp; HAL &bull; MMU: x86 <code>CR3</code> | RISC-V <code>satp</code></div>
                             <div class="flow-step-title">Schedulers, MMU &amp; Device Drivers</div>
-                            <div class="flow-step-desc">Preemptive CPU Scheduler &bull; MMU CR3 / satp Page Tables &bull; Keyboard/Audio/Disk Drivers</div>
+                            <div class="flow-step-desc">Preemptive CPU Scheduler &bull; Virtual Page Tables &bull; Keyboard/Audio/Disk Drivers</div>
                         </div>
                         <div class="arch-flow-arrow">&darr; <span>System Bus &amp; Interrupt Lines</span></div>
                         <div class="arch-flow-step flow-hw">
-                            <div class="flow-step-tag">SIMULATED HARDWARE &amp; SILICON</div>
-                            <div class="flow-step-title">Dual-Core Silicon, RAM &amp; Dual-Storage Continuum</div>
-                            <div class="flow-step-desc">Registers (PC, SP, FLAGS) &bull; 64-Frame Physical RAM &bull; Magnetic HDD (Cylinders) &bull; NVMe SSD (FTL Blocks)</div>
+                            <div class="flow-step-tag">SIMULATED HARDWARE &amp; ARCHITECTURAL STATE</div>
+                            <div class="flow-step-title">Simulated Dual-Core CPU, 64-Frame RAM &amp; Dual-Storage Continuum</div>
+                            <div class="flow-step-desc">Simulated Registers (PC, SP, FLAGS, R0–R3) &bull; 64-Frame Simulated RAM Grid &bull; Magnetic HDD (Cylinders) &bull; NVMe SSD (FTL Blocks)</div>
                         </div>
+                    </div>
+
+                    <!-- Parallel Architecture Privilege & Trap Mappings Table -->
+                    <div class="arch-mapping-table-wrap">
+                        <div class="arch-mapping-title">
+                            <span class="badge-dot">●</span>
+                            <span>Parallel Architectural Privilege &amp; Trap Mappings (x86 vs. RISC-V)</span>
+                        </div>
+                        <table class="arch-mapping-table">
+                            <thead>
+                                <tr>
+                                    <th>Architectural Concept</th>
+                                    <th>x86 Architecture Model</th>
+                                    <th>RISC-V Architecture Model (RV64)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>User Privilege Level</strong></td>
+                                    <td><code>CPL 3</code> (Ring 3 User Mode)</td>
+                                    <td><code>U-mode</code> (User Mode)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kernel Privilege Level</strong></td>
+                                    <td><code>CPL 0</code> (Ring 0 Kernel Mode)</td>
+                                    <td><code>S-mode</code> (Supervisor Mode; or <code>M-mode</code> bare-metal)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>System Call Entry</strong></td>
+                                    <td><code>INT 0x80</code> (via IDT) or <code>SYSCALL</code> (via MSR <code>IA32_LSTAR</code>)</td>
+                                    <td><code>ECALL</code> (delegated to S-mode via <code>medeleg</code>)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Page-Table Control Register</strong></td>
+                                    <td><code>CR3</code> (Page Directory Base Register)</td>
+                                    <td><code>satp</code> (Supervisor Address Translation &amp; Protection)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Privilege Return</strong></td>
+                                    <td><code>IRET / IRETQ</code> (pops frame) or <code>SYSRET</code> (restores RCX/R11)</td>
+                                    <td><code>SRET</code> (restores <code>sstatus.SPP</code> &amp; <code>sepc</code>) or <code>MRET</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -329,7 +373,7 @@
                                 <code>IRQ 1</code> &rarr; Mode Switch &rarr; ISR Port 0x60 &rarr; TTY Buffer &rarr; Sched Wakeup &rarr; App Buffer &rarr; MMU Dirty &rarr; VRAM Blit
                             </div>
                             <p class="journey-desc">
-                                Illustrates how physical hardware interrupts wake a sleeping process, traverse kernel character queues, modify virtual memory frames, and blit glyphs to video memory.
+                                Illustrates how simulated hardware interrupts wake a sleeping process, traverse kernel character queues, modify virtual memory frames, and blit glyphs to video memory.
                             </p>
                         </div>
 
@@ -386,7 +430,7 @@
                                 </p>
                                 <ul class="card-features-list">
                                     <li><span>📱</span> <strong>OSSimDoc Word Processor:</strong> Live typing and document persistence</li>
-                                    <li><span>⚡</span> <strong>8-Stage Input Pipeline:</strong> IRQ 1 ➔ CPL elevation ➔ TTY buffer ➔ App ➔ MMU dirty page ➔ VRAM draw</li>
+                                    <li><span>⚡</span> <strong>8-Stage Input Pipeline:</strong> IRQ 1 ➔ Mode Switch ➔ ISR Port 0x60 ➔ TTY Queue ➔ Sched Wakeup ➔ App Buffer ➔ MMU Page Dirty ➔ VRAM Draw</li>
                                     <li><span>🛡️</span> <strong>With OS vs Bare-Metal:</strong> See why modern computers require an OS</li>
                                     <li><span>⚙️</span> <strong>Hardware X-Ray:</strong> CPU registers, disk platter, &amp; 64-frame RAM grid</li>
                                 </ul>

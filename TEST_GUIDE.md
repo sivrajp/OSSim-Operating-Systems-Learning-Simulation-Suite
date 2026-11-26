@@ -160,8 +160,10 @@ To avoid conflation between interactive I/O, process creation, and storage persi
   - **[TI]** Application launching follows an 8-stage sequence defined at a conceptual architecture-independent level, with concrete hardware mechanisms mapped for x86 and RISC-V targets:
     1. **Stage 1 (Shell Click):** Desktop GUI shell detects user launch event and prepares executable argument vector.
     2. **Stage 2 (System Call Trap):** CPU traps from unprivileged user mode to supervisor/kernel mode.
-       - *x86 Architecture Model:* Executes `INT 0x80` (or `SYSCALL`), transitioning privilege from User (CPL 3) to Kernel (CPL 0) via the Interrupt Descriptor Table (IDT).
-       - *RISC-V Architecture Model (RV64):* Executes `ECALL`, transitioning privilege from User Mode (U-mode) to the configured supervisor trap target (Supervisor Mode, S-mode) via `stvec`. *(Note: Under RISC-V privileged architecture, user-mode `ECALL` traps to Machine Mode (M-mode) unless explicitly delegated to S-mode via the `medeleg` Machine Exception Delegation Register; in OSSim's modeled operating system environment, environment calls from U-mode are delegated to the S-mode handler registered in `stvec`).*
+       - *x86 Architecture Model:*
+         - *Software Interrupt Trap (`INT 0x80`):* Traps from User (CPL 3) to Kernel (CPL 0) by indexing vector `0x80` in the Interrupt Descriptor Table (IDT), automatically pushing `SS`, `ESP`, `EFLAGS`, `CS`, and `EIP` onto the kernel stack.
+         - *Fast System Call Trap (`SYSCALL`):* Traps from CPL 3 to CPL 0 by loading the kernel target address directly from the `IA32_LSTAR` Model-Specific Register (MSR) without indexing the IDT, saving user `RIP` into `RCX` and `RFLAGS` into `R11`.
+       - *RISC-V Architecture Model (RV64):* Executes `ECALL`, transitioning privilege from User Mode (U-mode) to Supervisor Mode (S-mode). Under RISC-V privileged architecture, user-mode `ECALL` traps to Machine Mode (M-mode) unless explicitly delegated via the `medeleg` Machine Exception Delegation Register; in OSSim's modeled operating system environment, environment calls from U-mode are delegated directly to the S-mode handler configured in `stvec`.
     3. **Stage 3 (VFS ELF Header Read):** Virtual File System resolves executable path, parses ELF header, verifies magic bytes (`0x7F 'E' 'L' 'F'`), and inspects `PT_LOAD` program headers.
     4. **Stage 4 (MMU Virtual Page Directory Setup):** Kernel allocates physical memory frames and establishes the process page table hierarchy.
        - *x86 Architecture Model:* Configures two-level page directory and loads base physical frame into `CR3`.
@@ -169,8 +171,10 @@ To avoid conflation between interactive I/O, process creation, and storage persi
     5. **Stage 5 (PCB Instantiation & Queue Admission):** Kernel allocates the Process Control Block (PCB), assigns PID, and formally admits the process from `NEW` to the `READY` queue.
     6. **Stage 6 (Scheduler Selection & CPU Dispatch):** Operating system scheduler algorithm selects the admitted process from `READY` and dispatches it to `RUNNING` on Core 0.
     7. **Stage 7 (Privilege Return):** Kernel executes architectural return instruction, restoring CPU context and dropping privilege back to user mode.
-       - *x86 Architecture Model:* Executes `IRET` (or `SYSRET`), popping EFLAGS, CS, and EIP, returning CPL 0 $\rightarrow$ CPL 3.
-       - *RISC-V Architecture Model (RV64):* Executes `SRET`, restoring status from `sstatus.SPP` and program counter from `sepc`, returning S-mode $\rightarrow$ U-mode.
+       - *x86 Architecture Model:*
+         - *Interrupt Return (`IRET` / `IRETQ`):* Pops the hardware-saved interrupt stack frame (`EFLAGS`/`RFLAGS`, `CS`, `EIP`/`RIP`, and privilege stack pointers) from the kernel stack, restoring user context and returning CPL 0 $\rightarrow$ CPL 3.
+         - *Fast Syscall Return (`SYSRET`):* Restores user execution context by loading `RIP` from `RCX` and `RFLAGS` from `R11` while setting CPL to 3, without popping an interrupt stack frame.
+       - *RISC-V Architecture Model (RV64):* Executes `SRET` (Supervisor Return), restoring CPU privilege from Supervisor mode (S-mode) to User mode (U-mode) based on `sstatus.SPP` and restoring the Program Counter from the Supervisor Exception Program Counter register (`sepc`).
     8. **Stage 8 (Application Framebuffer Mount):** User-mode application process begins instruction execution and mounts its active window interface into the desktop framebuffer.
 - **Automated Verification Test IDs:** `PIPE-LAUNCH-01`, `PIPE-LAUNCH-02`, `PIPE-LAUNCH-03`, `PIPE-STAGE-1` through `PIPE-STAGE-8`, `DESK-LAUNCH-WIN` (Executed via `tests/test_desktop_launch_and_pc.py`).
 - **Empirical Verification Status:** VERIFIED (100% PASS).
@@ -183,10 +187,10 @@ To avoid conflation between interactive I/O, process creation, and storage persi
   - **[TI]** Document saving in The Playground (`OSSimDoc`) traces 7 discrete I/O persistence stages:
     1. **Stage 1 (Shell Input):** User clicks "Save Document" button in `OSSimDoc` (or invokes `sys_save`).
     2. **Stage 2 (Trap `sys_save`):** CPU traps from user mode to kernel supervisor mode with `sys_save` syscall vector:
-       - *x86 Architecture Model:* Executes `INT 0x80` (or `SYSCALL`) with `sys_save` syscall number in EAX/RAX, trapping to CPL 0.
-       - *RISC-V Architecture Model (RV64):* Executes `ECALL` with `sys_save` syscall ID in `a7`, trapping from U-mode to the configured supervisor trap target (S-mode via `stvec`).
+       - *x86 Architecture Model:* Executes `INT 0x80` (indexing vector `0x80` via IDT) or `SYSCALL` (loading entry point directly from MSR `IA32_LSTAR` without IDT indexing) with `sys_save` syscall number in EAX/RAX, trapping to CPL 0.
+       - *RISC-V Architecture Model (RV64):* Executes `ECALL` with `sys_save` syscall ID in `a7`, trapping from U-mode to S-mode via `stvec` (delegated via `medeleg`).
     3. **Stage 3 (VFS Inode Lookup):** Virtual File System resolves target file path, locates inode, and updates directory entry metadata.
-    4. **Stage 4 (Buffer Cache & Dirty Page Identification):** Virtual memory manager traverses process memory buffer frames (marked dirty `D=1` by MMU silicon hardware during prior user typing) and marshals unwritten dirty pages into filesystem block I/O buffer headers (`struct bio` / `buffer_head`). *(Note: In the educational visualization, this stage illustrates the critical pedagogical link between virtual memory dirty bits and filesystem writeback flushes).*
+    4. **Stage 4 (Buffer Cache & Dirty Page Identification):** Virtual memory manager traverses process memory buffer frames (marked dirty `D=1` by the MMU during prior user typing) and marshals unwritten dirty pages into filesystem block I/O buffer headers (`struct bio` / `buffer_head`). *(Note: In the educational visualization, this stage illustrates the critical pedagogical link between virtual memory dirty bits and filesystem writeback flushes).*
     5. **Stage 5 (Block Driver I/O Queue):** Block device driver queues transfer request into the disk elevator scheduler (e.g., SSTF / SCAN queue).
     6. **Stage 6 (Hardware Controller DMA Transfer):** Storage controller initiates DMA bus-master data transfer to secondary storage (simulating magnetic cylinder seek on HDD, or Flash Translation Layer FTL page write and wear-leveling on NVMe SSD).
     7. **Stage 7 (Framebuffer Confirmation):** Storage controller asserts completion interrupt, kernel marks buffer clean, and GUI framebuffer renders I/O persistence acknowledgment.
@@ -198,15 +202,17 @@ To avoid conflation between interactive I/O, process creation, and storage persi
 - **Theoretical Subsystem:** Asynchronous Hardware Interrupts (`IRQ 1`), Dual-Mode Transition, Kernel TTY Ring Buffers, Scheduler Wakeup, and Framebuffer VRAM Drawing.
 - **Authoritative Literature Citation:** Silberschatz, Chapter 1.2 & 13.2 (Interrupt-Driven I/O); Bovet & Cesati, Chapter 4 (Interrupts & Exceptions).
 - **Domain Invariant & Inception Rule:**
-  - **[TI]** Interactive keystroke processing in `OSSimDoc` traces 8 discrete hardware/kernel stages:
-    1. **Stage 1 (Keyboard Controller IRQ 1):** Physical keyboard controller detects keypress, generates hardware scan-code, and asserts Interrupt Request line `IRQ 1`.
-    2. **Stage 2 (CPU Mode Switch):** CPU interrupt controller acknowledges `IRQ 1`, pushes EFLAGS/CS/EIP onto kernel stack, and switches privilege from CPL 3 to CPL 0.
-    3. **Stage 3 (Keyboard Driver ISR):** Interrupt Service Routine executes, reading raw scan-code from I/O port `0x60` and issuing End-of-Interrupt (EOI) to the PIC.
-    4. **Stage 4 (TTY Queue Buffer):** Line discipline converts scan-code to ASCII character and appends it to the kernel TTY circular ring buffer.
-    5. **Stage 5 (OS Scheduler & PCB Wakeup):** Kernel unblocks `OSSimDoc` (transitioning PCB from `WAITING` $\rightarrow$ `READY`), yielding or preempting the idle loop to dispatch the editor process on Core 0.
-    6. **Stage 6 (Application Document Buffer):** `OSSimDoc` user-space process executes `read()` syscall, dequeues character from TTY buffer, and appends it to in-memory document text buffer.
-    7. **Stage 7 (Virtual MMU Paging):** CPU MMU translates virtual address of modified document buffer to physical frame, automatically setting the Dirty bit (`D=1`) in the Page Table Entry.
-    8. **Stage 8 (Display VRAM Draw):** Video graphics driver maps font glyph bitmap into video RAM (VRAM) framebuffer, and display hardware refreshes the visual canvas.
+  - **[TI]** *Theoretical Domain Principle:* Hardware interrupt handling requires an asynchronous interrupt request from the peripheral device controller, CPU privilege elevation, execution of an Interrupt Service Routine (ISR) that acknowledges the device, buffering of the input event in a kernel queue, unblocking of the waiting process in the scheduler, application consumption, memory page dirtiness tracking, and display refresh.
+  - **[SI]** *OSSim Simulated x86 Implementation Model:* When the learner types in the browser interface, OSSim captures the client-side browser keyboard event (`keydown`) and feeds it into the virtual hardware simulation engine. The simulator models the x86 keyboard-interrupt pipeline across 8 discrete simulated stages:
+    1. **Stage 1 (Simulated Keyboard Controller IRQ 1):** In response to the browser keyboard event, the simulated keyboard controller model generates an x86 hardware scan-code and asserts simulated Interrupt Request line `IRQ 1`.
+    2. **Stage 2 (Simulated CPU Mode Switch):** The virtual CPU interrupt controller acknowledges `IRQ 1`, pushes simulated `EFLAGS`, `CS`, and `EIP` onto the kernel stack, and switches simulated privilege from CPL 3 (User) to CPL 0 (Kernel).
+    3. **Stage 3 (Simulated Keyboard Driver ISR):** The kernel Interrupt Service Routine executes, reading the raw scan-code from simulated I/O port `0x60` and issuing a simulated End-of-Interrupt (EOI) to the Programmable Interrupt Controller (PIC).
+    4. **Stage 4 (Simulated TTY Queue Buffer):** Line discipline converts scan-code to ASCII character and appends it to the kernel TTY circular ring buffer.
+    5. **Stage 5 (Simulated OS Scheduler & PCB Wakeup):** Kernel unblocks `OSSimDoc` (transitioning simulated PCB from `WAITING` $\rightarrow$ `READY`), yielding or preempting the idle loop to dispatch the editor process on simulated Core 0.
+    6. **Stage 6 (Simulated Application Document Buffer):** `OSSimDoc` user-space process executes `read()` syscall, dequeues character from TTY buffer, and appends it to in-memory document text buffer.
+    7. **Stage 7 (Simulated Virtual MMU Paging):** CPU MMU translates virtual address of modified document buffer to physical frame, automatically setting the Dirty bit (`D=1`) in the Page Table Entry.
+    8. **Stage 8 (Simulated Display VRAM Draw):** Video graphics driver maps font glyph bitmap into video RAM (VRAM) framebuffer, and display hardware refreshes the visual canvas.
+    *(Note: In non-x86 or memory-mapped architectures such as RISC-V, console input is handled via memory-mapped UART registers and external interrupt delegation rather than legacy I/O port 0x60 and PIC).*
 - **Automated Verification Test IDs:** `ANIM-DOC-01`, `ANIM-DOC-02`, `ANIM-DOC-03`, `PIPE-AWAITING-INPUT`, `INVARIANT-WAKEUP-RUNNING` (Executed via `tests/test_desktop_launch_and_pc.py`).
 - **Empirical Verification Status:** VERIFIED (100% PASS).
 

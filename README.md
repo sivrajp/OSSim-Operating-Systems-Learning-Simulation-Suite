@@ -16,14 +16,14 @@
 
 **OSSim** is an integrated, browser-based educational operating systems simulation platform and architecture laboratory. Grounded in canonical academic literature (*Silberschatz, Galvin & Gagne; Tanenbaum & Bos; Stallings; Patterson & Hennessy; OSTEP*) and premier university curricula (*MIT xv6, Stanford Pintos, NITC eXpOS, ACM/IEEE CS2023*), OSSim provides students and instructors with transparent, step-by-step visual observability into invisible silicon and kernel datapaths.
 
-From observing keyboard hardware interrupts traverse CPU registers to executing side-by-side algorithmic Gantt charts, exploring 18 structured conceptual workbenches, and solving 100 curricular exam problems, OSSim bridges theoretical abstraction and physical execution mechanics.
+From observing keyboard hardware interrupts traverse CPU registers to executing side-by-side algorithmic Gantt charts, exploring 18 structured conceptual workbenches, and solving 100 curricular exam problems, OSSim bridges theoretical abstraction and concrete architectural execution mechanics.
 
 ---
 
 ## 📸 Visual UI Tour (Live Environment Screenshots)
 
 ### 1. The Playground — Living Operating System & Silicon Hardware Datapath
-*Trace live application interaction (typing, saving) through the 8-stage interactive keyboard pipeline and 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, physical memory frames, and secondary storage controller.*
+*Trace live application interaction (typing, saving) through the 8-stage interactive keyboard pipeline and 7-stage storage persistence I/O pipeline, and observe process inception through the 8-stage application launch pipeline down to CPU architectural registers, simulated physical memory frames, and secondary storage controller.*
 
 ![The Playground](figures/screenshot_02_playground.png)
 
@@ -62,7 +62,7 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline, and application creation through the eight-stage launch and process-inception pipeline; dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, physical RAM frames, and dual-storage continuum (HDD/SSD). |
+| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline, and application creation through the eight-stage launch and process-inception pipeline; dual-mode execution (With OS vs. Bare-Metal Ring 0), CPU registers, simulated 64-frame physical RAM grid, and dual-storage continuum (HDD/SSD). |
 | **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
 | **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
 | **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
@@ -83,7 +83,7 @@ OSSim Engineering Architecture
 │   ├── visualizers/ProcessWorkbenchView.js (18-concept interactive workbenches)
 │   ├── visualizers/AlgorithmSimView.js     (Unified comparative solvers & delta metrics)
 │   ├── visualizers/ChallengePoolData.js    (100 curricular problems & derivations)
-│   └── visualizers/OSBuilderQuestView.js   (Levels 0–5 silicon kernel synthesis)
+│   └── visualizers/OSBuilderQuestView.js   (Levels 0–5 simulated kernel synthesis)
 └── 🚀 Standalone Distribution (This Repository)
     ├── index.html                          (Zero-dependency standalone entry point)
     ├── js/ossim_bundle.js                  (Production protected runtime bundle)
