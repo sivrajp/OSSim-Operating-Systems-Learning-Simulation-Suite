@@ -47,6 +47,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         initInstallBanner();
         initBottomNavigation();
+        initMobileDrawer();
         initNetworkStatus();
         initOrientationHelper();
     });
@@ -85,43 +86,162 @@
 
         navItems.forEach((item) => {
             item.addEventListener('click', () => {
+                // Check if this is the "More / All" button
+                if (item.id === 'mobile-nav-more-btn') {
+                    toggleDrawer(true);
+                    return;
+                }
+
                 const targetTabId = item.getAttribute('data-tab');
                 if (!targetTabId) return;
 
-                // 1. Update active item state in bottom nav
-                navItems.forEach((btn) => btn.classList.remove('active'));
-                item.classList.add('active');
+                // 1. Update active item state in bottom nav & drawer
+                syncActiveTab(targetTabId);
 
                 // 2. Trigger click on existing desktop header tab button to execute core suite routing
-                const desktopTabBtn = document.querySelector(`.nav-tab-btn[data-tab="${targetTabId}"]`);
-                if (desktopTabBtn) {
-                    desktopTabBtn.click();
-                } else {
-                    // Fallback direct view toggle
-                    document.querySelectorAll('.tab-view').forEach((v) => v.classList.remove('active'));
-                    const targetView = document.getElementById(`tab-view-${targetTabId}`);
-                    if (targetView) targetView.classList.add('active');
-                }
+                triggerTabSwitch(targetTabId);
 
-                // 3. Scroll to top of viewport
+                // 3. Scroll active bottom nav button into view
+                item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+
+                // 4. Scroll to top of viewport
                 const viewport = document.getElementById('app-viewport');
                 if (viewport) viewport.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
 
-        // Also listen to desktop tab changes to keep mobile bottom nav in sync
+        // Listen to desktop tab changes to keep mobile bottom nav & drawer in sync
         const desktopTabs = document.querySelectorAll('.nav-tab-btn');
         desktopTabs.forEach((tab) => {
             tab.addEventListener('click', () => {
                 const tabId = tab.getAttribute('data-tab');
-                navItems.forEach((item) => {
-                    if (item.getAttribute('data-tab') === tabId) {
-                        item.classList.add('active');
-                    } else {
-                        item.classList.remove('active');
+                if (tabId) {
+                    syncActiveTab(tabId);
+                    const matchingBottomItem = bottomNav.querySelector(`.mobile-nav-item[data-tab="${tabId}"]`);
+                    if (matchingBottomItem) {
+                        matchingBottomItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
                     }
-                });
+                }
             });
+        });
+    }
+
+    function syncActiveTab(tabId) {
+        document.querySelectorAll('.mobile-nav-item').forEach((item) => {
+            if (item.getAttribute('data-tab') === tabId) {
+                item.classList.add('active');
+            } else if (item.id !== 'mobile-nav-more-btn') {
+                item.classList.remove('active');
+            }
+        });
+        document.querySelectorAll('.drawer-nav-item').forEach((item) => {
+            if (item.getAttribute('data-tab') === tabId) {
+                item.classList.add('active');
+            } else {
+                item.classList.remove('active');
+            }
+        });
+    }
+
+    function triggerTabSwitch(targetTabId) {
+        const desktopTabBtn = document.querySelector(`.nav-tab-btn[data-tab="${targetTabId}"]`);
+        if (desktopTabBtn) {
+            desktopTabBtn.click();
+        } else {
+            // Fallback direct view toggle
+            document.querySelectorAll('.tab-view').forEach((v) => v.classList.remove('active'));
+            const targetView = document.getElementById(`tab-view-${targetTabId}`);
+            if (targetView) targetView.classList.add('active');
+        }
+    }
+
+    function toggleDrawer(open) {
+        const drawer = document.getElementById('mobile-nav-drawer');
+        if (!drawer) return;
+        if (open) {
+            drawer.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        } else {
+            drawer.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // 5. Initialize Mobile Navigation Drawer (8 Environments & Suite Actions)
+    function initMobileDrawer() {
+        const menuToggleBtn = document.getElementById('mobile-menu-toggle-btn');
+        const drawerCloseBtn = document.getElementById('drawer-close-btn');
+        const backdrop = document.getElementById('drawer-backdrop');
+
+        if (menuToggleBtn) {
+            menuToggleBtn.addEventListener('click', () => toggleDrawer(true));
+        }
+
+        if (drawerCloseBtn) {
+            drawerCloseBtn.addEventListener('click', () => toggleDrawer(false));
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', () => toggleDrawer(false));
+        }
+
+        // Drawer navigation items
+        const drawerNavItems = document.querySelectorAll('.drawer-nav-item');
+        drawerNavItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                const targetTabId = item.getAttribute('data-tab');
+                if (!targetTabId) return;
+
+                syncActiveTab(targetTabId);
+                triggerTabSwitch(targetTabId);
+                toggleDrawer(false);
+
+                const matchingBottomItem = document.querySelector(`.mobile-nav-item[data-tab="${targetTabId}"]`);
+                if (matchingBottomItem) {
+                    matchingBottomItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+
+                const viewport = document.getElementById('app-viewport');
+                if (viewport) viewport.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Drawer suite actions
+        const dashboardBtn = document.getElementById('drawer-btn-dashboard');
+        const syncBtn = document.getElementById('drawer-btn-sync');
+        const guidesBtn = document.getElementById('drawer-btn-guides');
+
+        if (dashboardBtn) {
+            dashboardBtn.addEventListener('click', () => {
+                toggleDrawer(false);
+                const target = document.getElementById('header-btn-dashboard');
+                if (target) target.click();
+            });
+        }
+
+        if (syncBtn) {
+            syncBtn.addEventListener('click', () => {
+                toggleDrawer(false);
+                const target = document.getElementById('header-btn-sync');
+                if (target) target.click();
+            });
+        }
+
+        if (guidesBtn) {
+            guidesBtn.addEventListener('click', () => {
+                toggleDrawer(false);
+                const target = document.getElementById('header-btn-guides');
+                if (target) target.click();
+            });
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                toggleDrawer(false);
+            }
         });
     }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>OSSim — Operating Systems Learning & Simulation Suite</title>
     <!-- Early Mobile Detection to Guarantee Immediate Mobile Ergonomics -->
     <script>
@@ -28,7 +28,11 @@
             html, body {
                 width: 100% !important;
                 max-width: 100vw !important;
-                overflow-x: hidden !important;
+            }
+            header.app-header {
+                position: sticky !important;
+                top: 0 !important;
+                z-index: 10000 !important;
             }
             .header-ribbon-row,
             .header-ribbon-row .nav-tabs,
@@ -37,13 +41,20 @@
             .header-bottom-bar {
                 display: none !important;
             }
+            .mobile-menu-toggle-btn {
+                display: inline-flex !important;
+            }
             #mobile-bottom-nav {
                 display: flex !important;
             }
             main#app-viewport {
-                padding-bottom: 68px !important;
-                overflow-x: hidden !important;
+                padding-bottom: 74px !important;
             }
+        }
+        html.mobile-layout header.app-header {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10000 !important;
         }
         html.mobile-layout .header-ribbon-row,
         html.mobile-layout .header-ribbon-row .nav-tabs,
@@ -52,12 +63,14 @@
         html.mobile-layout .header-bottom-bar {
             display: none !important;
         }
+        html.mobile-layout .mobile-menu-toggle-btn {
+            display: inline-flex !important;
+        }
         html.mobile-layout #mobile-bottom-nav {
             display: flex !important;
         }
         html.mobile-layout main#app-viewport {
-            padding-bottom: 68px !important;
-            overflow-x: hidden !important;
+            padding-bottom: 74px !important;
         }
     </style>
     <!-- PWA Manifest & Mobile Web App Meta -->
@@ -91,6 +104,10 @@
             <div class="brand-logo">A</div>
             <h1 class="tool-title">OPERATING SYSTEMS SUITE (OSSim)</h1>
             <span id="network-status-pill" class="offline-status-pill online">● Online</span>
+            <button id="mobile-menu-toggle-btn" class="mobile-menu-toggle-btn" aria-label="Open Navigation Menu" title="Open All 8 Environments Menu">
+                <span class="menu-icon-bars">☰</span>
+                <span class="menu-btn-text">Menu</span>
+            </button>
         </div>
 
         <!-- 2. The Ribbon: Navigation Tabs & Clock Controls -->
@@ -1082,28 +1099,147 @@
         <span>🔄 Tip: Rotate to landscape for expanded view</span>
     </div>
 
-    <!-- Mobile Thumb-Friendly Bottom Navigation Bar -->
+    <!-- Mobile Thumb-Friendly Bottom Navigation Bar (Scrollable Carousel with All 8 Environments) -->
     <nav id="mobile-bottom-nav" aria-label="Mobile Navigation">
-        <button class="mobile-nav-item active" data-tab="home" title="Home">
+        <button class="mobile-nav-item active" data-tab="home" title="1. Home">
             <span class="nav-icon">🏠</span>
-            <span>Home</span>
+            <span class="nav-label">Home</span>
         </button>
-        <button class="mobile-nav-item" data-tab="workbench" title="Classroom (18 Concepts)">
-            <span class="nav-icon">📚</span>
-            <span>Classroom</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="algorithms" title="Workshop (19 Solvers)">
-            <span class="nav-icon">⚙️</span>
-            <span>Workshop</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="desktop" title="Playground (Living Desktop)">
+        <button class="mobile-nav-item" data-tab="desktop" title="2. The Playground">
             <span class="nav-icon">🎮</span>
-            <span>Playground</span>
+            <span class="nav-label">Playground</span>
         </button>
-        <button class="mobile-nav-item" data-tab="challenge" title="Test Centre">
+        <button class="mobile-nav-item" data-tab="workbench" title="3. The Classroom">
+            <span class="nav-icon">📚</span>
+            <span class="nav-label">Classroom</span>
+        </button>
+        <button class="mobile-nav-item" data-tab="algorithms" title="4. The Workshop">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Workshop</span>
+        </button>
+        <button class="mobile-nav-item" data-tab="challenge" title="5. The Test Centre">
             <span class="nav-icon">🎯</span>
-            <span>Tests</span>
+            <span class="nav-label">Tests</span>
+        </button>
+        <button class="mobile-nav-item" data-tab="quest" title="6. OS Builder Quest">
+            <span class="nav-icon">🏗️</span>
+            <span class="nav-label">OS Builder</span>
+        </button>
+        <button class="mobile-nav-item" data-tab="capstone" title="7. The Capstone Studio">
+            <span class="nav-icon">🏭</span>
+            <span class="nav-label">Capstone</span>
+        </button>
+        <button class="mobile-nav-item" data-tab="capstone-playground" title="8. Capstone Playground">
+            <span class="nav-icon">⚡</span>
+            <span class="nav-label">Hardware</span>
+        </button>
+        <button class="mobile-nav-item" id="mobile-nav-more-btn" title="Open All Environments Menu">
+            <span class="nav-icon">☰</span>
+            <span class="nav-label">All</span>
         </button>
     </nav>
+
+    <!-- Mobile Navigation Drawer (Full Menu with All 8 Environments & Learning Actions) -->
+    <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
+        <div class="drawer-backdrop" id="drawer-backdrop"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <div class="drawer-brand">
+                    <div class="brand-logo">A</div>
+                    <div>
+                        <div class="drawer-title">OSSim Suite</div>
+                        <div class="drawer-subtitle">8 Integrated Environments</div>
+                    </div>
+                </div>
+                <button id="drawer-close-btn" class="drawer-close-btn" aria-label="Close Menu">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="drawer-nav-group">
+                    <div class="drawer-group-title">CANONICAL CURRICULUM ENVIRONMENTS</div>
+                    <button class="drawer-nav-item active" data-tab="home">
+                        <span class="drawer-item-icon">🏠</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">1. Home</span>
+                            <span class="drawer-item-desc">Curriculum Architecture &amp; Overview</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="desktop">
+                        <span class="drawer-item-icon">🎮</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">2. The Playground</span>
+                            <span class="drawer-item-desc">Living Desktop Operating System</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="workbench">
+                        <span class="drawer-item-icon">📚</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">3. The Classroom</span>
+                            <span class="drawer-item-desc">18 Interactive Conceptual Analogies</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="algorithms">
+                        <span class="drawer-item-icon">⚙️</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">4. The Workshop</span>
+                            <span class="drawer-item-desc">19 Algorithmic Solvers &amp; Visualizers</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="challenge">
+                        <span class="drawer-item-icon">🎯</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">5. The Test Centre</span>
+                            <span class="drawer-item-desc">100 Academic Challenges &amp; Exams</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="quest">
+                        <span class="drawer-item-icon">🏗️</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">6. OS Builder Quest</span>
+                            <span class="drawer-item-desc">Levels 0–5 Milestone Guided Quests</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="capstone">
+                        <span class="drawer-item-icon">🏭</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">7. The Capstone Studio</span>
+                            <span class="drawer-item-desc">App Foundry &amp; Kernel Synthesis</span>
+                        </div>
+                    </button>
+                    <button class="drawer-nav-item" data-tab="capstone-playground">
+                        <span class="drawer-item-icon">⚡</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">8. Capstone Playground</span>
+                            <span class="drawer-item-desc">Live Synthesized Hardware Stage</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="drawer-nav-group">
+                    <div class="drawer-group-title">STUDENT SUITE ACTIONS</div>
+                    <button class="drawer-action-item" id="drawer-btn-dashboard">
+                        <span class="drawer-item-icon">📊</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">Mastery Dashboard</span>
+                            <span class="drawer-item-desc">Learning Transcript &amp; Competencies</span>
+                        </div>
+                    </button>
+                    <button class="drawer-action-item" id="drawer-btn-sync">
+                        <span class="drawer-item-icon">💾</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">Sync &amp; Backup</span>
+                            <span class="drawer-item-desc">Export / Import Student Progress</span>
+                        </div>
+                    </button>
+                    <button class="drawer-action-item" id="drawer-btn-guides">
+                        <span class="drawer-item-icon">📖</span>
+                        <div class="drawer-item-text">
+                            <span class="drawer-item-title">Docs &amp; Test Guides</span>
+                            <span class="drawer-item-desc">Complete User &amp; Validation Manuals</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
