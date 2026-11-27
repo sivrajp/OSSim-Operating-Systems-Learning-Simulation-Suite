@@ -1,6 +1,6 @@
 /* ==============================================================================
    OSSim Mobile PWA Responsive Stylesheet — Readable Size & Single-Menu Navigation
-   Author: Sivraj P. | © Copyright Sivraj P. All rights reserved.
+   Author: Sivraj P. | (C) Copyright Sivraj P. All rights reserved.
    ============================================================================== */
 
 /* Base Mobile Enhancements & Safe Area Support */
@@ -383,16 +383,16 @@
     pointer-events: none;
 }
 
-/* ==========================================================================
-   Comprehensive Mobile & Tablet Adaptation/* ==========================================================================
-   Comprehensive Mobile & Tablet Adaptation — Full Readable Size Flow
-   ========================================================================== */
+/* Playground Top Switcher (Hidden on desktop) */
 .mobile-playground-nav {
     display: none;
 }
 
+/* ==============================================================================
+   Comprehensive Mobile & Tablet Adaptation — Full Readable Size Flow
+   ============================================================================== */
 @media (max-width: 1024px), (pointer: coarse) {
-    /* 1. Universal Containment — Zero Horizontal Overflow across any view */
+    /* 1. Universal Containment & Large Readable Base Scale */
     *, *::before, *::after {
         box-sizing: border-box !important;
     }
@@ -403,24 +403,27 @@
         overflow-x: hidden !important;
         height: auto !important;
         min-height: 100% !important;
-        font-size: 16px !important;
+        font-size: 18px !important;
+        line-height: 1.6 !important;
         -webkit-text-size-adjust: 100% !important;
         text-size-adjust: 100% !important;
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    /* 2. Sticky Header with compact Title and prominent Menu button */
+    /* 2. Sticky Header with Prominent Title & Large Menu Toggle */
     header.app-header {
         position: sticky !important;
         top: 0 !important;
         z-index: 10000 !important;
         background: #0E1726 !important;
-        padding: 0.5rem 0.75rem !important;
+        padding: 0.65rem 0.85rem !important;
         gap: 0 !important;
         width: 100% !important;
         max-width: 100vw !important;
         overflow: hidden !important;
+        min-height: 56px !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
     }
 
     .header-top-bar {
@@ -429,25 +432,29 @@
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        gap: 0.5rem !important;
+        gap: 0.75rem !important;
         overflow: hidden !important;
     }
 
     .header-top-bar .tool-title {
-        font-size: 0.88rem !important;
+        font-size: 1.05rem !important;
         font-weight: 800 !important;
+        letter-spacing: 0.4px !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
-        max-width: calc(100vw - 145px) !important;
+        max-width: calc(100vw - 150px) !important;
         flex: 1 1 auto !important;
-        letter-spacing: 0.3px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.45rem !important;
     }
 
     .header-top-bar .brand-logo {
-        width: 26px !important;
-        height: 26px !important;
-        font-size: 0.95rem !important;
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 1.15rem !important;
+        border-radius: 6px !important;
         flex-shrink: 0 !important;
     }
 
@@ -457,15 +464,30 @@
 
     .mobile-menu-toggle-btn {
         display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
         flex-shrink: 0 !important;
-        padding: 0.4rem 0.75rem !important;
-        min-height: 38px !important;
-        font-size: 0.88rem !important;
-        font-weight: 700 !important;
+        padding: 0.5rem 1rem !important;
+        min-height: 44px !important;
+        font-size: 1.0rem !important;
+        font-weight: 800 !important;
         background: var(--primary-light) !important;
-        border: 1px solid var(--accent) !important;
+        border: 2px solid var(--accent) !important;
         color: #FFFFFF !important;
-        border-radius: 6px !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+    }
+
+    .mobile-menu-toggle-btn .menu-icon-bars {
+        font-size: 1.35rem !important;
+        line-height: 1 !important;
+    }
+
+    .mobile-menu-toggle-btn .menu-btn-text {
+        font-size: 1.0rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.4px !important;
     }
 
     /* 3. Hide Wide Desktop Ribbon Elements */
@@ -478,7 +500,7 @@
         display: none !important;
     }
 
-    /* 4. Main Viewport & Home Page */
+    /* 4. Main Viewport Container */
     main#app-viewport {
         width: 100% !important;
         max-width: 100vw !important;
@@ -487,7 +509,7 @@
         overflow-x: hidden !important;
         overflow-y: visible !important;
         display: block !important;
-        padding: 0 0 3.5rem 0 !important;
+        padding: 0 0 4rem 0 !important;
     }
 
     .tab-view {
@@ -503,68 +525,163 @@
         flex-direction: column !important;
     }
 
+    /* 5. Home Landing Page: Large Readable Typography & Touch Targets */
     .home-container {
-        padding: 1rem 0.85rem 3rem !important;
+        padding: 1.25rem 1rem 4rem !important;
         width: 100% !important;
         max-width: 100vw !important;
         height: auto !important;
         overflow: visible !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
     }
 
     .home-hero {
-        padding: 0.5rem 0 !important;
+        padding: 0.75rem 0 1rem !important;
         width: 100% !important;
         max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 1.1rem !important;
     }
 
-    .home-hero h1 {
-        font-size: 1.45rem !important;
-        line-height: 1.3 !important;
+    .home-hero-badge {
+        font-size: 0.92rem !important;
+        font-weight: 800 !important;
+        padding: 0.45rem 1.1rem !important;
+        border-radius: 24px !important;
+        letter-spacing: 0.5px !important;
+        min-height: 38px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1.5px solid var(--accent) !important;
+    }
+
+    .home-hero h1,
+    .home-hero-title {
+        font-size: 1.95rem !important;
+        line-height: 1.25 !important;
+        font-weight: 800 !important;
         word-wrap: break-word !important;
+        text-align: center !important;
+        margin: 0.25rem 0 !important;
+        letter-spacing: -0.3px !important;
     }
 
     .home-hero-subtitle {
-        font-size: 0.92rem !important;
-        line-height: 1.5 !important;
+        font-size: 1.12rem !important;
+        line-height: 1.6 !important;
         width: 100% !important;
         max-width: 100% !important;
+        text-align: center !important;
+        color: #CBD5E0 !important;
+        font-weight: 500 !important;
     }
 
     .home-hero-purpose {
-        font-size: 0.84rem !important;
-        line-height: 1.6 !important;
-        padding: 0.85rem 1rem !important;
+        font-size: 1.05rem !important;
+        line-height: 1.7 !important;
+        padding: 1.25rem 1.35rem !important;
         width: 100% !important;
         max-width: 100% !important;
+        border-radius: 12px !important;
+        background: rgba(16, 25, 40, 0.9) !important;
+        border: 1px solid var(--border-color) !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .home-hero-purpose strong {
+        color: #ECC94B !important;
+        font-size: 1.08rem !important;
     }
 
     .home-stats-strip {
         display: flex !important;
         flex-direction: column !important;
-        gap: 0.6rem !important;
-        padding: 0.85rem !important;
+        gap: 0.75rem !important;
+        padding: 0 !important;
         width: 100% !important;
         max-width: 100% !important;
     }
 
-    .stat-item {
+    .stat-pill {
         width: 100% !important;
         display: flex !important;
         align-items: center !important;
-        gap: 0.75rem !important;
-        padding: 0.4rem 0.5rem !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        justify-content: flex-start !important;
+        gap: 0.65rem !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.98rem !important;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        min-height: 50px !important;
+        background: rgba(34, 48, 72, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
     }
 
-    .stat-item:last-child {
-        border-bottom: none !important;
+    /* 6. Home Sections & Readable Single-Column Cards */
+    .home-quickstart-section,
+    .home-levels-section,
+    .home-pillars-section,
+    .home-journeys-section,
+    .home-syllabus-section,
+    .home-arch-flow-section,
+    .home-cards-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 1.5rem 1.15rem !important;
+        border-radius: 14px !important;
+        margin: 0.5rem 0 1.25rem !important;
+        box-sizing: border-box !important;
     }
 
-    .stat-divider {
-        display: none !important;
+    .quickstart-header,
+    .levels-header,
+    .section-header,
+    .section-heading {
+        margin-bottom: 1.25rem !important;
     }
 
-    /* 5. Single-Column Full-Width Grids */
+    .quickstart-header h2,
+    .levels-header h2,
+    .section-header h2,
+    .section-heading h2,
+    .home-arch-flow-section h3 {
+        font-size: 1.55rem !important;
+        font-weight: 800 !important;
+        color: #F8FAFC !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.45rem !important;
+    }
+
+    .quickstart-header p,
+    .levels-header p,
+    .section-header p,
+    .section-heading p,
+    .home-arch-flow-section p {
+        font-size: 1.05rem !important;
+        line-height: 1.6 !important;
+        color: #94A3B8 !important;
+    }
+
+    .quickstart-badge,
+    .levels-badge,
+    .pillar-card-badge {
+        font-size: 0.88rem !important;
+        font-weight: 800 !important;
+        padding: 0.35rem 0.85rem !important;
+        border-radius: 16px !important;
+        letter-spacing: 0.5px !important;
+        min-height: 32px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        margin-bottom: 0.65rem !important;
+    }
+
     .home-cards-grid,
     .quickstart-steps-grid,
     .pillars-grid,
@@ -573,32 +690,99 @@
     .syllabus-grid,
     .credits-grid,
     .home-docs-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 1.25rem !important;
         width: 100% !important;
         max-width: 100% !important;
     }
 
-    .home-big-card,
     .quickstart-step-card,
     .pillar-card,
     .level-card,
     .journey-card,
     .syllabus-card,
+    .home-big-card,
     .home-doc-card {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 1.25rem !important;
+        padding: 1.4rem 1.25rem !important;
+        border-radius: 12px !important;
+        background: rgba(15, 23, 42, 0.8) !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0.75rem !important;
     }
 
-    /* 6. Full-Width Horizontal Touch Table */
+    .step-card-num {
+        font-size: 0.85rem !important;
+        font-weight: 800 !important;
+        padding: 4px 10px !important;
+        border-radius: 6px !important;
+        letter-spacing: 0.5px !important;
+        align-self: flex-start !important;
+    }
+
+    .step-card-title,
+    .pillar-card-title,
+    .level-card-title,
+    .journey-card-title,
+    .syllabus-card-title,
+    .home-big-card h3,
+    .home-doc-card h3 {
+        font-size: 1.28rem !important;
+        font-weight: 800 !important;
+        color: #F1F5F9 !important;
+        line-height: 1.35 !important;
+        margin: 0 !important;
+    }
+
+    .step-card-desc,
+    .pillar-card-desc,
+    .level-card-desc,
+    .journey-card-desc,
+    .syllabus-card-desc,
+    .home-big-card p,
+    .home-doc-card p {
+        font-size: 1.02rem !important;
+        line-height: 1.65 !important;
+        color: #CBD5E0 !important;
+        margin: 0 !important;
+    }
+
+    .step-card-desc strong,
+    .pillar-card-desc strong,
+    .level-card-desc strong {
+        color: #F8FAFC !important;
+    }
+
+    .step-card-link,
+    .home-card-btn,
+    .home-doc-link {
+        font-size: 1.02rem !important;
+        font-weight: 700 !important;
+        padding: 0.6rem 1rem !important;
+        min-height: 48px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        border-radius: 8px !important;
+        background: rgba(56, 189, 248, 0.12) !important;
+        border: 1px solid rgba(56, 189, 248, 0.35) !important;
+        color: #38BDF8 !important;
+        margin-top: 0.35rem !important;
+        text-decoration: none !important;
+    }
+
+    /* 7. Architecture Mapping Flow Table */
     .home-arch-flow-section {
         width: 100% !important;
         max-width: 100% !important;
         overflow-x: hidden !important;
         box-sizing: border-box !important;
-        padding: 1.25rem 0.85rem !important;
+        padding: 1.5rem 1rem !important;
     }
 
     .arch-mapping-table-wrap {
@@ -607,53 +791,60 @@
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
         box-sizing: border-box !important;
-        padding: 0.5rem !important;
+        padding: 0.5rem 0 !important;
+        margin-top: 0.75rem !important;
     }
 
     .arch-mapping-table {
-        min-width: 460px !important;
+        min-width: 480px !important;
         width: 100% !important;
-        font-size: 0.82rem !important;
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
     }
 
-    .arch-mapping-table th,
+    .arch-mapping-table th {
+        font-size: 0.98rem !important;
+        font-weight: 800 !important;
+        padding: 0.75rem 0.85rem !important;
+    }
+
     .arch-mapping-table td {
-        padding: 0.65rem 0.75rem !important;
+        font-size: 0.92rem !important;
+        padding: 0.75rem 0.85rem !important;
     }
 
-    /* ==============================================================================
-       7. The Playground: Apps & Dock Focus + Switcher + Pipeline Containment
-       ============================================================================== */
+    /* 8. The Playground: Apps & Dock Focus + Switcher + Smooth Scrolling */
     .mobile-playground-nav {
         display: flex !important;
         width: 100% !important;
         max-width: 100vw !important;
         background: #09101D !important;
-        border-bottom: 1px solid var(--accent) !important;
-        padding: 0.45rem 0.65rem !important;
-        gap: 0.45rem !important;
+        border-bottom: 2px solid var(--accent) !important;
+        padding: 0.55rem 0.65rem !important;
+        gap: 0.5rem !important;
         position: relative !important;
         top: 0 !important;
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 0.65rem !important;
         z-index: 100 !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
     }
 
     .playground-nav-btn {
         flex: 1 !important;
-        padding: 0.45rem 0.4rem !important;
-        font-size: 0.78rem !important;
+        padding: 0.6rem 0.5rem !important;
+        font-size: 0.92rem !important;
         font-weight: 700 !important;
-        border-radius: 6px !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-        background: rgba(255, 255, 255, 0.05) !important;
+        border-radius: 8px !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        background: rgba(255, 255, 255, 0.06) !important;
         color: #CBD5E0 !important;
         cursor: pointer !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
-        gap: 0.35rem !important;
+        gap: 0.4rem !important;
         white-space: nowrap !important;
+        min-height: 46px !important;
         transition: all 0.2s ease !important;
     }
 
@@ -666,7 +857,7 @@
         background: var(--primary-light) !important;
         color: #FFFFFF !important;
         border-color: var(--accent) !important;
-        box-shadow: 0 0 10px rgba(214, 158, 46, 0.35) !important;
+        box-shadow: 0 0 12px rgba(214, 158, 46, 0.4) !important;
     }
 
     #tab-view-desktop {
@@ -692,7 +883,7 @@
         min-height: 0 !important;
         overflow: visible !important;
         gap: 1.25rem !important;
-        padding: 0.25rem 0.5rem 2.5rem !important;
+        padding: 0.25rem 0.5rem 3rem !important;
     }
 
     /* DEFAULT: Apps & Dock Focus on Mobile */
@@ -732,11 +923,11 @@
         border-bottom: 2px solid var(--accent) !important;
         border-right: none !important;
         border-left: none !important;
-        padding: 0.65rem 0.4rem !important;
-        gap: 0.65rem !important;
+        padding: 0.75rem 0.5rem !important;
+        gap: 0.75rem !important;
     }
 
-    /* Contain Pipeline Visualizer within Screen */
+    /* Pipeline Visualizer Containment */
     #pipeline-visualizer-container,
     .pipeline-visualizer-container,
     .pipe-container,
@@ -761,7 +952,7 @@
         flex-wrap: wrap !important;
         width: 100% !important;
         max-width: 100% !important;
-        gap: 0.25rem !important;
+        gap: 0.35rem !important;
     }
 
     .pipeline-playback-bar {
@@ -779,12 +970,12 @@
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        gap: 0.65rem !important;
+        gap: 0.75rem !important;
     }
 
     .compact-card .registers-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.35rem !important;
+        gap: 0.45rem !important;
     }
 
     #process-scheduler-deck-container,
@@ -808,27 +999,43 @@
         overflow: visible !important;
         border-right: none !important;
         border-left: none !important;
-        padding: 0.5rem 0.35rem !important;
+        padding: 0.65rem 0.45rem !important;
     }
 
     .desktop-taskbar#desktop-app-dock {
         display: grid !important;
         grid-template-columns: repeat(2, 1fr) !important;
-        gap: 0.5rem !important;
+        gap: 0.65rem !important;
         width: 100% !important;
         margin-top: 0 !important;
-        margin-bottom: 0.75rem !important;
+        margin-bottom: 0.85rem !important;
     }
 
     .dock-app-btn {
-        min-height: 50px !important;
-        padding: 0.5rem 0.65rem !important;
+        min-height: 56px !important;
+        padding: 0.65rem 0.85rem !important;
+        border-radius: 10px !important;
+        font-size: 1.02rem !important;
+        font-weight: 700 !important;
+    }
+
+    .dock-app-btn .dock-icon {
+        font-size: 1.45rem !important;
+    }
+
+    .dock-app-btn .dock-app-title {
+        font-size: 1.0rem !important;
+        font-weight: 700 !important;
+    }
+
+    .dock-app-btn .dock-pid-badge {
+        font-size: 0.82rem !important;
     }
 
     .desktop-app-stage {
         width: 100% !important;
         height: auto !important;
-        min-height: 420px !important;
+        min-height: 440px !important;
         overflow: visible !important;
     }
 
@@ -836,54 +1043,31 @@
     .app-window-pane {
         width: 100% !important;
         height: auto !important;
-        min-height: 380px !important;
+        min-height: 420px !important;
         overflow: visible !important;
         position: relative !important;
         left: 0 !important;
         top: 0 !important;
+        border-radius: 10px !important;
     }
 
-    /* ==============================================================================
-       8. OS Builder Quest: Scorecard Deck & Navigation Ribbon Containment
-       ============================================================================== */
-    .quest-view-wrapper {
-        padding: 0.75rem 0.5rem 3.5rem !important;
-        width: 100% !important;
-        max-width: 100vw !important;
-        overflow-x: hidden !important;
+    .window-header {
+        min-height: 46px !important;
+        padding: 0.5rem 0.85rem !important;
     }
 
-    .quest-header-bar {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        width: 100% !important;
-        gap: 0.75rem !important;
+    .window-title {
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
     }
 
-    .quest-scorecard-deck {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+    .window-ctrl-btn {
+        min-width: 36px !important;
+        min-height: 36px !important;
+        font-size: 1.1rem !important;
     }
 
-    .quest-track-ribbon {
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        box-sizing: border-box !important;
-    }
-
-    .quest-level-deck {
-        grid-template-columns: 1fr !important;
-        width: 100% !important;
-    }
-
-    /* ==============================================================================
-       9. The Classroom: Compact Top Topic Selector & Full-Width Analogy Stage
-       ============================================================================== */
+    /* 9. The Classroom: Prominent Top Topic Selector & Full-Width Analogy Stage */
     .classroom-container {
         display: flex !important;
         flex-direction: column !important;
@@ -901,9 +1085,9 @@
         height: auto !important;
         border-right: none !important;
         border-bottom: 2px solid var(--accent) !important;
-        padding: 0.5rem 0.75rem !important;
+        padding: 0.65rem 0.85rem !important;
         position: sticky !important;
-        top: 48px !important;
+        top: 56px !important;
         z-index: 9998 !important;
         background: #0E1726 !important;
     }
@@ -912,19 +1096,30 @@
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
+        min-height: 46px !important;
         cursor: pointer !important;
         user-select: none !important;
     }
 
+    .classroom-sidebar-header h3 {
+        font-size: 1.15rem !important;
+        font-weight: 800 !important;
+        color: #FFFFFF !important;
+        margin: 0 !important;
+    }
+
     .classroom-sidebar-header::after {
         content: '▾ Select Topic' !important;
-        font-size: 0.78rem !important;
+        font-size: 0.92rem !important;
         font-weight: 700 !important;
         color: var(--accent) !important;
-        background: rgba(214, 158, 46, 0.15) !important;
-        border: 1px solid var(--accent) !important;
-        border-radius: 4px !important;
-        padding: 0.2rem 0.5rem !important;
+        background: rgba(214, 158, 46, 0.18) !important;
+        border: 1.5px solid var(--accent) !important;
+        border-radius: 6px !important;
+        padding: 0.4rem 0.75rem !important;
+        min-height: 36px !important;
+        display: inline-flex !important;
+        align-items: center !important;
     }
 
     .classroom-sidebar.open-drawer .classroom-sidebar-header::after {
@@ -938,28 +1133,60 @@
     .classroom-sidebar.open-drawer .classroom-nav-list {
         display: flex !important;
         flex-direction: column !important;
-        gap: 0.4rem !important;
-        max-height: 55vh !important;
+        gap: 0.5rem !important;
+        max-height: 60vh !important;
         overflow-y: auto !important;
-        margin-top: 0.5rem !important;
-        padding: 0.5rem !important;
+        margin-top: 0.65rem !important;
+        padding: 0.65rem !important;
         background: #111A2E !important;
-        border-radius: 6px !important;
+        border-radius: 10px !important;
         border: 1px solid var(--border-color) !important;
+    }
+
+    .classroom-nav-item {
+        font-size: 0.98rem !important;
+        font-weight: 600 !important;
+        padding: 0.75rem 1rem !important;
+        min-height: 48px !important;
+        display: flex !important;
+        align-items: center !important;
+        border-radius: 8px !important;
     }
 
     .classroom-stage {
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
-        min-height: 500px !important;
+        min-height: 520px !important;
         overflow: visible !important;
-        padding: 0.75rem 0.5rem 2rem !important;
+        padding: 1.1rem 0.85rem 3rem !important;
+        font-size: 1.02rem !important;
+        line-height: 1.65 !important;
     }
 
-    /* ==============================================================================
-       10. The Workshop: Compact Top Solver Selector & Full-Width Visualizer
-       ============================================================================== */
+    .classroom-stage h2,
+    .classroom-stage h3 {
+        font-size: 1.45rem !important;
+        font-weight: 800 !important;
+        margin-bottom: 0.65rem !important;
+    }
+
+    .classroom-stage p,
+    .analogy-narration-box {
+        font-size: 1.05rem !important;
+        line-height: 1.65 !important;
+    }
+
+    .analogy-ctrl-btn,
+    .classroom-ctrl-btn {
+        min-height: 48px !important;
+        padding: 0.6rem 1.1rem !important;
+        font-size: 1.0rem !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+    }
+
+    /* 10. The Workshop: Prominent Solver Selector & Touch Controls */
     .algo-container {
         display: flex !important;
         flex-direction: column !important;
@@ -974,12 +1201,12 @@
         width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        gap: 0.35rem !important;
-        padding: 0.5rem 0.75rem !important;
+        gap: 0.45rem !important;
+        padding: 0.65rem 0.85rem !important;
         background: #0E1726 !important;
         border-bottom: 2px solid var(--accent) !important;
         position: sticky !important;
-        top: 48px !important;
+        top: 56px !important;
         z-index: 9998 !important;
     }
 
@@ -992,20 +1219,23 @@
         width: 100% !important;
         justify-content: space-between !important;
         align-items: center !important;
-        padding: 0.45rem 0.75rem !important;
-        border: 1px solid var(--accent) !important;
-        border-radius: 6px !important;
+        padding: 0.6rem 0.85rem !important;
+        border: 1.5px solid var(--accent) !important;
+        border-radius: 8px !important;
+        font-size: 1.0rem !important;
+        font-weight: 700 !important;
+        min-height: 46px !important;
     }
 
     .algo-subnav:not(.open-drawer) .algo-tab-btn.active::after {
         content: '▾ Solvers' !important;
-        font-size: 0.78rem !important;
+        font-size: 0.92rem !important;
         font-weight: 700 !important;
         color: var(--accent) !important;
-        background: rgba(214, 158, 46, 0.15) !important;
-        border: 1px solid var(--accent) !important;
-        border-radius: 4px !important;
-        padding: 0.2rem 0.5rem !important;
+        background: rgba(214, 158, 46, 0.18) !important;
+        border: 1.5px solid var(--accent) !important;
+        border-radius: 6px !important;
+        padding: 0.35rem 0.75rem !important;
     }
 
     .algo-subnav.open-drawer .algo-tab-btn.active::after {
@@ -1015,20 +1245,55 @@
     .algo-subnav.open-drawer .algo-tab-btn {
         display: flex !important;
         width: 100% !important;
-        padding: 0.5rem 0.75rem !important;
+        padding: 0.65rem 0.85rem !important;
+        min-height: 48px !important;
+        font-size: 0.98rem !important;
+        border-radius: 8px !important;
     }
 
     .algo-content-pane {
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
-        min-height: 500px !important;
+        min-height: 520px !important;
         overflow-x: auto !important;
         overflow-y: visible !important;
-        padding: 0.75rem 0.5rem 2.5rem !important;
+        padding: 1rem 0.75rem 3rem !important;
+        font-size: 1.02rem !important;
     }
 
-    /* 11. All Other Environments */
+    .algo-content-pane h2,
+    .algo-content-pane h3 {
+        font-size: 1.45rem !important;
+        font-weight: 800 !important;
+    }
+
+    .algo-btn,
+    .algo-ctrl-btn {
+        min-height: 48px !important;
+        padding: 0.6rem 1.1rem !important;
+        font-size: 1.0rem !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+    }
+
+    .algo-kpi-card {
+        padding: 1rem !important;
+        border-radius: 10px !important;
+        min-height: 85px !important;
+    }
+
+    .algo-kpi-val {
+        font-size: 1.55rem !important;
+        font-weight: 800 !important;
+    }
+
+    .algo-kpi-lbl {
+        font-size: 0.92rem !important;
+        font-weight: 600 !important;
+    }
+
+    /* 11. OS Builder Quest, Workbench, Challenge, and Capstone Views */
     #tab-view-workbench,
     #tab-view-algorithms,
     #tab-view-challenge,
@@ -1040,6 +1305,45 @@
         height: auto !important;
         min-height: 100% !important;
         overflow: visible !important;
+    }
+
+    .quest-view-wrapper {
+        padding: 1rem 0.75rem 4rem !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        font-size: 1.02rem !important;
+    }
+
+    .quest-header-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        gap: 0.85rem !important;
+    }
+
+    .quest-scorecard-deck,
+    .quest-track-ribbon {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+        padding: 0.5rem 0 !important;
+    }
+
+    .quest-level-deck {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+        width: 100% !important;
+    }
+
+    .quest-level-card {
+        padding: 1.35rem 1.15rem !important;
+        border-radius: 12px !important;
+        font-size: 1.02rem !important;
     }
 
     .l0-split-view,
@@ -1054,13 +1358,13 @@
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        gap: 1rem !important;
+        gap: 1.25rem !important;
     }
 }
 
-/* ==========================================================================
-   Identical Enforcement for html.mobile-layout Class
-   ========================================================================== */
+/* ==============================================================================
+   Identical Strict Enforcement for html.mobile-layout Class
+   ============================================================================== */
 html.mobile-layout *,
 html.mobile-layout *::before,
 html.mobile-layout *::after {
@@ -1074,7 +1378,8 @@ html.mobile-layout body {
     overflow-x: hidden !important;
     height: auto !important;
     min-height: 100% !important;
-    font-size: 16px !important;
+    font-size: 18px !important;
+    line-height: 1.6 !important;
     -webkit-text-size-adjust: 100% !important;
     text-size-adjust: 100% !important;
     margin: 0 !important;
@@ -1086,10 +1391,13 @@ html.mobile-layout header.app-header {
     top: 0 !important;
     z-index: 10000 !important;
     background: #0E1726 !important;
-    padding: 0.5rem 0.75rem !important;
+    padding: 0.65rem 0.85rem !important;
+    gap: 0 !important;
     width: 100% !important;
     max-width: 100vw !important;
     overflow: hidden !important;
+    min-height: 56px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
 }
 
 html.mobile-layout .header-top-bar {
@@ -1098,25 +1406,29 @@ html.mobile-layout .header-top-bar {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    gap: 0.5rem !important;
+    gap: 0.75rem !important;
     overflow: hidden !important;
 }
 
 html.mobile-layout .header-top-bar .tool-title {
-    font-size: 0.88rem !important;
+    font-size: 1.05rem !important;
     font-weight: 800 !important;
+    letter-spacing: 0.4px !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: calc(100vw - 145px) !important;
+    max-width: calc(100vw - 150px) !important;
     flex: 1 1 auto !important;
-    letter-spacing: 0.3px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.45rem !important;
 }
 
 html.mobile-layout .header-top-bar .brand-logo {
-    width: 26px !important;
-    height: 26px !important;
-    font-size: 0.95rem !important;
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.15rem !important;
+    border-radius: 6px !important;
     flex-shrink: 0 !important;
 }
 
@@ -1126,15 +1438,30 @@ html.mobile-layout .offline-status-pill {
 
 html.mobile-layout .mobile-menu-toggle-btn {
     display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
     flex-shrink: 0 !important;
-    padding: 0.4rem 0.75rem !important;
-    min-height: 38px !important;
-    font-size: 0.88rem !important;
-    font-weight: 700 !important;
+    padding: 0.5rem 1rem !important;
+    min-height: 44px !important;
+    font-size: 1.0rem !important;
+    font-weight: 800 !important;
     background: var(--primary-light) !important;
-    border: 1px solid var(--accent) !important;
+    border: 2px solid var(--accent) !important;
     color: #FFFFFF !important;
-    border-radius: 6px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.mobile-layout .mobile-menu-toggle-btn .menu-icon-bars {
+    font-size: 1.35rem !important;
+    line-height: 1 !important;
+}
+
+html.mobile-layout .mobile-menu-toggle-btn .menu-btn-text {
+    font-size: 1.0rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.4px !important;
 }
 
 html.mobile-layout .header-ribbon-row,
@@ -1154,7 +1481,7 @@ html.mobile-layout main#app-viewport {
     overflow-x: hidden !important;
     overflow-y: visible !important;
     display: block !important;
-    padding: 0 0 3.5rem 0 !important;
+    padding: 0 0 4rem 0 !important;
 }
 
 html.mobile-layout .tab-view {
@@ -1171,47 +1498,158 @@ html.mobile-layout .tab-view.active {
 }
 
 html.mobile-layout .home-container {
-    padding: 1rem 0.85rem 3rem !important;
+    padding: 1.25rem 1rem 4rem !important;
     width: 100% !important;
     max-width: 100vw !important;
     height: auto !important;
     overflow: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
 }
 
 html.mobile-layout .home-hero {
-    padding: 0.5rem 0 !important;
+    padding: 0.75rem 0 1rem !important;
     width: 100% !important;
     max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 1.1rem !important;
 }
 
-html.mobile-layout .home-hero h1 {
-    font-size: 1.45rem !important;
-    line-height: 1.3 !important;
+html.mobile-layout .home-hero-badge {
+    font-size: 0.92rem !important;
+    font-weight: 800 !important;
+    padding: 0.45rem 1.1rem !important;
+    border-radius: 24px !important;
+    letter-spacing: 0.5px !important;
+    min-height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1.5px solid var(--accent) !important;
+}
+
+html.mobile-layout .home-hero h1,
+html.mobile-layout .home-hero-title {
+    font-size: 1.95rem !important;
+    line-height: 1.25 !important;
+    font-weight: 800 !important;
     word-wrap: break-word !important;
+    text-align: center !important;
+    margin: 0.25rem 0 !important;
+    letter-spacing: -0.3px !important;
 }
 
 html.mobile-layout .home-hero-subtitle {
-    font-size: 0.92rem !important;
-    line-height: 1.5 !important;
+    font-size: 1.12rem !important;
+    line-height: 1.6 !important;
     width: 100% !important;
     max-width: 100% !important;
+    text-align: center !important;
+    color: #CBD5E0 !important;
+    font-weight: 500 !important;
 }
 
 html.mobile-layout .home-hero-purpose {
-    font-size: 0.84rem !important;
-    line-height: 1.6 !important;
-    padding: 0.85rem 1rem !important;
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+    padding: 1.25rem 1.35rem !important;
     width: 100% !important;
     max-width: 100% !important;
+    border-radius: 12px !important;
+    background: rgba(16, 25, 40, 0.9) !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4) !important;
+}
+
+html.mobile-layout .home-hero-purpose strong {
+    color: #ECC94B !important;
+    font-size: 1.08rem !important;
 }
 
 html.mobile-layout .home-stats-strip {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.6rem !important;
-    padding: 0.85rem !important;
+    gap: 0.75rem !important;
+    padding: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
+}
+
+html.mobile-layout .stat-pill {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 0.65rem !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.98rem !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    min-height: 50px !important;
+    background: rgba(34, 48, 72, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+html.mobile-layout .home-quickstart-section,
+html.mobile-layout .home-levels-section,
+html.mobile-layout .home-pillars-section,
+html.mobile-layout .home-journeys-section,
+html.mobile-layout .home-syllabus-section,
+html.mobile-layout .home-arch-flow-section,
+html.mobile-layout .home-cards-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1.5rem 1.15rem !important;
+    border-radius: 14px !important;
+    margin: 0.5rem 0 1.25rem !important;
+    box-sizing: border-box !important;
+}
+
+html.mobile-layout .quickstart-header,
+html.mobile-layout .levels-header,
+html.mobile-layout .section-header,
+html.mobile-layout .section-heading {
+    margin-bottom: 1.25rem !important;
+}
+
+html.mobile-layout .quickstart-header h2,
+html.mobile-layout .levels-header h2,
+html.mobile-layout .section-header h2,
+html.mobile-layout .section-heading h2,
+html.mobile-layout .home-arch-flow-section h3 {
+    font-size: 1.55rem !important;
+    font-weight: 800 !important;
+    color: #F8FAFC !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.45rem !important;
+}
+
+html.mobile-layout .quickstart-header p,
+html.mobile-layout .levels-header p,
+html.mobile-layout .section-header p,
+html.mobile-layout .section-heading p,
+html.mobile-layout .home-arch-flow-section p {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    color: #94A3B8 !important;
+}
+
+html.mobile-layout .quickstart-badge,
+html.mobile-layout .levels-badge,
+html.mobile-layout .pillar-card-badge {
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    padding: 0.35rem 0.85rem !important;
+    border-radius: 16px !important;
+    letter-spacing: 0.5px !important;
+    min-height: 32px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin-bottom: 0.65rem !important;
 }
 
 html.mobile-layout .home-cards-grid,
@@ -1222,23 +1660,90 @@ html.mobile-layout .journeys-grid,
 html.mobile-layout .syllabus-grid,
 html.mobile-layout .credits-grid,
 html.mobile-layout .home-docs-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
     gap: 1.25rem !important;
     width: 100% !important;
     max-width: 100% !important;
 }
 
-html.mobile-layout .home-big-card,
 html.mobile-layout .quickstart-step-card,
 html.mobile-layout .pillar-card,
 html.mobile-layout .level-card,
 html.mobile-layout .journey-card,
 html.mobile-layout .syllabus-card,
+html.mobile-layout .home-big-card,
 html.mobile-layout .home-doc-card {
     width: 100% !important;
     max-width: 100% !important;
-    padding: 1.25rem !important;
+    padding: 1.4rem 1.25rem !important;
+    border-radius: 12px !important;
+    background: rgba(15, 23, 42, 0.8) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+}
+
+html.mobile-layout .step-card-num {
+    font-size: 0.85rem !important;
+    font-weight: 800 !important;
+    padding: 4px 10px !important;
+    border-radius: 6px !important;
+    letter-spacing: 0.5px !important;
+    align-self: flex-start !important;
+}
+
+html.mobile-layout .step-card-title,
+html.mobile-layout .pillar-card-title,
+html.mobile-layout .level-card-title,
+html.mobile-layout .journey-card-title,
+html.mobile-layout .syllabus-card-title,
+html.mobile-layout .home-big-card h3,
+html.mobile-layout .home-doc-card h3 {
+    font-size: 1.28rem !important;
+    font-weight: 800 !important;
+    color: #F1F5F9 !important;
+    line-height: 1.35 !important;
+    margin: 0 !important;
+}
+
+html.mobile-layout .step-card-desc,
+html.mobile-layout .pillar-card-desc,
+html.mobile-layout .level-card-desc,
+html.mobile-layout .journey-card-desc,
+html.mobile-layout .syllabus-card-desc,
+html.mobile-layout .home-big-card p,
+html.mobile-layout .home-doc-card p {
+    font-size: 1.02rem !important;
+    line-height: 1.65 !important;
+    color: #CBD5E0 !important;
+    margin: 0 !important;
+}
+
+html.mobile-layout .step-card-desc strong,
+html.mobile-layout .pillar-card-desc strong,
+html.mobile-layout .level-card-desc strong {
+    color: #F8FAFC !important;
+}
+
+html.mobile-layout .step-card-link,
+html.mobile-layout .home-card-btn,
+html.mobile-layout .home-doc-link {
+    font-size: 1.02rem !important;
+    font-weight: 700 !important;
+    padding: 0.6rem 1rem !important;
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    border-radius: 8px !important;
+    background: rgba(56, 189, 248, 0.12) !important;
+    border: 1px solid rgba(56, 189, 248, 0.35) !important;
+    color: #38BDF8 !important;
+    margin-top: 0.35rem !important;
+    text-decoration: none !important;
 }
 
 html.mobile-layout .home-arch-flow-section {
@@ -1246,7 +1751,7 @@ html.mobile-layout .home-arch-flow-section {
     max-width: 100% !important;
     overflow-x: hidden !important;
     box-sizing: border-box !important;
-    padding: 1.25rem 0.85rem !important;
+    padding: 1.5rem 1rem !important;
 }
 
 html.mobile-layout .arch-mapping-table-wrap {
@@ -1255,13 +1760,26 @@ html.mobile-layout .arch-mapping-table-wrap {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     box-sizing: border-box !important;
-    padding: 0.5rem !important;
+    padding: 0.5rem 0 !important;
+    margin-top: 0.75rem !important;
 }
 
 html.mobile-layout .arch-mapping-table {
-    min-width: 460px !important;
+    min-width: 480px !important;
     width: 100% !important;
-    font-size: 0.82rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+}
+
+html.mobile-layout .arch-mapping-table th {
+    font-size: 0.98rem !important;
+    font-weight: 800 !important;
+    padding: 0.75rem 0.85rem !important;
+}
+
+html.mobile-layout .arch-mapping-table td {
+    font-size: 0.92rem !important;
+    padding: 0.75rem 0.85rem !important;
 }
 
 /* Playground on html.mobile-layout */
@@ -1270,38 +1788,40 @@ html.mobile-layout .mobile-playground-nav {
     width: 100% !important;
     max-width: 100vw !important;
     background: #09101D !important;
-    border-bottom: 1px solid var(--accent) !important;
-    padding: 0.45rem 0.65rem !important;
-    gap: 0.45rem !important;
+    border-bottom: 2px solid var(--accent) !important;
+    padding: 0.55rem 0.65rem !important;
+    gap: 0.5rem !important;
     position: relative !important;
     top: 0 !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.65rem !important;
     z-index: 100 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
 html.mobile-layout .playground-nav-btn {
     flex: 1 !important;
-    padding: 0.45rem 0.4rem !important;
-    font-size: 0.78rem !important;
+    padding: 0.6rem 0.5rem !important;
+    font-size: 0.92rem !important;
     font-weight: 700 !important;
-    border-radius: 6px !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    background: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    background: rgba(255, 255, 255, 0.06) !important;
     color: #CBD5E0 !important;
     cursor: pointer !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 0.35rem !important;
+    gap: 0.4rem !important;
     white-space: nowrap !important;
+    min-height: 46px !important;
+    transition: all 0.2s ease !important;
 }
 
 html.mobile-layout .playground-nav-btn.active {
     background: var(--primary-light) !important;
     color: #FFFFFF !important;
     border-color: var(--accent) !important;
-    box-shadow: 0 0 10px rgba(214, 158, 46, 0.35) !important;
+    box-shadow: 0 0 12px rgba(214, 158, 46, 0.4) !important;
 }
 
 html.mobile-layout #tab-view-desktop {
@@ -1327,7 +1847,7 @@ html.mobile-layout .living-os-container {
     min-height: 0 !important;
     overflow: visible !important;
     gap: 1.25rem !important;
-    padding: 0.25rem 0.5rem 2.5rem !important;
+    padding: 0.25rem 0.5rem 3rem !important;
 }
 
 /* Default to Apps & Dock focused */
@@ -1366,8 +1886,8 @@ html.mobile-layout .xray-pane {
     border-bottom: 2px solid var(--accent) !important;
     border-left: none !important;
     border-right: none !important;
-    padding: 0.65rem 0.4rem !important;
-    gap: 0.65rem !important;
+    padding: 0.75rem 0.5rem !important;
+    gap: 0.75rem !important;
 }
 
 html.mobile-layout #pipeline-visualizer-container,
@@ -1394,7 +1914,7 @@ html.mobile-layout .pipe-mode-bar {
     flex-wrap: wrap !important;
     width: 100% !important;
     max-width: 100% !important;
-    gap: 0.25rem !important;
+    gap: 0.35rem !important;
 }
 
 html.mobile-layout .pipeline-playback-bar {
@@ -1412,12 +1932,12 @@ html.mobile-layout .xray-middle-row {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    gap: 0.65rem !important;
+    gap: 0.75rem !important;
 }
 
 html.mobile-layout .compact-card .registers-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.35rem !important;
+    gap: 0.45rem !important;
 }
 
 html.mobile-layout #process-scheduler-deck-container,
@@ -1440,27 +1960,43 @@ html.mobile-layout .desktop-pane {
     overflow: visible !important;
     border-right: none !important;
     border-left: none !important;
-    padding: 0.5rem 0.35rem !important;
+    padding: 0.65rem 0.45rem !important;
 }
 
 html.mobile-layout .desktop-taskbar#desktop-app-dock {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 0.5rem !important;
+    gap: 0.65rem !important;
     width: 100% !important;
     margin-top: 0 !important;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.85rem !important;
 }
 
 html.mobile-layout .dock-app-btn {
-    min-height: 50px !important;
-    padding: 0.5rem 0.65rem !important;
+    min-height: 56px !important;
+    padding: 0.65rem 0.85rem !important;
+    border-radius: 10px !important;
+    font-size: 1.02rem !important;
+    font-weight: 700 !important;
+}
+
+html.mobile-layout .dock-app-btn .dock-icon {
+    font-size: 1.45rem !important;
+}
+
+html.mobile-layout .dock-app-btn .dock-app-title {
+    font-size: 1.0rem !important;
+    font-weight: 700 !important;
+}
+
+html.mobile-layout .dock-app-btn .dock-pid-badge {
+    font-size: 0.82rem !important;
 }
 
 html.mobile-layout .desktop-app-stage {
     width: 100% !important;
     height: auto !important;
-    min-height: 420px !important;
+    min-height: 440px !important;
     overflow: visible !important;
 }
 
@@ -1468,19 +2004,37 @@ html.mobile-layout .desktop-window,
 html.mobile-layout .app-window-pane {
     width: 100% !important;
     height: auto !important;
-    min-height: 380px !important;
+    min-height: 420px !important;
     overflow: visible !important;
     position: relative !important;
     left: 0 !important;
     top: 0 !important;
+    border-radius: 10px !important;
+}
+
+html.mobile-layout .window-header {
+    min-height: 46px !important;
+    padding: 0.5rem 0.85rem !important;
+}
+
+html.mobile-layout .window-title {
+    font-size: 1.05rem !important;
+    font-weight: 700 !important;
+}
+
+html.mobile-layout .window-ctrl-btn {
+    min-width: 36px !important;
+    min-height: 36px !important;
+    font-size: 1.1rem !important;
 }
 
 /* OS Builder Quest on html.mobile-layout */
 html.mobile-layout .quest-view-wrapper {
-    padding: 0.75rem 0.5rem 3.5rem !important;
+    padding: 1rem 0.75rem 4rem !important;
     width: 100% !important;
     max-width: 100vw !important;
     overflow-x: hidden !important;
+    font-size: 1.02rem !important;
 }
 
 html.mobile-layout .quest-header-bar {
@@ -1488,27 +2042,30 @@ html.mobile-layout .quest-header-bar {
     flex-direction: column !important;
     align-items: flex-start !important;
     width: 100% !important;
-    gap: 0.75rem !important;
+    gap: 0.85rem !important;
 }
 
-html.mobile-layout .quest-scorecard-deck {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-}
-
+html.mobile-layout .quest-scorecard-deck,
 html.mobile-layout .quest-track-ribbon {
     width: 100% !important;
     max-width: 100% !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     box-sizing: border-box !important;
+    padding: 0.5rem 0 !important;
 }
 
 html.mobile-layout .quest-level-deck {
-    grid-template-columns: 1fr !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
     width: 100% !important;
+}
+
+html.mobile-layout .quest-level-card {
+    padding: 1.35rem 1.15rem !important;
+    border-radius: 12px !important;
+    font-size: 1.02rem !important;
 }
 
 /* Classroom on html.mobile-layout */
@@ -1529,9 +2086,9 @@ html.mobile-layout .classroom-sidebar {
     height: auto !important;
     border-right: none !important;
     border-bottom: 2px solid var(--accent) !important;
-    padding: 0.5rem 0.75rem !important;
+    padding: 0.65rem 0.85rem !important;
     position: sticky !important;
-    top: 48px !important;
+    top: 56px !important;
     z-index: 9998 !important;
     background: #0E1726 !important;
 }
@@ -1540,18 +2097,30 @@ html.mobile-layout .classroom-sidebar-header {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
+    min-height: 46px !important;
     cursor: pointer !important;
+    user-select: none !important;
+}
+
+html.mobile-layout .classroom-sidebar-header h3 {
+    font-size: 1.15rem !important;
+    font-weight: 800 !important;
+    color: #FFFFFF !important;
+    margin: 0 !important;
 }
 
 html.mobile-layout .classroom-sidebar-header::after {
     content: '▾ Select Topic' !important;
-    font-size: 0.78rem !important;
+    font-size: 0.92rem !important;
     font-weight: 700 !important;
     color: var(--accent) !important;
-    background: rgba(214, 158, 46, 0.15) !important;
-    border: 1px solid var(--accent) !important;
-    border-radius: 4px !important;
-    padding: 0.2rem 0.5rem !important;
+    background: rgba(214, 158, 46, 0.18) !important;
+    border: 1.5px solid var(--accent) !important;
+    border-radius: 6px !important;
+    padding: 0.4rem 0.75rem !important;
+    min-height: 36px !important;
+    display: inline-flex !important;
+    align-items: center !important;
 }
 
 html.mobile-layout .classroom-sidebar.open-drawer .classroom-sidebar-header::after {
@@ -1565,23 +2134,57 @@ html.mobile-layout .classroom-nav-list {
 html.mobile-layout .classroom-sidebar.open-drawer .classroom-nav-list {
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.4rem !important;
-    max-height: 55vh !important;
+    gap: 0.5rem !important;
+    max-height: 60vh !important;
     overflow-y: auto !important;
-    margin-top: 0.5rem !important;
-    padding: 0.5rem !important;
+    margin-top: 0.65rem !important;
+    padding: 0.65rem !important;
     background: #111A2E !important;
-    border-radius: 6px !important;
+    border-radius: 10px !important;
     border: 1px solid var(--border-color) !important;
+}
+
+html.mobile-layout .classroom-nav-item {
+    font-size: 0.98rem !important;
+    font-weight: 600 !important;
+    padding: 0.75rem 1rem !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 8px !important;
 }
 
 html.mobile-layout .classroom-stage {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    min-height: 500px !important;
+    min-height: 520px !important;
     overflow: visible !important;
-    padding: 0.75rem 0.5rem 2rem !important;
+    padding: 1.1rem 0.85rem 3rem !important;
+    font-size: 1.02rem !important;
+    line-height: 1.65 !important;
+}
+
+html.mobile-layout .classroom-stage h2,
+html.mobile-layout .classroom-stage h3 {
+    font-size: 1.45rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.65rem !important;
+}
+
+html.mobile-layout .classroom-stage p,
+html.mobile-layout .analogy-narration-box {
+    font-size: 1.05rem !important;
+    line-height: 1.65 !important;
+}
+
+html.mobile-layout .analogy-ctrl-btn,
+html.mobile-layout .classroom-ctrl-btn {
+    min-height: 48px !important;
+    padding: 0.6rem 1.1rem !important;
+    font-size: 1.0rem !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
 }
 
 /* Workshop on html.mobile-layout */
@@ -1599,12 +2202,12 @@ html.mobile-layout .algo-subnav {
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    gap: 0.35rem !important;
-    padding: 0.5rem 0.75rem !important;
+    gap: 0.45rem !important;
+    padding: 0.65rem 0.85rem !important;
     background: #0E1726 !important;
     border-bottom: 2px solid var(--accent) !important;
     position: sticky !important;
-    top: 48px !important;
+    top: 56px !important;
     z-index: 9998 !important;
 }
 
@@ -1617,20 +2220,23 @@ html.mobile-layout .algo-subnav .algo-tab-btn.active {
     width: 100% !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding: 0.45rem 0.75rem !important;
-    border: 1px solid var(--accent) !important;
-    border-radius: 6px !important;
+    padding: 0.6rem 0.85rem !important;
+    border: 1.5px solid var(--accent) !important;
+    border-radius: 8px !important;
+    font-size: 1.0rem !important;
+    font-weight: 700 !important;
+    min-height: 46px !important;
 }
 
 html.mobile-layout .algo-subnav:not(.open-drawer) .algo-tab-btn.active::after {
     content: '▾ Solvers' !important;
-    font-size: 0.78rem !important;
+    font-size: 0.92rem !important;
     font-weight: 700 !important;
     color: var(--accent) !important;
-    background: rgba(214, 158, 46, 0.15) !important;
-    border: 1px solid var(--accent) !important;
-    border-radius: 4px !important;
-    padding: 0.2rem 0.5rem !important;
+    background: rgba(214, 158, 46, 0.18) !important;
+    border: 1.5px solid var(--accent) !important;
+    border-radius: 6px !important;
+    padding: 0.35rem 0.75rem !important;
 }
 
 html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn.active::after {
@@ -1640,17 +2246,52 @@ html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn.active::after {
 html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn {
     display: flex !important;
     width: 100% !important;
-    padding: 0.5rem 0.75rem !important;
+    padding: 0.65rem 0.85rem !important;
+    min-height: 48px !important;
+    font-size: 0.98rem !important;
+    border-radius: 8px !important;
 }
 
 html.mobile-layout .algo-content-pane {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    min-height: 500px !important;
+    min-height: 520px !important;
     overflow-x: auto !important;
     overflow-y: visible !important;
-    padding: 0.75rem 0.5rem 2.5rem !important;
+    padding: 1rem 0.75rem 3rem !important;
+    font-size: 1.02rem !important;
+}
+
+html.mobile-layout .algo-content-pane h2,
+html.mobile-layout .algo-content-pane h3 {
+    font-size: 1.45rem !important;
+    font-weight: 800 !important;
+}
+
+html.mobile-layout .algo-btn,
+html.mobile-layout .algo-ctrl-btn {
+    min-height: 48px !important;
+    padding: 0.6rem 1.1rem !important;
+    font-size: 1.0rem !important;
+    font-weight: 700 !important;
+    border-radius: 8px !important;
+}
+
+html.mobile-layout .algo-kpi-card {
+    padding: 1rem !important;
+    border-radius: 10px !important;
+    min-height: 85px !important;
+}
+
+html.mobile-layout .algo-kpi-val {
+    font-size: 1.55rem !important;
+    font-weight: 800 !important;
+}
+
+html.mobile-layout .algo-kpi-lbl {
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
 }
 
 /* Other Views */
@@ -1679,5 +2320,5 @@ html.mobile-layout .bench-grid {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    gap: 1rem !important;
+    gap: 1.25rem !important;
 }
