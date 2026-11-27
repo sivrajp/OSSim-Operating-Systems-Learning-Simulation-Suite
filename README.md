@@ -62,7 +62,7 @@ From observing keyboard hardware interrupts traverse CPU registers to executing 
 | # | Room / Environment | Core Pedagogical Focus |
 | :-: | :--- | :--- |
 | **0** | **Home Hub** | Central landing suite, mode launcher, progress sync manager, and in-app documentation reader. |
-| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline (ending in simulated I/O completion and user-interface acknowledgement), and application creation through the eight-stage launch and process-inception pipeline; dual execution models (With OS: kernel-supervised execution with user/kernel privilege transitions vs. Without OS: direct access to simulated hardware in the configured execution model), CPU registers, simulated 64-frame physical RAM grid, and dual-storage continuum (HDD/SSD). |
+| **1** | **The Playground** | Living interactive desktop with dock applications. Trace keyboard input through the eight-stage input-processing pipeline, document saving through the seven-stage storage-persistence pipeline (ending in simulated I/O completion and user-interface acknowledgement), and application creation through the eight-stage launch and process-inception pipeline; dual execution models (With OS: kernel-supervised execution with user/kernel privilege transitions vs. Without OS – direct execution in the simulated hardware environment), CPU registers, simulated 64-frame physical RAM grid, and dual-storage continuum (HDD/SSD). |
 | **2** | **The Classroom** | 18 ordered conceptual workbenches with textbook analogies, interactive SVG diagrams, step-by-step boot phase inspector, container cgroups, and live Tri-Pillar feedback. |
 | **3** | **The Workshop** | Side-by-side comparative solvers across CPU scheduling, memory allocation, page replacement, disk schedulers, and NVMe SSD/FTL simulator with unified workload efficiency deltas ($\Delta \text{ WT vs FCFS}$). |
 | **4** | **The Test Centre** | 100 tested curricular problems spanning Units 1–4 with instant evaluator grading, diagnostic misconception detection, and an exportable Master Solutions Manual. |
@@ -161,7 +161,7 @@ In addition to the 18 core domain suites, the release candidate validates 7 expl
 3. **Standalone Application Launch:** Validates web app manifest standalone display mode and orientation configurations.
 4. **Offline Reload & Execution:** When network access is severed (`navigator.onLine = false` / Airplane mode), the suite reloads and renders all 8 environments entirely from Cache Storage.
 5. **Offline Environment Navigation:** Switching between Home, The Classroom, The Workshop, The Playground, and The Test Centre operates seamlessly without network fetch requests.
-6. **Cache Lifecycle & Version Upgrade:** Publishing an updated cache version (`v1.0.2`) activates via `skipWaiting()` and purges obsolete versions.
+6. **Cache Lifecycle & Version Upgrade:** Publishing an updated cache version (`ossim-pwa-v1.3.0`) activates via `skipWaiting()` and purges obsolete versions.
 7. **Origin-Level Cache Namespace Isolation:** Confirms that cache deletion exclusively purges caches matching the `ossim-pwa-` prefix, safeguarding unrelated applications hosted on the same domain/origin.
 
 ---
