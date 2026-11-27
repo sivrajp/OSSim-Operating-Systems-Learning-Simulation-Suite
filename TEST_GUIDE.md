@@ -696,7 +696,7 @@ $$\mathbf{1\text{ Master Battery}} \quad\longrightarrow\quad \mathbf{18\text{ Au
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
 | **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` (Baseline CI Sweep) • `2026-11-27 11:36:00 UTC` (Release Candidate Freeze) |
-| **Public Distribution Commit SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Baseline CI Verified) • [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) (Current Release Freeze Candidate) |
+| **Baseline CI Verified SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Baseline CI Verified) • [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) (Release Candidate Freeze) |
 | **Test Harness Commit SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
@@ -741,7 +741,7 @@ The following matrix documents the formal verification criteria for all seven PW
 | **PWA-02** | **Precache Integrity** | Pre-caching of all 14 mandatory app shell assets in `install` event | All 14 assets (HTML, CSS, JS bundle, manifest, maskable & touch icons) cached in dedicated namespace | Automated Headless + Manual | **100% PASS** |
 | **PWA-03** | **Standalone Launch & Manifest** | Web App Manifest adoption and standalone display mode | Prompts installation banner; launches in dedicated standalone window without browser chrome UI | Manual Device Audit | **100% PASS** |
 | **PWA-04** | **Offline Application Reload** | Cold-start application launch with network interface disabled | Application shell, assets, visualizer components, and simulation engines load instantly from cache | Automated Headless + Manual | **100% PASS** |
-| **PWA-05** | **Offline Environment Navigation** | Seamless routing across all eight learning environments offline | Uninterrupted interactive switching between Home, Playground, Classroom, Workshop, Test Centre, Quest, and Capstone | Automated Headless + Manual | **100% PASS** |
+| **PWA-05** | **Offline Environment Navigation** | Seamless routing across all eight learning environments offline | Uninterrupted offline navigation across all 8 environments: (1) Home Hub, (2) Playground, (3) Classroom, (4) Workshop, (5) Test Centre, (6) OS Builder Quest, (7) Capstone Studio, and (8) Capstone Playground | Automated Headless + Manual | **100% PASS** |
 | **PWA-06** | **Cache Version Lifecycle & Namespace Purge** | Activation handler cache eviction during application bundle update | New release (`ossim-pwa-vX.Y.Z`) purges obsolete OSSim cache generations; `event.waitUntil()` protects background updates | Automated Headless + Manual | **100% PASS** |
 | **PWA-07** | **Origin-Level Cache Isolation** | Namespaced cache protection (`name.startsWith('ossim-pwa-')`) | Third-party or unrelated application caches on the same origin remain untouched; lookups strictly scoped to `CACHE_NAME` | Automated Headless | **100% PASS** |
 

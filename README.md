@@ -141,7 +141,8 @@ OSSim maintains an automated, headless browser integration test harness executin
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
 | **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` (Baseline CI Sweep) • `2026-11-27 11:36:00 UTC` (Release Candidate Freeze) |
-| **Public Distribution Commit SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Baseline CI Verified) • [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) (Release Candidate Freeze) |
+| **Baseline CI Verified SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Full 18-Suite Headless CI Battery • 749 Assertions) |
+| **Release Freeze Candidate SHA** | [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) (Final Release Candidate Freeze) |
 | **Test Harness SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
@@ -162,7 +163,7 @@ In addition to the 18 core domain suites, the release candidate validates 7 expl
 2. **Precache Asset Integrity:** All 14 precached assets (`index.html`, `manifest.json`, `ossim_bundle.js`, `pwa-register.js`, stylesheets, icons) resolve successfully with HTTP 200 responses.
 3. **Standalone Application Launch:** Validates web app manifest standalone display mode and orientation configurations.
 4. **Offline Reload & Execution:** When network access is severed (`navigator.onLine = false` / Airplane mode), the suite reloads and renders all 8 environments entirely from Cache Storage.
-5. **Offline Environment Navigation:** Switching between Home, The Classroom, The Workshop, The Playground, and The Test Centre operates seamlessly without network fetch requests.
+5. **Offline Environment Navigation:** Seamless offline switching across all eight environments—(1) Home Hub, (2) Playground, (3) Classroom, (4) Workshop, (5) Test Centre, (6) OS Builder Quest, (7) Capstone Studio, and (8) Capstone Playground—operates without network fetch requests.
 6. **Cache Lifecycle & Version Upgrade:** Publishing an updated cache version (`ossim-pwa-v1.3.0`) activates via `skipWaiting()` and purges obsolete versions.
 7. **Origin-Level Cache Namespace Isolation:** Confirms that cache deletion exclusively purges caches matching the `ossim-pwa-` prefix, safeguarding unrelated applications hosted on the same domain/origin.
 
