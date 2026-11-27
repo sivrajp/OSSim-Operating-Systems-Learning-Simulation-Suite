@@ -47,6 +47,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         initInstallBanner();
         initMobileDrawer();
+        initMobileViewSelectors();
         initNetworkStatus();
         initOrientationHelper();
     });
@@ -194,7 +195,62 @@
         }
     }
 
-    // 5. Network Status Monitoring
+    // 5. Initialize Classroom & Workshop Mobile Selectors (Dropdown / Drawer)
+    function initMobileViewSelectors() {
+        document.addEventListener('click', (e) => {
+            // A. The Classroom Topic Selector
+            const sidebarHeader = e.target.closest('.classroom-sidebar-header');
+            if (sidebarHeader) {
+                const sidebar = sidebarHeader.closest('.classroom-sidebar');
+                if (sidebar) {
+                    sidebar.classList.toggle('open-drawer');
+                }
+                return;
+            }
+
+            const navItem = e.target.closest('.classroom-nav-item');
+            if (navItem) {
+                const sidebar = navItem.closest('.classroom-sidebar');
+                if (sidebar) {
+                    sidebar.classList.remove('open-drawer');
+                }
+                return;
+            }
+
+            // B. The Workshop Solver Selector
+            const activeAlgoTab = e.target.closest('.algo-subnav .algo-tab-btn.active');
+            if (activeAlgoTab) {
+                const subnav = activeAlgoTab.closest('.algo-subnav');
+                if (subnav) {
+                    subnav.classList.toggle('open-drawer');
+                }
+                return;
+            }
+
+            const anyAlgoTab = e.target.closest('.algo-subnav .algo-tab-btn');
+            if (anyAlgoTab) {
+                const subnav = anyAlgoTab.closest('.algo-subnav');
+                if (subnav) {
+                    subnav.classList.remove('open-drawer');
+                }
+                return;
+            }
+
+            // Click outside to close open drawers
+            if (!e.target.closest('.classroom-sidebar')) {
+                document.querySelectorAll('.classroom-sidebar.open-drawer').forEach((el) => {
+                    el.classList.remove('open-drawer');
+                });
+            }
+            if (!e.target.closest('.algo-subnav')) {
+                document.querySelectorAll('.algo-subnav.open-drawer').forEach((el) => {
+                    el.classList.remove('open-drawer');
+                });
+            }
+        });
+    }
+
+    // 6. Network Status Monitoring
     function initNetworkStatus() {
         const pill = document.getElementById('network-status-pill');
         if (!pill) return;

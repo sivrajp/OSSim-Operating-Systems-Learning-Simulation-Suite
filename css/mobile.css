@@ -605,27 +605,231 @@
         padding: 0.65rem 0.75rem !important;
     }
 
-    /* 9. Classroom & Workshop Layouts: Single-column flow */
-    .classroom-layout,
-    .workshop-layout,
-    .solver-grid {
+    /* 9. The Playground (Living Desktop): Option A Stacked Architecture */
+    .living-os-container {
+        display: flex !important;
         flex-direction: column !important;
-        grid-template-columns: 1fr !important;
-        gap: 1.25rem !important;
         width: 100% !important;
-    }
-
-    .concept-sidebar,
-    .solver-sidebar {
-        width: 100% !important;
-        max-height: 280px !important;
+        height: auto !important;
+        min-height: 100% !important;
         overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 
-    /* 10. Floating Windows in Living Desktop */
+    /* PC Hardware Console on Top */
+    .xray-pane {
+        order: 1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: 0 0 auto !important;
+        height: auto !important;
+        max-height: 290px !important;
+        overflow-y: auto !important;
+        border-bottom: 2px solid var(--accent) !important;
+        border-left: none !important;
+        padding: 0.65rem !important;
+    }
+
+    /* Conventional Right Side Window Content (Dock + Windows) Below */
+    .desktop-pane {
+        order: 2 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        flex: 1 0 auto !important;
+        min-height: 480px !important;
+        border-right: none !important;
+        padding: 0.75rem !important;
+    }
+
+    .desktop-taskbar#desktop-app-dock {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+        width: 100% !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .dock-app-btn {
+        min-height: 48px !important;
+        padding: 0.5rem 0.65rem !important;
+    }
+
+    .desktop-app-stage {
+        width: 100% !important;
+        min-height: 400px !important;
+        position: relative !important;
+    }
+
     .desktop-window {
-        max-width: 96vw !important;
-        left: 2vw !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        position: relative !important;
+        min-height: 380px !important;
+    }
+
+    /* 10. The Classroom: Mobile Top Topic Dropdown / Drawer Selector */
+    .classroom-container {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    .classroom-sidebar {
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        flex: 0 0 auto !important;
+        border-right: none !important;
+        border-bottom: 2px solid var(--accent) !important;
+        position: relative !important;
+        z-index: 500 !important;
+        background: #0F172A !important;
+        overflow: visible !important;
+    }
+
+    .classroom-sidebar-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0.65rem 1rem !important;
+        cursor: pointer !important;
+        min-height: 48px !important;
+        background: #0F172A !important;
+    }
+
+    .classroom-sidebar-header::after {
+        content: "▾ Select Topic" !important;
+        font-size: 0.85rem !important;
+        font-weight: 700 !important;
+        color: var(--accent) !important;
+        background: rgba(214, 158, 46, 0.15) !important;
+        border: 1px solid var(--accent) !important;
+        padding: 0.3rem 0.65rem !important;
+        border-radius: 6px !important;
+    }
+
+    .classroom-sidebar.open-drawer .classroom-sidebar-header::after {
+        content: "▴ Close Topics" !important;
+    }
+
+    .classroom-nav-list {
+        display: none !important;
+    }
+
+    .classroom-sidebar.open-drawer .classroom-nav-list {
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important;
+        max-height: 65vh !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        background: #0A101D !important;
+        border: 2px solid var(--accent) !important;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95) !important;
+        z-index: 1000 !important;
+    }
+
+    .classroom-stage {
+        width: 100% !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        padding: 1rem 0.85rem !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
+    /* 11. The Workshop: Mobile Top Solver Dropdown Selector */
+    .algo-container {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: 100% !important;
+        overflow-x: hidden !important;
+    }
+
+    .algo-subnav {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        position: relative !important;
+        z-index: 400 !important;
+        background: #0F172A !important;
+        border-bottom: 2px solid var(--accent) !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .algo-subnav:not(.open-drawer) .algo-tab-btn:not(.active) {
+        display: none !important;
+    }
+
+    .algo-subnav .algo-tab-btn.active {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        background: #0F172A !important;
+        color: #FFFFFF !important;
+        cursor: pointer !important;
+        min-height: 48px !important;
+    }
+
+    .algo-subnav:not(.open-drawer) .algo-tab-btn.active::after {
+        content: "▾ Solvers" !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        color: var(--accent) !important;
+        background: rgba(214, 158, 46, 0.15) !important;
+        border: 1px solid var(--accent) !important;
+        padding: 0.25rem 0.6rem !important;
+        border-radius: 6px !important;
+    }
+
+    .algo-subnav.open-drawer .algo-tab-btn.active::after {
+        content: "▴ Close" !important;
+        font-size: 0.8rem !important;
+        font-weight: 700 !important;
+        color: var(--accent) !important;
+        background: rgba(214, 158, 46, 0.15) !important;
+        border: 1px solid var(--accent) !important;
+        padding: 0.25rem 0.6rem !important;
+        border-radius: 6px !important;
+    }
+
+    .algo-subnav.open-drawer {
+        position: relative !important;
+    }
+
+    .algo-subnav.open-drawer .algo-tab-btn {
+        display: flex !important;
+        width: 100% !important;
+        padding: 0.75rem 1rem !important;
+        font-size: 0.92rem !important;
+        min-height: 48px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+
+    .algo-content-pane {
+        width: 100% !important;
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        padding: 1rem 0.85rem !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
     }
 }
 
@@ -673,4 +877,203 @@ html.mobile-layout .home-docs-grid {
 
 html.mobile-layout .home-stats-strip {
     flex-direction: column !important;
+}
+
+/* Playground Option A on html.mobile-layout */
+html.mobile-layout .living-os-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+html.mobile-layout .xray-pane {
+    order: 1 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    max-height: 290px !important;
+    overflow-y: auto !important;
+    border-bottom: 2px solid var(--accent) !important;
+    border-left: none !important;
+}
+
+html.mobile-layout .desktop-pane {
+    order: 2 !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 1 0 auto !important;
+    min-height: 480px !important;
+    border-right: none !important;
+}
+
+html.mobile-layout .desktop-taskbar#desktop-app-dock {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+}
+
+html.mobile-layout .desktop-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    position: relative !important;
+    min-height: 380px !important;
+}
+
+/* Classroom on html.mobile-layout */
+html.mobile-layout .classroom-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+html.mobile-layout .classroom-sidebar {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 0 0 auto !important;
+    border-right: none !important;
+    border-bottom: 2px solid var(--accent) !important;
+    position: relative !important;
+    z-index: 500 !important;
+    background: #0F172A !important;
+    overflow: visible !important;
+}
+
+html.mobile-layout .classroom-sidebar-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.65rem 1rem !important;
+    cursor: pointer !important;
+    min-height: 48px !important;
+}
+
+html.mobile-layout .classroom-sidebar-header::after {
+    content: "▾ Select Topic" !important;
+    font-size: 0.85rem !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
+    background: rgba(214, 158, 46, 0.15) !important;
+    border: 1px solid var(--accent) !important;
+    padding: 0.3rem 0.65rem !important;
+    border-radius: 6px !important;
+}
+
+html.mobile-layout .classroom-sidebar.open-drawer .classroom-sidebar-header::after {
+    content: "▴ Close Topics" !important;
+}
+
+html.mobile-layout .classroom-nav-list {
+    display: none !important;
+}
+
+html.mobile-layout .classroom-sidebar.open-drawer .classroom-nav-list {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-height: 65vh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: #0A101D !important;
+    border: 2px solid var(--accent) !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95) !important;
+    z-index: 1000 !important;
+}
+
+html.mobile-layout .classroom-stage {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 1rem 0.85rem !important;
+    overflow-y: auto !important;
+}
+
+/* Workshop on html.mobile-layout */
+html.mobile-layout .algo-container {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+html.mobile-layout .algo-subnav {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 400 !important;
+    background: #0F172A !important;
+    border-bottom: 2px solid var(--accent) !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
+
+html.mobile-layout .algo-subnav:not(.open-drawer) .algo-tab-btn:not(.active) {
+    display: none !important;
+}
+
+html.mobile-layout .algo-subnav .algo-tab-btn.active {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 700 !important;
+    border: none !important;
+    background: #0F172A !important;
+    color: #FFFFFF !important;
+    cursor: pointer !important;
+    min-height: 48px !important;
+}
+
+html.mobile-layout .algo-subnav:not(.open-drawer) .algo-tab-btn.active::after {
+    content: "▾ Solvers" !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
+    background: rgba(214, 158, 46, 0.15) !important;
+    border: 1px solid var(--accent) !important;
+    padding: 0.25rem 0.6rem !important;
+    border-radius: 6px !important;
+}
+
+html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn.active::after {
+    content: "▴ Close" !important;
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
+    background: rgba(214, 158, 46, 0.15) !important;
+    border: 1px solid var(--accent) !important;
+    padding: 0.25rem 0.6rem !important;
+    border-radius: 6px !important;
+}
+
+html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn {
+    display: flex !important;
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 0.92rem !important;
+    min-height: 48px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.mobile-layout .algo-content-pane {
+    width: 100% !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    padding: 1rem 0.85rem !important;
+    overflow-y: auto !important;
 }
