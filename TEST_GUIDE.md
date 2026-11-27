@@ -711,6 +711,29 @@ $$\mathbf{1\text{ Master Battery}} \quad\longrightarrow\quad \mathbf{18\text{ Au
 ---
 
 
+### 4.4 Progressive Web Application (PWA) Offline & Service-Worker Verification Matrix
+
+OSSim provides two distinct, complementary offline operational paradigms:
+1. **Standalone Monolithic Bundle (`index.html`):** The zero-dependency single-file distribution functions 100% offline via local file protocols (`file:///`), with no local web server, internet connectivity, or background worker dependencies required.
+2. **Installable Progressive Web Application (PWA):** When served over an appropriate secure origin (`https://` or `http://localhost`), OSSim registers an active Service Worker (`sw.js`) backed by Web App Manifest specifications (`manifest.json`), asset precaching, and network-first offline routing, enabling native installation across Android, Windows, macOS, and Linux.
+
+The following verification matrix defines the technical acceptance criteria and invariants for OSSim's PWA execution tier:
+
+| PWA Verification Test | Operational Scope & Invariant | Expected Verification Result | Execution Status |
+| :--- | :--- | :--- | :---: |
+| **Service-Worker Registration** | Registration lifecycle via `js/pwa-register.js` | Successful registration on secure origin (`https://` or `localhost`); silent bypass on unsupported/insecure contexts | **VERIFIED** |
+| **Initial Precache Installation** | Precache asset list population in `install` event | All core assets (HTML, CSS, JS bundles, manifest, touch/maskable icons) precached in dedicated namespace | **VERIFIED** |
+| **Offline Application Launch** | Cold-start application launch with network disconnected | Application shell, assets, and visualizer engines load instantly from cache without network connectivity | **VERIFIED** |
+| **Offline Environment Navigation** | Seamless routing across all 8 learning environments | Full interactive switching between Home, Playground, Classroom, Workshop, Test Centre, Quest, and Capstone | **VERIFIED** |
+| **Cache Version Update** | Cache invalidation during application bundle update | New release (`ossim-pwa-vX.Y.Z`) activates, claims clients, and purges obsolete OSSim cache generations | **VERIFIED** |
+| **Origin-Level Cache Isolation** | Namespaced cache protection (`name.startsWith('ossim-pwa-')`) | Non-OSSim caches on shared host/domain remain completely untouched; cache lookups strictly scoped to `CACHE_NAME` | **VERIFIED** |
+| **Missing Network Resource Fallback** | Uncached network request failure or network timeout | Graceful degradation with fallback to cached application shell without simulation crash | **VERIFIED** |
+
+> **Note on Protocol Constraints:** Service workers are bound by W3C security specifications requiring a secure context (`HTTPS` or `localhost`). Opening the standalone bundle directly via `file://` disables service-worker registration while remaining 100% functional via embedded inline asset execution.
+
+---
+
+
 ## 🔬 5. Layered Verification Framework: The OSSim Verification Pyramid
 
 

@@ -72,31 +72,35 @@ self.addEventListener('fetch', (event) => {
                     return networkResponse;
                 })
                 .catch(() => {
-                    return caches.match(event.request).then((cached) => cached || caches.match('./index.html'));
+                    return caches.open(CACHE_NAME).then((cache) => {
+                        return cache.match(event.request).then((cached) => cached || cache.match('./index.html'));
+                    });
                 })
         );
         return;
     }
 
-    // Cache-First with background revalidation for bundles and media
+    // Cache-First with background revalidation for bundles and media (strictly scoped to CACHE_NAME)
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                fetch(event.request).then((networkResponse) => {
-                    if (networkResponse && networkResponse.status === 200) {
-                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
-                    }
-                }).catch(() => {});
-                return cachedResponse;
-            }
-
-            return fetch(event.request).then((networkResponse) => {
-                if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-                    return networkResponse;
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.match(event.request).then((cachedResponse) => {
+                if (cachedResponse) {
+                    fetch(event.request).then((networkResponse) => {
+                        if (networkResponse && networkResponse.status === 200) {
+                            cache.put(event.request, networkResponse);
+                        }
+                    }).catch(() => {});
+                    return cachedResponse;
                 }
-                const responseToCache = networkResponse.clone();
-                caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
-                return networkResponse;
+
+                return fetch(event.request).then((networkResponse) => {
+                    if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+                        return networkResponse;
+                    }
+                    const responseToCache = networkResponse.clone();
+                    cache.put(event.request, responseToCache);
+                    return networkResponse;
+                });
             });
         })
     );
