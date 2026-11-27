@@ -140,7 +140,7 @@ OSSim maintains an automated, headless browser integration test harness executin
 | Parameter | Official CI Verification Record |
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
-| **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` |
+| **Execution Date & Timestamp** | `2026-11-27 11:45:00 UTC` |
 | **Public Distribution SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Verified Green • Release Candidate) |
 | **Test Harness SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
@@ -153,6 +153,16 @@ OSSim maintains an automated, headless browser integration test harness executin
 | **Automated Cadence** | Daily Nightly Regression (00:00 UTC) & On Every Push |
 
 > **Note on Exact Test Counts:** The core release baseline comprises **749 atomic assertions** across 18 automated CI suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). Extended combinatorial sweeps in the private test harness (evaluating Suite 10 across all 4 dock application mode-switch matrices `BM_01`–`BM_86`) execute **exactly 810 atomic assertions**, all passing at 100.0% ($749 + 61 = 810$). When including the automated release consistency audit suite (`verify_release_consistency.py` with 68 checks), the codebase passes **878 automated checks**.
+
+### 📱 Progressive Web App (PWA) & Offline Suite Verification
+In addition to the 18 core domain suites, the release candidate validates 7 explicit PWA lifecycle and offline scenarios:
+1. **Service Worker Registration:** `navigator.serviceWorker.register('./sw.js')` succeeds cleanly with active scope `./`.
+2. **Precache Asset Integrity:** All 14 precached assets (`index.html`, `manifest.json`, `ossim_bundle.js`, `pwa-register.js`, stylesheets, icons) resolve successfully with HTTP 200 responses.
+3. **Standalone Application Launch:** Validates web app manifest standalone display mode and orientation configurations.
+4. **Offline Reload & Execution:** When network access is severed (`navigator.onLine = false` / Airplane mode), the suite reloads and renders all 8 environments entirely from Cache Storage.
+5. **Offline Environment Navigation:** Switching between Home, The Classroom, The Workshop, The Playground, and The Test Centre operates seamlessly without network fetch requests.
+6. **Cache Lifecycle & Version Upgrade:** Publishing an updated cache version (`v1.0.2`) activates via `skipWaiting()` and purges obsolete versions.
+7. **Origin-Level Cache Namespace Isolation:** Confirms that cache deletion exclusively purges caches matching the `ossim-pwa-` prefix, safeguarding unrelated applications hosted on the same domain/origin.
 
 ---
 

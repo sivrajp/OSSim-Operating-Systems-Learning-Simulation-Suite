@@ -3,7 +3,7 @@
  * (C) Copyright Sivraj P. All rights reserved.
  */
 
-const CACHE_NAME = 'ossim-pwa-v1.0.1';
+const CACHE_NAME = 'ossim-pwa-v1.0.2';
 
 const PRECACHE_ASSETS = [
     './',
@@ -33,14 +33,14 @@ self.addEventListener('install', (event) => {
     );
 });
 
-// Activate: Purge old cache versions
+// Activate: Purge old cache versions belonging strictly to OSSim namespace
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames.map((name) => {
-                    if (name !== CACHE_NAME) {
-                        console.log('[OSSim SW] Purging obsolete cache:', name);
+                    if (name.startsWith('ossim-pwa-') && name !== CACHE_NAME) {
+                        console.log('[OSSim SW] Purging obsolete OSSim cache:', name);
                         return caches.delete(name);
                     }
                 })
