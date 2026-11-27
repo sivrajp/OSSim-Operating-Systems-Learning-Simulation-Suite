@@ -392,7 +392,11 @@
 }
 
 @media (max-width: 1024px), (pointer: coarse) {
-    /* 1. Base typography & layout sizing */
+    /* 1. Universal Containment — Zero Horizontal Overflow across any view */
+    *, *::before, *::after {
+        box-sizing: border-box !important;
+    }
+
     html, body {
         width: 100% !important;
         max-width: 100vw !important;
@@ -406,11 +410,7 @@
         padding: 0 !important;
     }
 
-    *, *::before, *::after {
-        box-sizing: border-box !important;
-    }
-
-    /* 2. Sticky Header with prominent Menu button */
+    /* 2. Sticky Header with compact Title and prominent Menu button */
     header.app-header {
         position: sticky !important;
         top: 0 !important;
@@ -434,12 +434,12 @@
     }
 
     .header-top-bar .tool-title {
-        font-size: 0.95rem !important;
+        font-size: 0.88rem !important;
         font-weight: 800 !important;
         white-space: nowrap !important;
         overflow: hidden !important;
         text-overflow: ellipsis !important;
-        max-width: calc(100vw - 130px) !important;
+        max-width: calc(100vw - 145px) !important;
         flex: 1 1 auto !important;
         letter-spacing: 0.3px !important;
     }
@@ -538,7 +538,6 @@
         max-width: 100% !important;
     }
 
-    /* 5. Home Stats Strip: Full-Width Clean Cards */
     .home-stats-strip {
         display: flex !important;
         flex-direction: column !important;
@@ -565,7 +564,7 @@
         display: none !important;
     }
 
-    /* 6. Single-Column Full-Width Grids */
+    /* 5. Single-Column Full-Width Grids */
     .home-cards-grid,
     .quickstart-steps-grid,
     .pillars-grid,
@@ -593,17 +592,26 @@
         padding: 1.25rem !important;
     }
 
-    /* 7. Full-Width Horizontal Touch Tables */
+    /* 6. Full-Width Horizontal Touch Table */
+    .home-arch-flow-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+        padding: 1.25rem 0.85rem !important;
+    }
+
     .arch-mapping-table-wrap {
         width: 100% !important;
-        max-width: 100vw !important;
+        max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
         padding: 0.5rem !important;
     }
 
     .arch-mapping-table {
-        min-width: 520px !important;
+        min-width: 460px !important;
         width: 100% !important;
         font-size: 0.82rem !important;
     }
@@ -614,7 +622,7 @@
     }
 
     /* ==============================================================================
-       8. The Playground: Option A Stacked Architecture + Sticky View Switcher
+       7. The Playground: Apps & Dock Focus + Switcher + Pipeline Containment
        ============================================================================== */
     .mobile-playground-nav {
         display: flex !important;
@@ -624,9 +632,10 @@
         border-bottom: 1px solid var(--accent) !important;
         padding: 0.45rem 0.65rem !important;
         gap: 0.45rem !important;
-        position: sticky !important;
-        top: 48px !important;
-        z-index: 9999 !important;
+        position: relative !important;
+        top: 0 !important;
+        margin-bottom: 0.5rem !important;
+        z-index: 100 !important;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
     }
 
@@ -683,10 +692,35 @@
         min-height: 0 !important;
         overflow: visible !important;
         gap: 1.25rem !important;
-        padding: 0.5rem 0.5rem 2.5rem !important;
+        padding: 0.25rem 0.5rem 2.5rem !important;
     }
 
-    /* Option A: PC Hardware Console on Top */
+    /* DEFAULT: Apps & Dock Focus on Mobile */
+    .living-os-container:not(.view-console-only):not(.view-split) .xray-pane,
+    .living-os-container.view-apps-only .xray-pane {
+        display: none !important;
+    }
+    .living-os-container:not(.view-console-only):not(.view-split) .desktop-pane,
+    .living-os-container.view-apps-only .desktop-pane {
+        display: flex !important;
+        width: 100% !important;
+    }
+
+    .living-os-container.view-console-only .desktop-pane {
+        display: none !important;
+    }
+    .living-os-container.view-console-only .xray-pane {
+        display: flex !important;
+        width: 100% !important;
+    }
+
+    .living-os-container.view-split .xray-pane,
+    .living-os-container.view-split .desktop-pane {
+        display: flex !important;
+        width: 100% !important;
+    }
+
+    /* PC Console */
     .xray-pane {
         order: 1 !important;
         width: 100% !important;
@@ -698,11 +732,49 @@
         border-bottom: 2px solid var(--accent) !important;
         border-right: none !important;
         border-left: none !important;
-        padding: 0.65rem !important;
+        padding: 0.65rem 0.4rem !important;
         gap: 0.65rem !important;
     }
 
-    /* Middle Row inside Console: CPU registers & Disk Platter stack vertically */
+    /* Contain Pipeline Visualizer within Screen */
+    #pipeline-visualizer-container,
+    .pipeline-visualizer-container,
+    .pipe-container,
+    .pipeline-header,
+    .pipe-steps-strip,
+    .pipe-flow-strip {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+    }
+
+    .pipeline-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        gap: 0.5rem !important;
+    }
+
+    .pipe-mode-bar {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        gap: 0.25rem !important;
+    }
+
+    .pipeline-playback-bar {
+        max-width: 100% !important;
+        flex-wrap: wrap !important;
+    }
+
+    .actor-ribbon {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
     .xray-middle-row {
         display: flex !important;
         flex-direction: column !important;
@@ -715,7 +787,16 @@
         gap: 0.35rem !important;
     }
 
-    /* Option A: Conventional Right Side Window Content (Dock + Windows) Below */
+    #process-scheduler-deck-container,
+    .queue-matrix-grid,
+    .ram-frames-grid {
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Dock & Application Workspace */
     .desktop-pane {
         order: 2 !important;
         width: 100% !important;
@@ -727,7 +808,7 @@
         overflow: visible !important;
         border-right: none !important;
         border-left: none !important;
-        padding: 0.75rem 0.5rem !important;
+        padding: 0.5rem 0.35rem !important;
     }
 
     .desktop-taskbar#desktop-app-dock {
@@ -735,6 +816,7 @@
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 0.5rem !important;
         width: 100% !important;
+        margin-top: 0 !important;
         margin-bottom: 0.75rem !important;
     }
 
@@ -761,24 +843,42 @@
         top: 0 !important;
     }
 
-    /* Playground Switcher States */
-    .living-os-container.view-apps-only .xray-pane {
-        display: none !important;
-    }
-    .living-os-container.view-apps-only .desktop-pane {
-        display: flex !important;
-    }
-
-    .living-os-container.view-console-only .desktop-pane {
-        display: none !important;
-    }
-    .living-os-container.view-console-only .xray-pane {
-        display: flex !important;
+    /* ==============================================================================
+       8. OS Builder Quest: Scorecard Deck & Navigation Ribbon Containment
+       ============================================================================== */
+    .quest-view-wrapper {
+        padding: 0.75rem 0.5rem 3.5rem !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
     }
 
-    .living-os-container.view-split .xray-pane,
-    .living-os-container.view-split .desktop-pane {
+    .quest-header-bar {
         display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100% !important;
+        gap: 0.75rem !important;
+    }
+
+    .quest-scorecard-deck {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    .quest-track-ribbon {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        box-sizing: border-box !important;
+    }
+
+    .quest-level-deck {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
     }
 
     /* ==============================================================================
@@ -928,7 +1028,7 @@
         padding: 0.75rem 0.5rem 2.5rem !important;
     }
 
-    /* 11. All Other Environments (Architecture Lab, Studio, Challenge, Capstone) */
+    /* 11. All Other Environments */
     #tab-view-workbench,
     #tab-view-algorithms,
     #tab-view-challenge,
@@ -961,6 +1061,12 @@
 /* ==========================================================================
    Identical Enforcement for html.mobile-layout Class
    ========================================================================== */
+html.mobile-layout *,
+html.mobile-layout *::before,
+html.mobile-layout *::after {
+    box-sizing: border-box !important;
+}
+
 html.mobile-layout,
 html.mobile-layout body {
     width: 100% !important;
@@ -997,12 +1103,12 @@ html.mobile-layout .header-top-bar {
 }
 
 html.mobile-layout .header-top-bar .tool-title {
-    font-size: 0.95rem !important;
+    font-size: 0.88rem !important;
     font-weight: 800 !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: calc(100vw - 130px) !important;
+    max-width: calc(100vw - 145px) !important;
     flex: 1 1 auto !important;
     letter-spacing: 0.3px !important;
 }
@@ -1135,21 +1241,30 @@ html.mobile-layout .home-doc-card {
     padding: 1.25rem !important;
 }
 
+html.mobile-layout .home-arch-flow-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    padding: 1.25rem 0.85rem !important;
+}
+
 html.mobile-layout .arch-mapping-table-wrap {
     width: 100% !important;
-    max-width: 100vw !important;
+    max-width: 100% !important;
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
     padding: 0.5rem !important;
 }
 
 html.mobile-layout .arch-mapping-table {
-    min-width: 520px !important;
+    min-width: 460px !important;
     width: 100% !important;
     font-size: 0.82rem !important;
 }
 
-/* Playground Option A on html.mobile-layout */
+/* Playground on html.mobile-layout */
 html.mobile-layout .mobile-playground-nav {
     display: flex !important;
     width: 100% !important;
@@ -1158,9 +1273,10 @@ html.mobile-layout .mobile-playground-nav {
     border-bottom: 1px solid var(--accent) !important;
     padding: 0.45rem 0.65rem !important;
     gap: 0.45rem !important;
-    position: sticky !important;
-    top: 48px !important;
-    z-index: 9999 !important;
+    position: relative !important;
+    top: 0 !important;
+    margin-bottom: 0.5rem !important;
+    z-index: 100 !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -1211,7 +1327,32 @@ html.mobile-layout .living-os-container {
     min-height: 0 !important;
     overflow: visible !important;
     gap: 1.25rem !important;
-    padding: 0.5rem 0.5rem 2.5rem !important;
+    padding: 0.25rem 0.5rem 2.5rem !important;
+}
+
+/* Default to Apps & Dock focused */
+html.mobile-layout .living-os-container:not(.view-console-only):not(.view-split) .xray-pane,
+html.mobile-layout .living-os-container.view-apps-only .xray-pane {
+    display: none !important;
+}
+html.mobile-layout .living-os-container:not(.view-console-only):not(.view-split) .desktop-pane,
+html.mobile-layout .living-os-container.view-apps-only .desktop-pane {
+    display: flex !important;
+    width: 100% !important;
+}
+
+html.mobile-layout .living-os-container.view-console-only .desktop-pane {
+    display: none !important;
+}
+html.mobile-layout .living-os-container.view-console-only .xray-pane {
+    display: flex !important;
+    width: 100% !important;
+}
+
+html.mobile-layout .living-os-container.view-split .xray-pane,
+html.mobile-layout .living-os-container.view-split .desktop-pane {
+    display: flex !important;
+    width: 100% !important;
 }
 
 html.mobile-layout .xray-pane {
@@ -1225,8 +1366,46 @@ html.mobile-layout .xray-pane {
     border-bottom: 2px solid var(--accent) !important;
     border-left: none !important;
     border-right: none !important;
-    padding: 0.65rem !important;
+    padding: 0.65rem 0.4rem !important;
     gap: 0.65rem !important;
+}
+
+html.mobile-layout #pipeline-visualizer-container,
+html.mobile-layout .pipeline-visualizer-container,
+html.mobile-layout .pipe-container,
+html.mobile-layout .pipeline-header,
+html.mobile-layout .pipe-steps-strip,
+html.mobile-layout .pipe-flow-strip {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+}
+
+html.mobile-layout .pipeline-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    gap: 0.5rem !important;
+}
+
+html.mobile-layout .pipe-mode-bar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 0.25rem !important;
+}
+
+html.mobile-layout .pipeline-playback-bar {
+    max-width: 100% !important;
+    flex-wrap: wrap !important;
+}
+
+html.mobile-layout .actor-ribbon {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
 html.mobile-layout .xray-middle-row {
@@ -1234,6 +1413,20 @@ html.mobile-layout .xray-middle-row {
     flex-direction: column !important;
     width: 100% !important;
     gap: 0.65rem !important;
+}
+
+html.mobile-layout .compact-card .registers-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.35rem !important;
+}
+
+html.mobile-layout #process-scheduler-deck-container,
+html.mobile-layout .queue-matrix-grid,
+html.mobile-layout .ram-frames-grid {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
 }
 
 html.mobile-layout .desktop-pane {
@@ -1247,7 +1440,7 @@ html.mobile-layout .desktop-pane {
     overflow: visible !important;
     border-right: none !important;
     border-left: none !important;
-    padding: 0.75rem 0.5rem !important;
+    padding: 0.5rem 0.35rem !important;
 }
 
 html.mobile-layout .desktop-taskbar#desktop-app-dock {
@@ -1255,7 +1448,20 @@ html.mobile-layout .desktop-taskbar#desktop-app-dock {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.5rem !important;
     width: 100% !important;
+    margin-top: 0 !important;
     margin-bottom: 0.75rem !important;
+}
+
+html.mobile-layout .dock-app-btn {
+    min-height: 50px !important;
+    padding: 0.5rem 0.65rem !important;
+}
+
+html.mobile-layout .desktop-app-stage {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 420px !important;
+    overflow: visible !important;
 }
 
 html.mobile-layout .desktop-window,
@@ -1269,23 +1475,40 @@ html.mobile-layout .app-window-pane {
     top: 0 !important;
 }
 
-html.mobile-layout .living-os-container.view-apps-only .xray-pane {
-    display: none !important;
-}
-html.mobile-layout .living-os-container.view-apps-only .desktop-pane {
-    display: flex !important;
-}
-
-html.mobile-layout .living-os-container.view-console-only .desktop-pane {
-    display: none !important;
-}
-html.mobile-layout .living-os-container.view-console-only .xray-pane {
-    display: flex !important;
+/* OS Builder Quest on html.mobile-layout */
+html.mobile-layout .quest-view-wrapper {
+    padding: 0.75rem 0.5rem 3.5rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
 }
 
-html.mobile-layout .living-os-container.view-split .xray-pane,
-html.mobile-layout .living-os-container.view-split .desktop-pane {
+html.mobile-layout .quest-header-bar {
     display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    gap: 0.75rem !important;
+}
+
+html.mobile-layout .quest-scorecard-deck {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+}
+
+html.mobile-layout .quest-track-ribbon {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+}
+
+html.mobile-layout .quest-level-deck {
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
 }
 
 /* Classroom on html.mobile-layout */

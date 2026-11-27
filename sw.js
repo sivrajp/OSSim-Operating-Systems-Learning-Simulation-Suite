@@ -3,7 +3,7 @@
  * (C) Copyright Sivraj P. All rights reserved.
  */
 
-const CACHE_NAME = 'ossim-pwa-v1.0.6';
+const CACHE_NAME = 'ossim-pwa-v1.1.0';
 
 const PRECACHE_ASSETS = [
     './',
@@ -49,42 +49,54 @@ self.addEventListener('activate', (event) => {
     );
 });
 
-// Fetch: Cache-First strategy with Stale-While-Revalidate fallback
+// Fetch: Network-First for HTML & CSS (ensures instant live updates, offline fallback), Cache-First for static bundles
 self.addEventListener('fetch', (event) => {
-    // Only handle GET requests for our app
     if (event.request.method !== 'GET') return;
 
+    const url = new URL(event.request.url);
+    const isHtmlOrCss = event.request.mode === 'navigate' ||
+                        (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) ||
+                        url.pathname.endsWith('.html') ||
+                        url.pathname.endsWith('.css') ||
+                        url.pathname.endsWith('pwa-register.js');
+
+    if (isHtmlOrCss) {
+        // Network-First: Always fetch freshest styles and markup when online
+        event.respondWith(
+            fetch(event.request)
+                .then((networkResponse) => {
+                    if (networkResponse && networkResponse.status === 200) {
+                        const responseToCache = networkResponse.clone();
+                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+                    }
+                    return networkResponse;
+                })
+                .catch(() => {
+                    return caches.match(event.request).then((cached) => cached || caches.match('./index.html'));
+                })
+        );
+        return;
+    }
+
+    // Cache-First with background revalidation for bundles and media
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
             if (cachedResponse) {
-                // Fetch in background to update cache (Stale-While-Revalidate)
                 fetch(event.request).then((networkResponse) => {
                     if (networkResponse && networkResponse.status === 200) {
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(event.request, networkResponse);
-                        });
+                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, networkResponse));
                     }
-                }).catch(() => {
-                    // Network unavailable, running purely offline
-                });
+                }).catch(() => {});
                 return cachedResponse;
             }
 
-            // Not in cache: fetch from network and store
             return fetch(event.request).then((networkResponse) => {
                 if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
                     return networkResponse;
                 }
                 const responseToCache = networkResponse.clone();
-                caches.open(CACHE_NAME).then((cache) => {
-                    cache.put(event.request, responseToCache);
-                });
+                caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
                 return networkResponse;
-            }).catch(() => {
-                // Offline fallback for HTML navigation
-                if (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) {
-                    return caches.match('./index.html');
-                }
             });
         })
     );

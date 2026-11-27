@@ -14,10 +14,25 @@
             navigator.serviceWorker.register('./sw.js')
                 .then((registration) => {
                     console.log('[OSSim PWA] Service Worker registered successfully with scope:', registration.scope);
+                    // Check for updates periodically
+                    registration.update();
+                })
+                .then((registration) => {
+                    console.log('[OSSim PWA] Service Worker registered successfully with scope:', registration.scope);
                 })
                 .catch((error) => {
                     console.warn('[OSSim PWA] Service Worker registration failed:', error);
                 });
+
+            // Auto-refresh when a new service worker version activates
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    console.log('[OSSim PWA] Controller changed! Auto-refreshing for latest assets...');
+                    window.location.reload();
+                }
+            });
         });
     }
 
