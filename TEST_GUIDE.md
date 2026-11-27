@@ -708,6 +708,8 @@ $$\mathbf{1\text{ Master Battery}} \quad\longrightarrow\quad \mathbf{18\text{ Au
 | **Total Automated System Checks** | **878 / 878 Passed (100.0% Pass Rate)** |
 | **Automated Execution Cadence** | Nightly Regression at 00:00 UTC & on every push to `main` |
 
+> **Provenance & CI Lineage Note:** Commit [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) represents the formal automated continuous integration run across all 18 headless test suites (749 baseline atomic assertions + 61 extended combinatorial checks). Subsequent commits culminating in [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) incorporate PWA service worker isolation hardening, responsive mobile ergonomics, empirical multi-device audit records, and terminology consistency checks validated via the local release consistency harness (`verify_release_consistency.py` passing 96/96 checks).
+
 ---
 
 

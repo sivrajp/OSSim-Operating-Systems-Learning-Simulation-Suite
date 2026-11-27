@@ -140,8 +140,8 @@ OSSim maintains an automated, headless browser integration test harness executin
 | Parameter | Official CI Verification Record |
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
-| **Execution Date & Timestamp** | `2026-11-27 11:45:00 UTC` |
-| **Public Distribution SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Verified Green • Release Candidate) |
+| **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` (Baseline CI Sweep) • `2026-11-27 11:36:00 UTC` (Release Candidate Freeze) |
+| **Public Distribution Commit SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Baseline CI Verified) • [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) (Release Candidate Freeze) |
 | **Test Harness SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
@@ -153,6 +153,8 @@ OSSim maintains an automated, headless browser integration test harness executin
 | **Automated Cadence** | Daily Nightly Regression (00:00 UTC) & On Every Push |
 
 > **Note on Exact Test Counts:** The core release baseline comprises **749 atomic assertions** across 18 automated CI suites ($\sum_{i=1}^{6} A_i = 233$, $\sum_{i=7}^{12} A_i = 310$, $\sum_{i=13}^{18} A_i = 206 \implies 233 + 310 + 206 = 749$). Extended combinatorial sweeps in the private test harness (evaluating Suite 10 across all 4 dock application mode-switch matrices `BM_01`–`BM_86`) execute **exactly 810 atomic assertions**, all passing at 100.0% ($749 + 61 = 810$). When including the automated release consistency audit suite (`verify_release_consistency.py` with 68 checks), the codebase passes **878 automated checks**.
+>
+> **Provenance & CI Lineage Note:** Commit [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) represents the formal automated continuous integration run across all 18 headless test suites (749 baseline atomic assertions + 61 extended combinatorial checks). Subsequent commits culminating in [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) incorporate PWA service worker isolation hardening, responsive mobile ergonomics, empirical multi-device audit records, and terminology consistency checks validated via the local release consistency harness (`verify_release_consistency.py` passing 96/96 checks).
 
 ### 📱 Progressive Web App (PWA) & Offline Suite Verification
 In addition to the 18 core domain suites, the release candidate validates 7 explicit PWA lifecycle and offline scenarios:
