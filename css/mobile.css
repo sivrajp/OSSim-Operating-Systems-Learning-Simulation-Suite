@@ -5,7 +5,7 @@
 
 /* Base Mobile Enhancements & Safe Area Support */
 :root {
-    --mobile-nav-height: 58px;
+    --mobile-nav-height: 60px;
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-top: env(safe-area-inset-top, 0px);
 }
@@ -13,6 +13,7 @@
 /* Ensure smooth touch scrolling on iOS */
 * {
     -webkit-tap-highlight-color: transparent;
+    box-sizing: border-box;
 }
 
 /* --------------------------------------------------------------------------
@@ -22,18 +23,18 @@
     display: none;
     position: fixed;
     top: max(var(--safe-top), 8px);
-    left: 12px;
-    right: 12px;
-    background: linear-gradient(135deg, rgba(27, 54, 93, 0.96) 0%, rgba(15, 32, 56, 0.98) 100%);
+    left: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, rgba(27, 54, 93, 0.98) 0%, rgba(15, 32, 56, 0.99) 100%);
     border: 1px solid var(--accent);
     border-radius: 12px;
     padding: 0.75rem 1rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7), 0 0 15px rgba(214, 158, 46, 0.25);
-    z-index: 10000;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.8), 0 0 15px rgba(214, 158, 46, 0.3);
+    z-index: 100000;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
     animation: pwaSlideDown 0.35s ease-out;
 }
 
@@ -87,8 +88,8 @@
     color: #0E1726;
     border: none;
     border-radius: 6px;
-    padding: 0.4rem 0.85rem;
-    font-size: 0.78rem;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
     transition: transform 0.15s;
@@ -102,7 +103,7 @@
     background: transparent;
     color: var(--text-muted);
     border: none;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
@@ -119,36 +120,39 @@
     letter-spacing: 0.3px;
     text-transform: uppercase;
     transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .offline-status-pill.online {
-    background: rgba(39, 103, 73, 0.3);
+    background: rgba(39, 103, 73, 0.35);
     color: #9AE6B4;
     border: 1px solid var(--success);
 }
 
 .offline-status-pill.offline {
-    background: rgba(221, 107, 32, 0.3);
+    background: rgba(221, 107, 32, 0.35);
     color: #FEEBC8;
     border: 1px solid var(--warning);
 }
 
 /* --------------------------------------------------------------------------
-   Mobile Bottom Navigation Bar
+   Mobile Bottom Navigation Bar (Fixed to screen bottom)
    -------------------------------------------------------------------------- */
 #mobile-bottom-nav {
     display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: calc(var(--mobile-nav-height) + var(--safe-bottom));
-    padding-bottom: var(--safe-bottom);
-    background: rgba(15, 23, 42, 0.94);
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.45);
-    z-index: 9999;
-    backdrop-filter: blur(12px);
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: calc(var(--mobile-nav-height) + var(--safe-bottom)) !important;
+    padding-bottom: var(--safe-bottom) !important;
+    background: rgba(14, 23, 38, 0.97) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.14) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
+    z-index: 99999 !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
     justify-content: space-around;
     align-items: center;
 }
@@ -162,17 +166,18 @@
     background: transparent;
     border: none;
     color: var(--text-secondary);
-    padding: 0.4rem 0.6rem;
+    padding: 0.4rem 0.4rem;
     cursor: pointer;
     font-size: 0.68rem;
     font-weight: 600;
     flex: 1;
     height: 100%;
     transition: color 0.15s ease, transform 0.1s ease;
+    min-height: 48px;
 }
 
 .mobile-nav-item .nav-icon {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     line-height: 1;
 }
 
@@ -182,7 +187,7 @@
 
 .mobile-nav-item.active .nav-icon {
     color: var(--accent);
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 /* --------------------------------------------------------------------------
@@ -191,149 +196,223 @@
 #orientation-tip-banner {
     display: none;
     position: fixed;
-    bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 8px);
+    bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 10px);
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(14, 23, 38, 0.92);
-    border: 1px solid rgba(56, 189, 248, 0.5);
+    background: rgba(14, 23, 38, 0.95);
+    border: 1px solid rgba(56, 189, 248, 0.6);
     border-radius: 20px;
-    padding: 0.35rem 0.9rem;
-    font-size: 0.72rem;
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: #E2E8F0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-    z-index: 9998;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    z-index: 99998;
     backdrop-filter: blur(8px);
-    animation: fadeInOut 5s forwards;
     white-space: nowrap;
     pointer-events: none;
 }
 
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: translate(-50%, 10px); }
-    15% { opacity: 1; transform: translate(-50%, 0); }
-    85% { opacity: 1; transform: translate(-50%, 0); }
-    100% { opacity: 0; transform: translate(-50%, -10px); }
-}
-
 /* ==========================================================================
-   Responsive Breakpoints for Tablets & Phones (max-width: 768px)
+   Comprehensive Mobile & Tablet Adaptation (Applies to all touch / narrow screens)
    ========================================================================== */
-@media (max-width: 768px) {
-    /* Show bottom navigation */
+@media (max-width: 1024px), (pointer: coarse) {
+    /* 1. Prevent any horizontal content blowout that triggers desktop zoom-out */
+    html, body {
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        position: relative !important;
+        height: 100vh !important;
+        height: 100dvh !important;
+    }
+
+    /* 2. Show bottom navigation */
     #mobile-bottom-nav {
-        display: flex;
+        display: flex !important;
     }
 
-    /* Allocate space for bottom navigation bar */
-    body {
-        height: 100vh;
-        height: 100dvh; /* Dynamic viewport height for mobile browser toolbars */
-    }
-
-    main#app-viewport {
-        padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom));
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Compact header on mobile */
-    header.app-header {
-        padding: 0.35rem 0.75rem;
-        gap: 0.2rem;
-    }
-
-    /* Hide redundant desktop navigation tabs in header ribbon */
-    .header-ribbon-row .nav-tabs {
+    /* 3. Hide redundant desktop top navigation ribbon */
+    .header-ribbon-row,
+    .header-ribbon-row .nav-tabs,
+    .nav-tabs {
         display: none !important;
     }
 
-    /* Center master clock and action controls */
-    .header-ribbon-row {
-        justify-content: space-between;
-        gap: 0.4rem;
+    /* 4. Hide desktop header action buttons */
+    .header-ribbon-row .header-actions {
+        display: none !important;
     }
 
-    .master-controls {
-        gap: 0.4rem;
-    }
-
-    .ctrl-btn {
-        padding: 0.4rem 0.6rem;
-        min-height: 40px;
-        min-width: 40px;
-        justify-content: center;
-        font-size: 0.75rem;
-    }
-
+    /* 5. Hide desktop subtitle strip */
     .header-bottom-bar {
-        display: none !important; /* Hide subtitle row to save vertical space on phones */
+        display: none !important;
     }
 
-    /* Touch Target & Ergonomics Optimization */
+    /* 6. Compact header row */
+    header.app-header {
+        padding: 0.5rem 0.85rem !important;
+        gap: 0 !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+    }
+
+    .header-top-bar {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+    }
+
+    .header-top-bar .tool-title {
+        font-size: 0.92rem !important;
+        letter-spacing: 0.4px !important;
+    }
+
+    .header-top-bar .brand-logo {
+        width: 22px !important;
+        height: 22px !important;
+        font-size: 0.85rem !important;
+    }
+
+    /* 7. Viewport padding so content is never covered by bottom nav */
+    main#app-viewport {
+        padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 8px) !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* 8. Home Hero & Container Mobile Adjustments */
+    .home-container {
+        padding: 1rem 0.85rem 3rem !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+        gap: 1.25rem !important;
+    }
+
+    .home-hero {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .home-hero-badge {
+        font-size: 0.65rem !important;
+        padding: 0.25rem 0.65rem !important;
+        text-align: center !important;
+    }
+
+    .home-hero-title {
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+        word-break: break-word !important;
+    }
+
+    .home-hero-subtitle {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .home-hero-purpose {
+        font-size: 0.78rem !important;
+        padding: 0.75rem 0.9rem !important;
+        line-height: 1.5 !important;
+        width: 100% !important;
+    }
+
+    .home-stats-strip {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.4rem !important;
+    }
+
+    .home-stats-strip .stat-pill {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        font-size: 0.74rem !important;
+        padding: 0.4rem 0.75rem !important;
+    }
+
+    .quickstart-steps-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+    }
+
+    /* 9. Touch Ergonomics */
     button, 
     .btn, 
     select, 
     input[type="button"], 
     input[type="submit"] {
-        min-height: 42px;
+        min-height: 44px !important;
     }
 
-    /* Visualizer & Simulation Canvases: Enable Smooth Horizontal Touch Scrolling */
+    /* 10. Horizontal Touch-Scroll Containers for Data Visualizers */
     .visualizer-container,
     .canvas-wrapper,
     .gantt-chart-wrapper,
     .memory-grid-container,
     .disk-track-container,
-    .table-responsive {
-        width: 100% !important;
+    .table-responsive,
+    canvas {
+        max-width: 100% !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
-        padding-bottom: 0.5rem;
     }
 
-    /* Classroom & Workshop Layouts: Stack vertically */
+    /* 11. Classroom & Workshop Layouts: Single-column flow */
     .classroom-layout,
     .workshop-layout,
     .solver-grid {
         flex-direction: column !important;
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
+        width: 100% !important;
     }
 
     .concept-sidebar,
     .solver-sidebar {
         width: 100% !important;
-        max-height: 240px;
-        overflow-y: auto;
+        max-height: 250px !important;
+        overflow-y: auto !important;
     }
 
-    /* Floating Windows in Living Desktop */
+    /* 12. Floating Windows in Living Desktop */
     .desktop-window {
-        max-width: 95vw !important;
-        left: 2.5vw !important;
+        max-width: 96vw !important;
+        left: 2vw !important;
     }
 }
 
 /* ==========================================================================
-   Small Mobile Devices (max-width: 480px)
+   Identical Enforcement for html.mobile-layout Class
    ========================================================================== */
-@media (max-width: 480px) {
-    .header-top-bar .tool-title {
-        font-size: 0.88rem;
-    }
+html.mobile-layout .header-ribbon-row,
+html.mobile-layout .header-ribbon-row .nav-tabs,
+html.mobile-layout .nav-tabs,
+html.mobile-layout .header-ribbon-row .header-actions,
+html.mobile-layout .header-bottom-bar {
+    display: none !important;
+}
 
-    .header-top-bar .brand-logo {
-        width: 20px;
-        height: 20px;
-        font-size: 0.8rem;
-    }
+html.mobile-layout #mobile-bottom-nav {
+    display: flex !important;
+}
 
-    .speed-selector label {
-        display: none;
-    }
+html.mobile-layout main#app-viewport {
+    padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 8px) !important;
+    overflow-x: hidden !important;
+}
 
-    .mobile-nav-item {
-        font-size: 0.62rem;
-    }
+html.mobile-layout .home-stats-strip {
+    flex-direction: column !important;
+}
+
+html.mobile-layout .quickstart-steps-grid {
+    grid-template-columns: 1fr !important;
 }

@@ -2,8 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>OSSim — Operating Systems Learning & Simulation Suite</title>
+    <!-- Early Mobile Detection to Guarantee Immediate Mobile Ergonomics -->
+    <script>
+    (function() {
+        function checkMobile() {
+            var isCoarse = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+            var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            var isNarrow = (window.innerWidth <= 1024) || (screen && screen.width <= 1024);
+            if (isCoarse || isMobileUA || isNarrow) {
+                document.documentElement.classList.add('mobile-layout');
+            } else {
+                document.documentElement.classList.remove('mobile-layout');
+            }
+        }
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        window.addEventListener('orientationchange', checkMobile);
+    })();
+    </script>
+    <style>
+        /* Immediate Critical Mobile Layout - Eliminates desktop zoom-out */
+        @media (max-width: 1024px), (pointer: coarse) {
+            html, body {
+                width: 100% !important;
+                max-width: 100vw !important;
+                overflow-x: hidden !important;
+            }
+            .header-ribbon-row,
+            .header-ribbon-row .nav-tabs,
+            .nav-tabs,
+            .header-ribbon-row .header-actions,
+            .header-bottom-bar {
+                display: none !important;
+            }
+            #mobile-bottom-nav {
+                display: flex !important;
+            }
+            main#app-viewport {
+                padding-bottom: 68px !important;
+                overflow-x: hidden !important;
+            }
+        }
+        html.mobile-layout .header-ribbon-row,
+        html.mobile-layout .header-ribbon-row .nav-tabs,
+        html.mobile-layout .nav-tabs,
+        html.mobile-layout .header-ribbon-row .header-actions,
+        html.mobile-layout .header-bottom-bar {
+            display: none !important;
+        }
+        html.mobile-layout #mobile-bottom-nav {
+            display: flex !important;
+        }
+        html.mobile-layout main#app-viewport {
+            padding-bottom: 68px !important;
+            overflow-x: hidden !important;
+        }
+    </style>
     <!-- PWA Manifest & Mobile Web App Meta -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1B365D">
