@@ -696,7 +696,7 @@ $$\mathbf{1\text{ Master Battery}} \quad\longrightarrow\quad \mathbf{18\text{ Au
 | :--- | :--- |
 | **CI Orchestrator** | GitHub Actions ([`regression.yml`](https://github.com/sivrajp/ossim-test-harness/actions/workflows/regression.yml)) |
 | **Execution Date & Timestamp** | `2026-11-25 08:45:00 UTC` (Baseline CI Sweep) • `2026-11-27 11:36:00 UTC` (Release Candidate Freeze) |
-| **Public Distribution Commit SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Baseline CI Verified) • [`b82662e`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/b82662e) (Current Release Freeze Candidate) |
+| **Public Distribution Commit SHA** | [`a7d2130`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/a7d2130) (Baseline CI Verified) • [`fcc0b65`](https://github.com/sivrajp/OSSim-Operating-Systems-Learning-Simulation-Suite/commit/fcc0b65) (Current Release Freeze Candidate) |
 | **Test Harness Commit SHA** | [`b6634fb`](https://github.com/sivrajp/ossim-test-harness/commit/b6634fb) (Release Consistency & Invariant Verification Suite) |
 | **Runner Environment** | `windows-latest` (Windows Server 2022 Datacenter, x86_64) |
 | **Browser Engine** | Microsoft Edge Headless 131.0+ (`--headless=new --disable-gpu`) |
