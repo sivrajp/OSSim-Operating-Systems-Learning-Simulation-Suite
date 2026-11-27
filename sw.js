@@ -3,7 +3,7 @@
  * (C) Copyright Sivraj P. All rights reserved.
  */
 
-const CACHE_NAME = 'ossim-pwa-v1.2.0';
+const CACHE_NAME = 'ossim-pwa-v1.3.0';
 
 const PRECACHE_ASSETS = [
     './',
