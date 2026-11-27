@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>OSSim — Operating Systems Learning & Simulation Suite</title>
     <!-- Early Mobile Detection to Guarantee Immediate Mobile Ergonomics -->
     <script>
@@ -28,13 +28,42 @@
             html, body {
                 width: 100% !important;
                 max-width: 100vw !important;
+                overflow-x: hidden !important;
+                height: auto !important;
+                min-height: 100% !important;
                 font-size: 16px !important;
+                -webkit-text-size-adjust: 100% !important;
+                text-size-adjust: 100% !important;
             }
             header.app-header {
                 position: sticky !important;
                 top: 0 !important;
                 z-index: 10000 !important;
-                padding: 0.65rem 1rem !important;
+                padding: 0.5rem 0.75rem !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+                overflow: hidden !important;
+            }
+            .header-top-bar {
+                width: 100% !important;
+                max-width: 100vw !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 0.5rem !important;
+                overflow: hidden !important;
+            }
+            .header-top-bar .tool-title {
+                font-size: 0.95rem !important;
+                font-weight: 800 !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+                max-width: calc(100vw - 130px) !important;
+                flex: 1 1 auto !important;
+            }
+            .offline-status-pill {
+                display: none !important;
             }
             .header-ribbon-row,
             .header-ribbon-row .nav-tabs,
@@ -46,16 +75,72 @@
             }
             .mobile-menu-toggle-btn {
                 display: inline-flex !important;
+                flex-shrink: 0 !important;
+                padding: 0.4rem 0.75rem !important;
+                min-height: 38px !important;
             }
             main#app-viewport {
-                padding-bottom: 24px !important;
+                width: 100% !important;
+                max-width: 100vw !important;
+                height: auto !important;
+                min-height: calc(100vh - 56px) !important;
+                overflow-x: hidden !important;
+                overflow-y: visible !important;
+                display: block !important;
+                padding-bottom: 3rem !important;
             }
+            .tab-view {
+                width: 100% !important;
+                max-width: 100vw !important;
+                height: auto !important;
+                min-height: 100% !important;
+                overflow: visible !important;
+            }
+            .tab-view.active {
+                display: flex !important;
+                flex-direction: column !important;
+            }
+        }
+        html.mobile-layout,
+        html.mobile-layout body {
+            width: 100% !important;
+            max-width: 100vw !important;
+            overflow-x: hidden !important;
+            height: auto !important;
+            min-height: 100% !important;
+            font-size: 16px !important;
+            -webkit-text-size-adjust: 100% !important;
+            text-size-adjust: 100% !important;
         }
         html.mobile-layout header.app-header {
             position: sticky !important;
             top: 0 !important;
             z-index: 10000 !important;
-            padding: 0.65rem 1rem !important;
+            padding: 0.5rem 0.75rem !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            overflow: hidden !important;
+        }
+        html.mobile-layout .header-top-bar {
+            width: 100% !important;
+            max-width: 100vw !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 0.5rem !important;
+            overflow: hidden !important;
+        }
+        html.mobile-layout .header-top-bar .tool-title {
+            font-size: 0.95rem !important;
+            font-weight: 800 !important;
+            white-space: nowrap !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            max-width: calc(100vw - 130px) !important;
+            flex: 1 1 auto !important;
+        }
+        html.mobile-layout .offline-status-pill {
+            display: none !important;
         }
         html.mobile-layout .header-ribbon-row,
         html.mobile-layout .header-ribbon-row .nav-tabs,
@@ -67,9 +152,30 @@
         }
         html.mobile-layout .mobile-menu-toggle-btn {
             display: inline-flex !important;
+            flex-shrink: 0 !important;
+            padding: 0.4rem 0.75rem !important;
+            min-height: 38px !important;
         }
         html.mobile-layout main#app-viewport {
-            padding-bottom: 24px !important;
+            width: 100% !important;
+            max-width: 100vw !important;
+            height: auto !important;
+            min-height: calc(100vh - 56px) !important;
+            overflow-x: hidden !important;
+            overflow-y: visible !important;
+            display: block !important;
+            padding-bottom: 3rem !important;
+        }
+        html.mobile-layout .tab-view {
+            width: 100% !important;
+            max-width: 100vw !important;
+            height: auto !important;
+            min-height: 100% !important;
+            overflow: visible !important;
+        }
+        html.mobile-layout .tab-view.active {
+            display: flex !important;
+            flex-direction: column !important;
         }
     </style>
     <!-- PWA Manifest & Mobile Web App Meta -->
@@ -862,6 +968,18 @@
         <!-- TIER 1: LIVE OS DESKTOP VIEW (THE PLAYGROUND)                     -->
         <!-- ================================================================= -->
         <div class="tab-view" id="tab-view-desktop" style="flex-direction:column;">
+            <!-- Mobile Playground View Switcher (Stacked / Apps / PC Console) -->
+            <div class="mobile-playground-nav" id="mobile-playground-nav">
+                <button class="playground-nav-btn active" data-pview="split" id="btn-pview-split" title="View PC Console and Applications stacked together">
+                    <span class="pnav-icon">↕</span> <span class="pnav-text">Stacked (All)</span>
+                </button>
+                <button class="playground-nav-btn" data-pview="apps" id="btn-pview-apps" title="Focus on Application Workspace &amp; Dock">
+                    <span class="pnav-icon">💻</span> <span class="pnav-text">Apps &amp; Dock</span>
+                </button>
+                <button class="playground-nav-btn" data-pview="console" id="btn-pview-console" title="Focus on Virtual PC Hardware Console">
+                    <span class="pnav-icon">⚙️</span> <span class="pnav-text">PC Console</span>
+                </button>
+            </div>
             <div class="living-os-container" style="flex:1;min-height:0;">
                 <!-- Left Pane: Application Switcher Dock & Windows Stage -->
                 <div class="desktop-pane">

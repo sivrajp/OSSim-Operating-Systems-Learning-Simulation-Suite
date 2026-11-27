@@ -217,6 +217,26 @@
                 return;
             }
 
+            // C. The Playground Mobile Segmented Switcher (Stacked / Apps / Console)
+            const pnavBtn = e.target.closest('.playground-nav-btn');
+            if (pnavBtn) {
+                const mode = pnavBtn.getAttribute('data-pview');
+                document.querySelectorAll('.playground-nav-btn').forEach(btn => btn.classList.remove('active'));
+                pnavBtn.classList.add('active');
+                const container = document.querySelector('.living-os-container');
+                if (container) {
+                    container.classList.remove('view-split', 'view-apps-only', 'view-console-only');
+                    if (mode === 'apps') {
+                        container.classList.add('view-apps-only');
+                    } else if (mode === 'console') {
+                        container.classList.add('view-console-only');
+                    } else {
+                        container.classList.add('view-split');
+                    }
+                }
+                return;
+            }
+
             // B. The Workshop Solver Selector
             const activeAlgoTab = e.target.closest('.algo-subnav .algo-tab-btn.active');
             if (activeAlgoTab) {

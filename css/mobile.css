@@ -384,14 +384,30 @@
 }
 
 /* ==========================================================================
+   Comprehensive Mobile & Tablet Adaptation/* ==========================================================================
    Comprehensive Mobile & Tablet Adaptation — Full Readable Size Flow
    ========================================================================== */
+.mobile-playground-nav {
+    display: none;
+}
+
 @media (max-width: 1024px), (pointer: coarse) {
     /* 1. Base typography & layout sizing */
     html, body {
-        font-size: 16px !important;
         width: 100% !important;
         max-width: 100vw !important;
+        overflow-x: hidden !important;
+        height: auto !important;
+        min-height: 100% !important;
+        font-size: 16px !important;
+        -webkit-text-size-adjust: 100% !important;
+        text-size-adjust: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box !important;
     }
 
     /* 2. Sticky Header with prominent Menu button */
@@ -400,36 +416,59 @@
         top: 0 !important;
         z-index: 10000 !important;
         background: #0E1726 !important;
-        padding: 0.65rem 1rem !important;
+        padding: 0.5rem 0.75rem !important;
         gap: 0 !important;
         width: 100% !important;
         max-width: 100vw !important;
+        overflow: hidden !important;
     }
 
     .header-top-bar {
         width: 100% !important;
+        max-width: 100vw !important;
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
+        gap: 0.5rem !important;
+        overflow: hidden !important;
     }
 
     .header-top-bar .tool-title {
-        font-size: 1.1rem !important;
+        font-size: 0.95rem !important;
         font-weight: 800 !important;
-        letter-spacing: 0.5px !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        max-width: calc(100vw - 130px) !important;
+        flex: 1 1 auto !important;
+        letter-spacing: 0.3px !important;
     }
 
     .header-top-bar .brand-logo {
-        width: 28px !important;
-        height: 28px !important;
-        font-size: 1.0rem !important;
+        width: 26px !important;
+        height: 26px !important;
+        font-size: 0.95rem !important;
+        flex-shrink: 0 !important;
+    }
+
+    .offline-status-pill {
+        display: none !important;
     }
 
     .mobile-menu-toggle-btn {
         display: inline-flex !important;
+        flex-shrink: 0 !important;
+        padding: 0.4rem 0.75rem !important;
+        min-height: 38px !important;
+        font-size: 0.88rem !important;
+        font-weight: 700 !important;
+        background: var(--primary-light) !important;
+        border: 1px solid var(--accent) !important;
+        color: #FFFFFF !important;
+        border-radius: 6px !important;
     }
 
-    /* 3. Hide redundant desktop top ribbon & bottom ribbon */
+    /* 3. Hide Wide Desktop Ribbon Elements */
     .header-ribbon-row,
     .header-ribbon-row .nav-tabs,
     .nav-tabs,
@@ -441,68 +480,92 @@
 
     /* 4. Main Viewport & Home Page */
     main#app-viewport {
-        padding-bottom: 2.5rem !important;
         width: 100% !important;
         max-width: 100vw !important;
+        height: auto !important;
+        min-height: calc(100vh - 56px) !important;
         overflow-x: hidden !important;
-        overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
+        overflow-y: visible !important;
+        display: block !important;
+        padding: 0 0 3.5rem 0 !important;
+    }
+
+    .tab-view {
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
+    }
+
+    .tab-view.active {
+        display: flex !important;
+        flex-direction: column !important;
     }
 
     .home-container {
-        padding: 1.25rem 1rem 3rem !important;
+        padding: 1rem 0.85rem 3rem !important;
         width: 100% !important;
         max-width: 100vw !important;
-        gap: 1.5rem !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 
     .home-hero {
+        padding: 0.5rem 0 !important;
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 !important;
-        gap: 0.85rem !important;
     }
 
-    .home-hero-badge {
-        font-size: 0.82rem !important;
-        padding: 0.35rem 0.85rem !important;
-        border-radius: 20px !important;
-    }
-
-    .home-hero-title {
-        font-size: 1.65rem !important;
-        line-height: 1.25 !important;
-        word-break: break-word !important;
+    .home-hero h1 {
+        font-size: 1.45rem !important;
+        line-height: 1.3 !important;
+        word-wrap: break-word !important;
     }
 
     .home-hero-subtitle {
-        font-size: 1.05rem !important;
+        font-size: 0.92rem !important;
         line-height: 1.5 !important;
-        color: #CBD5E0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
 
     .home-hero-purpose {
-        font-size: 0.95rem !important;
-        padding: 1rem 1.15rem !important;
+        font-size: 0.84rem !important;
         line-height: 1.6 !important;
+        padding: 0.85rem 1rem !important;
         width: 100% !important;
+        max-width: 100% !important;
     }
 
+    /* 5. Home Stats Strip: Full-Width Clean Cards */
     .home-stats-strip {
+        display: flex !important;
         flex-direction: column !important;
+        gap: 0.6rem !important;
+        padding: 0.85rem !important;
         width: 100% !important;
-        gap: 0.55rem !important;
+        max-width: 100% !important;
     }
 
-    .home-stats-strip .stat-pill {
+    .stat-item {
         width: 100% !important;
-        justify-content: flex-start !important;
-        font-size: 0.9rem !important;
-        padding: 0.6rem 1rem !important;
-        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.75rem !important;
+        padding: 0.4rem 0.5rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     }
 
-    /* 5. ALL GRIDS REFLOW INTO READABLE SINGLE-COLUMN (1fr) */
+    .stat-item:last-child {
+        border-bottom: none !important;
+    }
+
+    .stat-divider {
+        display: none !important;
+    }
+
+    /* 6. Single-Column Full-Width Grids */
     .home-cards-grid,
     .quickstart-steps-grid,
     .pillars-grid,
@@ -515,89 +578,34 @@
         grid-template-columns: 1fr !important;
         gap: 1.25rem !important;
         width: 100% !important;
+        max-width: 100% !important;
     }
 
-    /* 6. Card typography and touch buttons */
-    .home-card,
-    .step-card,
+    .home-big-card,
+    .quickstart-step-card,
     .pillar-card,
     .level-card,
     .journey-card,
-    .doc-card,
-    .credit-card {
-        padding: 1.25rem !important;
+    .syllabus-card,
+    .home-doc-card {
         width: 100% !important;
         max-width: 100% !important;
+        padding: 1.25rem !important;
     }
 
-    .card-title,
-    .pillar-card-title,
-    .level-card-title,
-    .journey-card-title,
-    .doc-card-title {
-        font-size: 1.2rem !important;
-        line-height: 1.3 !important;
-        margin-bottom: 0.5rem !important;
-    }
-
-    .card-description,
-    .pillar-card-desc,
-    .level-card-desc,
-    .journey-card-desc,
-    .doc-card-desc {
-        font-size: 0.94rem !important;
-        line-height: 1.55 !important;
-        color: #CBD5E0 !important;
-    }
-
-    .card-action-btn,
-    .doc-card-btn {
-        font-size: 1.0rem !important;
-        min-height: 48px !important;
-        padding: 0.75rem 1.25rem !important;
-        border-radius: 8px !important;
-        font-weight: 700 !important;
-    }
-
-    .step-num {
-        font-size: 1.15rem !important;
-    }
-
-    .step-title {
-        font-size: 1.05rem !important;
-    }
-
-    .step-desc {
-        font-size: 0.90rem !important;
-        line-height: 1.5 !important;
-    }
-
-    /* 7. Touch Ergonomics */
-    button, 
-    .btn, 
-    select, 
-    input[type="button"], 
-    input[type="submit"] {
-        min-height: 44px !important;
-    }
-
-    /* 8. Tables, Code blocks & Data Visualizers - Horizontal Touch Scrolling */
-    .arch-mapping-table-wrap,
-    .visualizer-container,
-    .canvas-wrapper,
-    .gantt-chart-wrapper,
-    .memory-grid-container,
-    .disk-track-container,
-    .table-responsive,
-    canvas {
-        max-width: 100% !important;
+    /* 7. Full-Width Horizontal Touch Tables */
+    .arch-mapping-table-wrap {
+        width: 100% !important;
+        max-width: 100vw !important;
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch !important;
+        padding: 0.5rem !important;
     }
 
     .arch-mapping-table {
-        min-width: 540px !important;
-        font-size: 0.88rem !important;
+        min-width: 520px !important;
+        width: 100% !important;
+        font-size: 0.82rem !important;
     }
 
     .arch-mapping-table th,
@@ -605,41 +613,121 @@
         padding: 0.65rem 0.75rem !important;
     }
 
-    /* 9. The Playground (Living Desktop): Option A Stacked Architecture */
+    /* ==============================================================================
+       8. The Playground: Option A Stacked Architecture + Sticky View Switcher
+       ============================================================================== */
+    .mobile-playground-nav {
+        display: flex !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        background: #09101D !important;
+        border-bottom: 1px solid var(--accent) !important;
+        padding: 0.45rem 0.65rem !important;
+        gap: 0.45rem !important;
+        position: sticky !important;
+        top: 48px !important;
+        z-index: 9999 !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .playground-nav-btn {
+        flex: 1 !important;
+        padding: 0.45rem 0.4rem !important;
+        font-size: 0.78rem !important;
+        font-weight: 700 !important;
+        border-radius: 6px !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: #CBD5E0 !important;
+        cursor: pointer !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 0.35rem !important;
+        white-space: nowrap !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .playground-nav-btn:hover {
+        background: rgba(255, 255, 255, 0.12) !important;
+        color: #FFFFFF !important;
+    }
+
+    .playground-nav-btn.active {
+        background: var(--primary-light) !important;
+        color: #FFFFFF !important;
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 10px rgba(214, 158, 46, 0.35) !important;
+    }
+
+    #tab-view-desktop {
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
+        display: none;
+    }
+
+    #tab-view-desktop.active {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
     .living-os-container {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
+        max-width: 100vw !important;
         height: auto !important;
-        min-height: 100% !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
+        min-height: 0 !important;
+        overflow: visible !important;
+        gap: 1.25rem !important;
+        padding: 0.5rem 0.5rem 2.5rem !important;
     }
 
-    /* PC Hardware Console on Top */
+    /* Option A: PC Hardware Console on Top */
     .xray-pane {
         order: 1 !important;
         width: 100% !important;
         max-width: 100% !important;
-        flex: 0 0 auto !important;
+        flex: none !important;
         height: auto !important;
-        max-height: 290px !important;
-        overflow-y: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
         border-bottom: 2px solid var(--accent) !important;
+        border-right: none !important;
         border-left: none !important;
         padding: 0.65rem !important;
+        gap: 0.65rem !important;
     }
 
-    /* Conventional Right Side Window Content (Dock + Windows) Below */
+    /* Middle Row inside Console: CPU registers & Disk Platter stack vertically */
+    .xray-middle-row {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 0.65rem !important;
+    }
+
+    .compact-card .registers-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.35rem !important;
+    }
+
+    /* Option A: Conventional Right Side Window Content (Dock + Windows) Below */
     .desktop-pane {
         order: 2 !important;
         width: 100% !important;
-        min-width: 0 !important;
         max-width: 100% !important;
-        flex: 1 0 auto !important;
-        min-height: 480px !important;
+        min-width: 0 !important;
+        flex: none !important;
+        height: auto !important;
+        min-height: 520px !important;
+        overflow: visible !important;
         border-right: none !important;
-        padding: 0.75rem !important;
+        border-left: none !important;
+        padding: 0.75rem 0.5rem !important;
     }
 
     .desktop-taskbar#desktop-app-dock {
@@ -651,70 +739,96 @@
     }
 
     .dock-app-btn {
-        min-height: 48px !important;
+        min-height: 50px !important;
         padding: 0.5rem 0.65rem !important;
     }
 
     .desktop-app-stage {
         width: 100% !important;
-        min-height: 400px !important;
-        position: relative !important;
+        height: auto !important;
+        min-height: 420px !important;
+        overflow: visible !important;
     }
 
-    .desktop-window {
+    .desktop-window,
+    .app-window-pane {
         width: 100% !important;
-        max-width: 100% !important;
+        height: auto !important;
+        min-height: 380px !important;
+        overflow: visible !important;
+        position: relative !important;
         left: 0 !important;
         top: 0 !important;
-        position: relative !important;
-        min-height: 380px !important;
     }
 
-    /* 10. The Classroom: Mobile Top Topic Dropdown / Drawer Selector */
+    /* Playground Switcher States */
+    .living-os-container.view-apps-only .xray-pane {
+        display: none !important;
+    }
+    .living-os-container.view-apps-only .desktop-pane {
+        display: flex !important;
+    }
+
+    .living-os-container.view-console-only .desktop-pane {
+        display: none !important;
+    }
+    .living-os-container.view-console-only .xray-pane {
+        display: flex !important;
+    }
+
+    .living-os-container.view-split .xray-pane,
+    .living-os-container.view-split .desktop-pane {
+        display: flex !important;
+    }
+
+    /* ==============================================================================
+       9. The Classroom: Compact Top Topic Selector & Full-Width Analogy Stage
+       ============================================================================== */
     .classroom-container {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        height: 100% !important;
-        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
     }
 
     .classroom-sidebar {
         width: 100% !important;
         min-width: 0 !important;
         max-width: 100% !important;
-        flex: 0 0 auto !important;
+        height: auto !important;
         border-right: none !important;
         border-bottom: 2px solid var(--accent) !important;
-        position: relative !important;
-        z-index: 500 !important;
-        background: #0F172A !important;
-        overflow: visible !important;
+        padding: 0.5rem 0.75rem !important;
+        position: sticky !important;
+        top: 48px !important;
+        z-index: 9998 !important;
+        background: #0E1726 !important;
     }
 
     .classroom-sidebar-header {
         display: flex !important;
-        align-items: center !important;
         justify-content: space-between !important;
-        padding: 0.65rem 1rem !important;
+        align-items: center !important;
         cursor: pointer !important;
-        min-height: 48px !important;
-        background: #0F172A !important;
+        user-select: none !important;
     }
 
     .classroom-sidebar-header::after {
-        content: "▾ Select Topic" !important;
-        font-size: 0.85rem !important;
+        content: '▾ Select Topic' !important;
+        font-size: 0.78rem !important;
         font-weight: 700 !important;
         color: var(--accent) !important;
         background: rgba(214, 158, 46, 0.15) !important;
         border: 1px solid var(--accent) !important;
-        padding: 0.3rem 0.65rem !important;
-        border-radius: 6px !important;
+        border-radius: 4px !important;
+        padding: 0.2rem 0.5rem !important;
     }
 
     .classroom-sidebar.open-drawer .classroom-sidebar-header::after {
-        content: "▴ Close Topics" !important;
+        content: '▴ Close Topics' !important;
     }
 
     .classroom-nav-list {
@@ -724,48 +838,49 @@
     .classroom-sidebar.open-drawer .classroom-nav-list {
         display: flex !important;
         flex-direction: column !important;
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        right: 0 !important;
-        width: 100% !important;
-        max-height: 65vh !important;
+        gap: 0.4rem !important;
+        max-height: 55vh !important;
         overflow-y: auto !important;
-        -webkit-overflow-scrolling: touch !important;
-        background: #0A101D !important;
-        border: 2px solid var(--accent) !important;
-        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95) !important;
-        z-index: 1000 !important;
+        margin-top: 0.5rem !important;
+        padding: 0.5rem !important;
+        background: #111A2E !important;
+        border-radius: 6px !important;
+        border: 1px solid var(--border-color) !important;
     }
 
     .classroom-stage {
         width: 100% !important;
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        padding: 1rem 0.85rem !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 500px !important;
+        overflow: visible !important;
+        padding: 0.75rem 0.5rem 2rem !important;
     }
 
-    /* 11. The Workshop: Mobile Top Solver Dropdown Selector */
+    /* ==============================================================================
+       10. The Workshop: Compact Top Solver Selector & Full-Width Visualizer
+       ============================================================================== */
     .algo-container {
         display: flex !important;
         flex-direction: column !important;
         width: 100% !important;
-        height: 100% !important;
-        overflow-x: hidden !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
     }
 
     .algo-subnav {
+        width: 100% !important;
         display: flex !important;
         flex-direction: column !important;
-        width: 100% !important;
-        position: relative !important;
-        z-index: 400 !important;
-        background: #0F172A !important;
+        gap: 0.35rem !important;
+        padding: 0.5rem 0.75rem !important;
+        background: #0E1726 !important;
         border-bottom: 2px solid var(--accent) !important;
-        padding: 0 !important;
-        overflow: visible !important;
+        position: sticky !important;
+        top: 48px !important;
+        z-index: 9998 !important;
     }
 
     .algo-subnav:not(.open-drawer) .algo-tab-btn:not(.active) {
@@ -774,78 +889,146 @@
 
     .algo-subnav .algo-tab-btn.active {
         display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
         width: 100% !important;
-        padding: 0.75rem 1rem !important;
-        font-size: 0.95rem !important;
-        font-weight: 700 !important;
-        border-radius: 0 !important;
-        border: none !important;
-        background: #0F172A !important;
-        color: #FFFFFF !important;
-        cursor: pointer !important;
-        min-height: 48px !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 0.45rem 0.75rem !important;
+        border: 1px solid var(--accent) !important;
+        border-radius: 6px !important;
     }
 
     .algo-subnav:not(.open-drawer) .algo-tab-btn.active::after {
-        content: "▾ Solvers" !important;
-        font-size: 0.8rem !important;
+        content: '▾ Solvers' !important;
+        font-size: 0.78rem !important;
         font-weight: 700 !important;
         color: var(--accent) !important;
         background: rgba(214, 158, 46, 0.15) !important;
         border: 1px solid var(--accent) !important;
-        padding: 0.25rem 0.6rem !important;
-        border-radius: 6px !important;
+        border-radius: 4px !important;
+        padding: 0.2rem 0.5rem !important;
     }
 
     .algo-subnav.open-drawer .algo-tab-btn.active::after {
-        content: "▴ Close" !important;
-        font-size: 0.8rem !important;
-        font-weight: 700 !important;
-        color: var(--accent) !important;
-        background: rgba(214, 158, 46, 0.15) !important;
-        border: 1px solid var(--accent) !important;
-        padding: 0.25rem 0.6rem !important;
-        border-radius: 6px !important;
-    }
-
-    .algo-subnav.open-drawer {
-        position: relative !important;
+        content: '▴ Close' !important;
     }
 
     .algo-subnav.open-drawer .algo-tab-btn {
         display: flex !important;
         width: 100% !important;
-        padding: 0.75rem 1rem !important;
-        font-size: 0.92rem !important;
-        min-height: 48px !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+        padding: 0.5rem 0.75rem !important;
     }
 
     .algo-content-pane {
         width: 100% !important;
-        flex: 1 1 auto !important;
-        min-width: 0 !important;
-        padding: 1rem 0.85rem !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 500px !important;
+        overflow-x: auto !important;
+        overflow-y: visible !important;
+        padding: 0.75rem 0.5rem 2.5rem !important;
+    }
+
+    /* 11. All Other Environments (Architecture Lab, Studio, Challenge, Capstone) */
+    #tab-view-workbench,
+    #tab-view-algorithms,
+    #tab-view-challenge,
+    #tab-view-quest,
+    #tab-view-capstone,
+    #tab-view-capstone-playground {
+        width: 100% !important;
+        max-width: 100vw !important;
+        height: auto !important;
+        min-height: 100% !important;
+        overflow: visible !important;
+    }
+
+    .l0-split-view,
+    .l2-editor-split,
+    .l3-split-view,
+    .l4-split-view,
+    .l5-spec-grid,
+    .l5-code-grid,
+    .dual-mode-zones-container,
+    .shm-topo-container,
+    .bench-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 1rem !important;
     }
 }
 
 /* ==========================================================================
    Identical Enforcement for html.mobile-layout Class
    ========================================================================== */
+html.mobile-layout,
+html.mobile-layout body {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    height: auto !important;
+    min-height: 100% !important;
+    font-size: 16px !important;
+    -webkit-text-size-adjust: 100% !important;
+    text-size-adjust: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 html.mobile-layout header.app-header {
     position: sticky !important;
     top: 0 !important;
     z-index: 10000 !important;
     background: #0E1726 !important;
-    padding: 0.65rem 1rem !important;
+    padding: 0.5rem 0.75rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+}
+
+html.mobile-layout .header-top-bar {
+    width: 100% !important;
+    max-width: 100vw !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+    overflow: hidden !important;
+}
+
+html.mobile-layout .header-top-bar .tool-title {
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: calc(100vw - 130px) !important;
+    flex: 1 1 auto !important;
+    letter-spacing: 0.3px !important;
+}
+
+html.mobile-layout .header-top-bar .brand-logo {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 0.95rem !important;
+    flex-shrink: 0 !important;
+}
+
+html.mobile-layout .offline-status-pill {
+    display: none !important;
 }
 
 html.mobile-layout .mobile-menu-toggle-btn {
     display: inline-flex !important;
+    flex-shrink: 0 !important;
+    padding: 0.4rem 0.75rem !important;
+    min-height: 38px !important;
+    font-size: 0.88rem !important;
+    font-weight: 700 !important;
+    background: var(--primary-light) !important;
+    border: 1px solid var(--accent) !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
 }
 
 html.mobile-layout .header-ribbon-row,
@@ -858,8 +1041,71 @@ html.mobile-layout #mobile-bottom-nav {
 }
 
 html.mobile-layout main#app-viewport {
-    padding-bottom: 2.5rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: calc(100vh - 56px) !important;
     overflow-x: hidden !important;
+    overflow-y: visible !important;
+    display: block !important;
+    padding: 0 0 3.5rem 0 !important;
+}
+
+html.mobile-layout .tab-view {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+}
+
+html.mobile-layout .tab-view.active {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+html.mobile-layout .home-container {
+    padding: 1rem 0.85rem 3rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    overflow: visible !important;
+}
+
+html.mobile-layout .home-hero {
+    padding: 0.5rem 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+html.mobile-layout .home-hero h1 {
+    font-size: 1.45rem !important;
+    line-height: 1.3 !important;
+    word-wrap: break-word !important;
+}
+
+html.mobile-layout .home-hero-subtitle {
+    font-size: 0.92rem !important;
+    line-height: 1.5 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+html.mobile-layout .home-hero-purpose {
+    font-size: 0.84rem !important;
+    line-height: 1.6 !important;
+    padding: 0.85rem 1rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+html.mobile-layout .home-stats-strip {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.6rem !important;
+    padding: 0.85rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 html.mobile-layout .home-cards-grid,
@@ -873,57 +1119,173 @@ html.mobile-layout .home-docs-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 1.25rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
-html.mobile-layout .home-stats-strip {
-    flex-direction: column !important;
+html.mobile-layout .home-big-card,
+html.mobile-layout .quickstart-step-card,
+html.mobile-layout .pillar-card,
+html.mobile-layout .level-card,
+html.mobile-layout .journey-card,
+html.mobile-layout .syllabus-card,
+html.mobile-layout .home-doc-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1.25rem !important;
+}
+
+html.mobile-layout .arch-mapping-table-wrap {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0.5rem !important;
+}
+
+html.mobile-layout .arch-mapping-table {
+    min-width: 520px !important;
+    width: 100% !important;
+    font-size: 0.82rem !important;
 }
 
 /* Playground Option A on html.mobile-layout */
+html.mobile-layout .mobile-playground-nav {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    background: #09101D !important;
+    border-bottom: 1px solid var(--accent) !important;
+    padding: 0.45rem 0.65rem !important;
+    gap: 0.45rem !important;
+    position: sticky !important;
+    top: 48px !important;
+    z-index: 9999 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+html.mobile-layout .playground-nav-btn {
+    flex: 1 !important;
+    padding: 0.45rem 0.4rem !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    border-radius: 6px !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #CBD5E0 !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.35rem !important;
+    white-space: nowrap !important;
+}
+
+html.mobile-layout .playground-nav-btn.active {
+    background: var(--primary-light) !important;
+    color: #FFFFFF !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 10px rgba(214, 158, 46, 0.35) !important;
+}
+
+html.mobile-layout #tab-view-desktop {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+    display: none;
+}
+
+html.mobile-layout #tab-view-desktop.active {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
 html.mobile-layout .living-os-container {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
+    max-width: 100vw !important;
     height: auto !important;
-    min-height: 100% !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    gap: 1.25rem !important;
+    padding: 0.5rem 0.5rem 2.5rem !important;
 }
 
 html.mobile-layout .xray-pane {
     order: 1 !important;
     width: 100% !important;
     max-width: 100% !important;
-    flex: 0 0 auto !important;
-    max-height: 290px !important;
-    overflow-y: auto !important;
+    flex: none !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
     border-bottom: 2px solid var(--accent) !important;
     border-left: none !important;
+    border-right: none !important;
+    padding: 0.65rem !important;
+    gap: 0.65rem !important;
+}
+
+html.mobile-layout .xray-middle-row {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.65rem !important;
 }
 
 html.mobile-layout .desktop-pane {
     order: 2 !important;
     width: 100% !important;
-    min-width: 0 !important;
     max-width: 100% !important;
-    flex: 1 0 auto !important;
-    min-height: 480px !important;
+    min-width: 0 !important;
+    flex: none !important;
+    height: auto !important;
+    min-height: 520px !important;
+    overflow: visible !important;
     border-right: none !important;
+    border-left: none !important;
+    padding: 0.75rem 0.5rem !important;
 }
 
 html.mobile-layout .desktop-taskbar#desktop-app-dock {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 0.5rem !important;
+    width: 100% !important;
+    margin-bottom: 0.75rem !important;
 }
 
-html.mobile-layout .desktop-window {
+html.mobile-layout .desktop-window,
+html.mobile-layout .app-window-pane {
     width: 100% !important;
-    max-width: 100% !important;
+    height: auto !important;
+    min-height: 380px !important;
+    overflow: visible !important;
+    position: relative !important;
     left: 0 !important;
     top: 0 !important;
-    position: relative !important;
-    min-height: 380px !important;
+}
+
+html.mobile-layout .living-os-container.view-apps-only .xray-pane {
+    display: none !important;
+}
+html.mobile-layout .living-os-container.view-apps-only .desktop-pane {
+    display: flex !important;
+}
+
+html.mobile-layout .living-os-container.view-console-only .desktop-pane {
+    display: none !important;
+}
+html.mobile-layout .living-os-container.view-console-only .xray-pane {
+    display: flex !important;
+}
+
+html.mobile-layout .living-os-container.view-split .xray-pane,
+html.mobile-layout .living-os-container.view-split .desktop-pane {
+    display: flex !important;
 }
 
 /* Classroom on html.mobile-layout */
@@ -931,44 +1293,46 @@ html.mobile-layout .classroom-container {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    height: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
 }
 
 html.mobile-layout .classroom-sidebar {
     width: 100% !important;
     min-width: 0 !important;
     max-width: 100% !important;
-    flex: 0 0 auto !important;
+    height: auto !important;
     border-right: none !important;
     border-bottom: 2px solid var(--accent) !important;
-    position: relative !important;
-    z-index: 500 !important;
-    background: #0F172A !important;
-    overflow: visible !important;
+    padding: 0.5rem 0.75rem !important;
+    position: sticky !important;
+    top: 48px !important;
+    z-index: 9998 !important;
+    background: #0E1726 !important;
 }
 
 html.mobile-layout .classroom-sidebar-header {
     display: flex !important;
-    align-items: center !important;
     justify-content: space-between !important;
-    padding: 0.65rem 1rem !important;
+    align-items: center !important;
     cursor: pointer !important;
-    min-height: 48px !important;
 }
 
 html.mobile-layout .classroom-sidebar-header::after {
-    content: "▾ Select Topic" !important;
-    font-size: 0.85rem !important;
+    content: '▾ Select Topic' !important;
+    font-size: 0.78rem !important;
     font-weight: 700 !important;
     color: var(--accent) !important;
     background: rgba(214, 158, 46, 0.15) !important;
     border: 1px solid var(--accent) !important;
-    padding: 0.3rem 0.65rem !important;
-    border-radius: 6px !important;
+    border-radius: 4px !important;
+    padding: 0.2rem 0.5rem !important;
 }
 
 html.mobile-layout .classroom-sidebar.open-drawer .classroom-sidebar-header::after {
-    content: "▴ Close Topics" !important;
+    content: '▴ Close Topics' !important;
 }
 
 html.mobile-layout .classroom-nav-list {
@@ -978,26 +1342,23 @@ html.mobile-layout .classroom-nav-list {
 html.mobile-layout .classroom-sidebar.open-drawer .classroom-nav-list {
     display: flex !important;
     flex-direction: column !important;
-    position: absolute !important;
-    top: 100% !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    max-height: 65vh !important;
+    gap: 0.4rem !important;
+    max-height: 55vh !important;
     overflow-y: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    background: #0A101D !important;
-    border: 2px solid var(--accent) !important;
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.95) !important;
-    z-index: 1000 !important;
+    margin-top: 0.5rem !important;
+    padding: 0.5rem !important;
+    background: #111A2E !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--border-color) !important;
 }
 
 html.mobile-layout .classroom-stage {
     width: 100% !important;
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    padding: 1rem 0.85rem !important;
-    overflow-y: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 500px !important;
+    overflow: visible !important;
+    padding: 0.75rem 0.5rem 2rem !important;
 }
 
 /* Workshop on html.mobile-layout */
@@ -1005,19 +1366,23 @@ html.mobile-layout .algo-container {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
-    height: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
 }
 
 html.mobile-layout .algo-subnav {
+    width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    width: 100% !important;
-    position: relative !important;
-    z-index: 400 !important;
-    background: #0F172A !important;
+    gap: 0.35rem !important;
+    padding: 0.5rem 0.75rem !important;
+    background: #0E1726 !important;
     border-bottom: 2px solid var(--accent) !important;
-    padding: 0 !important;
-    overflow: visible !important;
+    position: sticky !important;
+    top: 48px !important;
+    z-index: 9998 !important;
 }
 
 html.mobile-layout .algo-subnav:not(.open-drawer) .algo-tab-btn:not(.active) {
@@ -1026,54 +1391,70 @@ html.mobile-layout .algo-subnav:not(.open-drawer) .algo-tab-btn:not(.active) {
 
 html.mobile-layout .algo-subnav .algo-tab-btn.active {
     display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
     width: 100% !important;
-    padding: 0.75rem 1rem !important;
-    font-size: 0.95rem !important;
-    font-weight: 700 !important;
-    border: none !important;
-    background: #0F172A !important;
-    color: #FFFFFF !important;
-    cursor: pointer !important;
-    min-height: 48px !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0.45rem 0.75rem !important;
+    border: 1px solid var(--accent) !important;
+    border-radius: 6px !important;
 }
 
 html.mobile-layout .algo-subnav:not(.open-drawer) .algo-tab-btn.active::after {
-    content: "▾ Solvers" !important;
-    font-size: 0.8rem !important;
+    content: '▾ Solvers' !important;
+    font-size: 0.78rem !important;
     font-weight: 700 !important;
     color: var(--accent) !important;
     background: rgba(214, 158, 46, 0.15) !important;
     border: 1px solid var(--accent) !important;
-    padding: 0.25rem 0.6rem !important;
-    border-radius: 6px !important;
+    border-radius: 4px !important;
+    padding: 0.2rem 0.5rem !important;
 }
 
 html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn.active::after {
-    content: "▴ Close" !important;
-    font-size: 0.8rem !important;
-    font-weight: 700 !important;
-    color: var(--accent) !important;
-    background: rgba(214, 158, 46, 0.15) !important;
-    border: 1px solid var(--accent) !important;
-    padding: 0.25rem 0.6rem !important;
-    border-radius: 6px !important;
+    content: '▴ Close' !important;
 }
 
 html.mobile-layout .algo-subnav.open-drawer .algo-tab-btn {
     display: flex !important;
     width: 100% !important;
-    padding: 0.75rem 1rem !important;
-    font-size: 0.92rem !important;
-    min-height: 48px !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 0.5rem 0.75rem !important;
 }
 
 html.mobile-layout .algo-content-pane {
     width: 100% !important;
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-    padding: 1rem 0.85rem !important;
-    overflow-y: auto !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 500px !important;
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    padding: 0.75rem 0.5rem 2.5rem !important;
+}
+
+/* Other Views */
+html.mobile-layout #tab-view-workbench,
+html.mobile-layout #tab-view-algorithms,
+html.mobile-layout #tab-view-challenge,
+html.mobile-layout #tab-view-quest,
+html.mobile-layout #tab-view-capstone,
+html.mobile-layout #tab-view-capstone-playground {
+    width: 100% !important;
+    max-width: 100vw !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow: visible !important;
+}
+
+html.mobile-layout .l0-split-view,
+html.mobile-layout .l2-editor-split,
+html.mobile-layout .l3-split-view,
+html.mobile-layout .l4-split-view,
+html.mobile-layout .l5-spec-grid,
+html.mobile-layout .l5-code-grid,
+html.mobile-layout .dual-mode-zones-container,
+html.mobile-layout .shm-topo-container,
+html.mobile-layout .bench-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 1rem !important;
 }
