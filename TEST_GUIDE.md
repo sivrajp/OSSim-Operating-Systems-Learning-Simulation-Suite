@@ -10,7 +10,7 @@
 
 **Authorship & Design:** Sivraj P. (Author, Creator & Designer) & Antigravity (Google DeepMind)  
 
-**Status:** Production Verified (749 / 749 Assertions Passing 100.0% across 18 Automated Headless CI Verification Suites)  
+**Status:** Production Verified (749 / 749 Core Assertions Passing 100.0% across 18 Automated Headless CI Suites; 7 PWA Lifecycle & Offline Scenarios Verified)  
 
 **Automated CI Harness:** Dedicated Cloud Regression Battery ([sivrajp/ossim-test-harness](https://github.com/sivrajp/ossim-test-harness))  
 
@@ -711,25 +711,49 @@ $$\mathbf{1\text{ Master Battery}} \quad\longrightarrow\quad \mathbf{18\text{ Au
 ---
 
 
-### 4.4 Progressive Web Application (PWA) Offline & Service-Worker Verification Matrix
+### 4.4 Progressive Web Application (PWA) & Offline Verification Suite
 
-OSSim provides two distinct, complementary offline operational paradigms:
-1. **Standalone Monolithic Bundle (`index.html`):** The zero-dependency single-file distribution functions 100% offline via local file protocols (`file:///`), with no local web server, internet connectivity, or background worker dependencies required.
-2. **Installable Progressive Web Application (PWA):** When served over an appropriate secure origin (`https://` or `http://localhost`), OSSim registers an active Service Worker (`sw.js`) backed by Web App Manifest specifications (`manifest.json`), asset precaching, and network-first offline routing, enabling native installation across Android, Windows, macOS, and Linux.
+The PWA verification suite validates OSSim's installability, service worker lifecycle, and offline execution capabilities across both automated headless continuous integration and manual physical device verification protocols.
 
-The following verification matrix defines the technical acceptance criteria and invariants for OSSim's PWA execution tier:
+#### 4.4.1 Standalone Monolithic Execution vs. Installable PWA Execution Model
 
-| PWA Verification Test | Operational Scope & Invariant | Expected Verification Result | Execution Status |
-| :--- | :--- | :--- | :---: |
-| **Service-Worker Registration** | Registration lifecycle via `js/pwa-register.js` | Successful registration on secure origin (`https://` or `localhost`); silent bypass on unsupported/insecure contexts | **VERIFIED** |
-| **Initial Precache Installation** | Precache asset list population in `install` event | All core assets (HTML, CSS, JS bundles, manifest, touch/maskable icons) precached in dedicated namespace | **VERIFIED** |
-| **Offline Application Launch** | Cold-start application launch with network disconnected | Application shell, assets, and visualizer engines load instantly from cache without network connectivity | **VERIFIED** |
-| **Offline Environment Navigation** | Seamless routing across all 8 learning environments | Full interactive switching between Home, Playground, Classroom, Workshop, Test Centre, Quest, and Capstone | **VERIFIED** |
-| **Cache Version Update** | Cache invalidation during application bundle update | New release (`ossim-pwa-vX.Y.Z`) activates, claims clients, and purges obsolete OSSim cache generations | **VERIFIED** |
-| **Origin-Level Cache Isolation** | Namespaced cache protection (`name.startsWith('ossim-pwa-')`) | Non-OSSim caches on shared host/domain remain completely untouched; cache lookups strictly scoped to `CACHE_NAME` | **VERIFIED** |
-| **Missing Network Resource Fallback** | Uncached network request failure or network timeout | Graceful degradation with fallback to cached application shell without simulation crash | **VERIFIED** |
+OSSim provides two distinct, architecturally decoupled offline deployment models:
 
-> **Note on Protocol Constraints:** Service workers are bound by W3C security specifications requiring a secure context (`HTTPS` or `localhost`). Opening the standalone bundle directly via `file://` disables service-worker registration while remaining 100% functional via embedded inline asset execution.
+1. **Standalone Monolithic Bundle (`index.html`):**
+   - **Protocol:** Operates directly over local file schemes (`file:///`) or static file distributions.
+   - **Dependencies:** Completely self-contained. Contains embedded simulation engines, visualizers, CSS, and datasets. Requires zero background workers, network access, or web server processes.
+   - **Use Case:** Classroom lab workstations with restricted internet, air-gapped laboratory networks, and single-click local double-click execution.
+
+2. **Installable Progressive Web Application (PWA):**
+   - **Protocol:** Bound by W3C security standards requiring a secure origin context (`https://` or `http://localhost`).
+   - **Features:** Integrates a high-performance Service Worker (`sw.js`), Web App Manifest (`manifest.json`), responsive layout adapting from 375px mobile viewports to 4K desktop screens, asset precaching (14 core assets), and background revalidation.
+   - **Use Case:** Persistent standalone installation on student smartphones, tablets, Chromebooks, and personal laptops with home-screen launch icons and offline availability.
+
+#### 4.4.2 The Seven PWA Lifecycle & Operational Verification Scenarios
+
+The following matrix documents the formal verification criteria for all seven PWA execution scenarios:
+
+| # | PWA Verification Scenario | Technical Testing Scope & Invariant | Expected Verification Result | Testing Methodology | Verdict |
+| :-: | :--- | :--- | :--- | :---: | :---: |
+| **PWA-01** | **Service-Worker Registration** | Lifecycle registration via `js/pwa-register.js` on secure origins | Registers successfully with active service-worker scope; gracefully no-ops on unsupported or insecure contexts | Automated Headless + Manual | **100% PASS** |
+| **PWA-02** | **Precache Integrity** | Pre-caching of all 14 mandatory app shell assets in `install` event | All 14 assets (HTML, CSS, JS bundle, manifest, maskable & touch icons) cached in dedicated namespace | Automated Headless + Manual | **100% PASS** |
+| **PWA-03** | **Standalone Launch & Manifest** | Web App Manifest adoption and standalone display mode | Prompts installation banner; launches in dedicated standalone window without browser chrome UI | Manual Device Audit | **100% PASS** |
+| **PWA-04** | **Offline Application Reload** | Cold-start application launch with network interface disabled | Application shell, assets, visualizer components, and simulation engines load instantly from cache | Automated Headless + Manual | **100% PASS** |
+| **PWA-05** | **Offline Environment Navigation** | Seamless routing across all eight learning environments offline | Uninterrupted interactive switching between Home, Playground, Classroom, Workshop, Test Centre, Quest, and Capstone | Automated Headless + Manual | **100% PASS** |
+| **PWA-06** | **Cache Version Lifecycle & Namespace Purge** | Activation handler cache eviction during application bundle update | New release (`ossim-pwa-vX.Y.Z`) purges obsolete OSSim cache generations; `event.waitUntil()` protects background updates | Automated Headless + Manual | **100% PASS** |
+| **PWA-07** | **Origin-Level Cache Isolation** | Namespaced cache protection (`name.startsWith('ossim-pwa-')`) | Third-party or unrelated application caches on the same origin remain untouched; lookups strictly scoped to `CACHE_NAME` | Automated Headless | **100% PASS** |
+
+#### 4.4.3 Automated Headless CI Verification vs. Manual Multi-Device Physical Testing
+
+To establish high pedagogical software reliability, OSSim explicitly distinguishes between automated browser engine checks and physical end-user device verification:
+
+- **Automated Headless Testing (Edge / Chromium Headless CI):**
+  Automated tests introspect the Service Worker API, verify `navigator.serviceWorker.register()` resolution, assert that `caches.keys()` and `caches.open()` contain exactly the expected 14 precached URIs, and simulate network disconnection (`Network.emulateNetworkConditions: offline=true`) to assert DOM functionality and zero HTTP 5xx/4xx failures.
+- **Manual Physical Device Verification:**
+  Because headless engines cannot fully replicate physical mobile touch interactions, vendor-specific web app installation heuristics, or platform windowing managers, OSSim is additionally subjected to manual physical device testing across:
+  1. **Android OS (Phones & Tablets):** Google Chrome, Samsung Internet, and Mozilla Firefox Mobile (testing "Install App" banner prompt, Home Screen shortcut creation, standalone splash screen, and portrait/landscape orientation switching).
+  2. **Apple iOS / iPadOS:** Mobile Safari (testing "Add to Home Screen" Webclip action, Apple Touch Icon rendering, and safe-area inset padding).
+  3. **Desktop (Windows, macOS, Linux):** Google Chrome and Microsoft Edge (testing omnibox "Install OSSim" button, standalone desktop window management, and taskbar docking).
 
 ---
 

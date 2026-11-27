@@ -67,11 +67,15 @@ self.addEventListener('fetch', (event) => {
                 .then((networkResponse) => {
                     if (networkResponse && networkResponse.status === 200) {
                         const responseToCache = networkResponse.clone();
-                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache));
+                        // Extend event lifetime to guarantee cache update completes before worker termination
+                        event.waitUntil(
+                            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseToCache))
+                        );
                     }
                     return networkResponse;
                 })
                 .catch(() => {
+                    // Restrict fallback lookup strictly to OSSim cache
                     return caches.open(CACHE_NAME).then((cache) => {
                         return cache.match(event.request).then((cached) => cached || cache.match('./index.html'));
                     });
@@ -85,20 +89,26 @@ self.addEventListener('fetch', (event) => {
         caches.open(CACHE_NAME).then((cache) => {
             return cache.match(event.request).then((cachedResponse) => {
                 if (cachedResponse) {
-                    fetch(event.request).then((networkResponse) => {
-                        if (networkResponse && networkResponse.status === 200) {
-                            cache.put(event.request, networkResponse);
-                        }
-                    }).catch(() => {});
+                    // Revalidate in background without blocking response, extending event lifetime with event.waitUntil
+                    event.waitUntil(
+                        fetch(event.request).then((networkResponse) => {
+                            if (networkResponse && networkResponse.status === 200) {
+                                return cache.put(event.request, networkResponse);
+                            }
+                        }).catch(() => {})
+                    );
                     return cachedResponse;
                 }
 
+                // If not in cache, fetch from network and cache before returning
                 return fetch(event.request).then((networkResponse) => {
                     if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
                         return networkResponse;
                     }
                     const responseToCache = networkResponse.clone();
-                    cache.put(event.request, responseToCache);
+                    event.waitUntil(
+                        cache.put(event.request, responseToCache)
+                    );
                     return networkResponse;
                 });
             });
