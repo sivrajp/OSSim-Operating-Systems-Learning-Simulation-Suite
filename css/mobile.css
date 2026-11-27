@@ -1,11 +1,10 @@
 /* ==============================================================================
-   OSSim Mobile PWA Responsive Stylesheet
+   OSSim Mobile PWA Responsive Stylesheet — Readable Size & Single-Menu Navigation
    Author: Sivraj P. | © Copyright Sivraj P. All rights reserved.
    ============================================================================== */
 
 /* Base Mobile Enhancements & Safe Area Support */
 :root {
-    --mobile-nav-height: 64px;
     --safe-bottom: env(safe-area-inset-bottom, 0px);
     --safe-top: env(safe-area-inset-top, 0px);
 }
@@ -66,14 +65,14 @@
 
 #pwa-install-banner .banner-text h4 {
     margin: 0;
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     font-weight: 700;
     color: #FFFFFF;
 }
 
 #pwa-install-banner .banner-text p {
     margin: 0;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     color: var(--accent-light);
 }
 
@@ -88,11 +87,12 @@
     color: #0E1726;
     border: none;
     border-radius: 6px;
-    padding: 0.45rem 0.9rem;
-    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
     font-weight: 700;
     cursor: pointer;
     transition: transform 0.15s;
+    min-height: 38px;
 }
 
 #pwa-install-btn:active {
@@ -103,7 +103,7 @@
     background: transparent;
     color: var(--text-muted);
     border: none;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
@@ -113,9 +113,9 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.15rem 0.55rem;
-    border-radius: 12px;
-    font-size: 0.68rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 14px;
+    font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.3px;
     text-transform: uppercase;
@@ -124,95 +124,15 @@
 }
 
 .offline-status-pill.online {
-    background: rgba(39, 103, 73, 0.35);
+    background: rgba(39, 103, 73, 0.45);
     color: #9AE6B4;
     border: 1px solid var(--success);
 }
 
 .offline-status-pill.offline {
-    background: rgba(221, 107, 32, 0.35);
+    background: rgba(221, 107, 32, 0.45);
     color: #FEEBC8;
     border: 1px solid var(--warning);
-}
-
-/* --------------------------------------------------------------------------
-   Mobile Bottom Navigation Bar (Scrollable Carousel with All 8 Environments)
-   -------------------------------------------------------------------------- */
-#mobile-bottom-nav {
-    display: none;
-    position: fixed !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    width: 100% !important;
-    height: calc(var(--mobile-nav-height) + var(--safe-bottom)) !important;
-    padding: 5px 8px calc(var(--safe-bottom) + 5px) 8px !important;
-    background: rgba(14, 23, 38, 0.98) !important;
-    border-top: 1px solid rgba(214, 158, 46, 0.35) !important;
-    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.75) !important;
-    z-index: 99999 !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    -webkit-overflow-scrolling: touch !important;
-    scrollbar-width: none !important;
-    white-space: nowrap !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    gap: 6px !important;
-}
-
-#mobile-bottom-nav::-webkit-scrollbar {
-    display: none !important;
-}
-
-.mobile-nav-item {
-    display: inline-flex !important;
-    flex: 0 0 auto !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    min-width: 74px !important;
-    height: 52px !important;
-    padding: 4px 6px !important;
-    border-radius: 8px !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    color: #A0AEC0 !important;
-    cursor: pointer !important;
-    text-decoration: none !important;
-    transition: all 0.15s ease !important;
-}
-
-.mobile-nav-item .nav-icon {
-    font-size: 1.35rem !important;
-    line-height: 1 !important;
-}
-
-.mobile-nav-item .nav-label {
-    font-size: 0.75rem !important;
-    font-weight: 600 !important;
-    letter-spacing: 0.2px !important;
-    margin-top: 2px !important;
-    white-space: nowrap !important;
-}
-
-.mobile-nav-item.active {
-    background: rgba(214, 158, 46, 0.18) !important;
-    border: 1px solid rgba(214, 158, 46, 0.55) !important;
-    color: #D69E2E !important;
-    font-weight: 700 !important;
-}
-
-.mobile-nav-item.active .nav-icon {
-    color: #D69E2E !important;
-    transform: scale(1.1);
-}
-
-.mobile-nav-item#mobile-nav-more-btn {
-    border: 1px dashed rgba(214, 158, 46, 0.4) !important;
-    color: var(--accent-light) !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -221,32 +141,34 @@
 .mobile-menu-toggle-btn {
     display: none;
     align-items: center;
-    gap: 0.35rem;
-    background: rgba(214, 158, 46, 0.15);
-    border: 1px solid var(--accent);
-    color: var(--accent-light);
-    padding: 0.35rem 0.65rem;
+    gap: 0.5rem;
+    background: rgba(214, 158, 46, 0.22);
+    border: 2px solid var(--accent);
+    color: #FFFFFF;
+    padding: 0.45rem 1rem;
     border-radius: 8px;
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-height: 36px;
+    min-height: 42px;
     flex-shrink: 0;
 }
 
 .mobile-menu-toggle-btn:active {
-    background: rgba(214, 158, 46, 0.3);
+    background: rgba(214, 158, 46, 0.4);
     transform: scale(0.96);
 }
 
 .mobile-menu-toggle-btn .menu-icon-bars {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     line-height: 1;
 }
 
 .mobile-menu-toggle-btn .menu-btn-text {
-    letter-spacing: 0.3px;
+    letter-spacing: 0.4px;
+    font-size: 0.95rem;
+    font-weight: 800;
 }
 
 /* --------------------------------------------------------------------------
@@ -273,9 +195,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     animation: drawerFadeIn 0.2s ease;
 }
 
@@ -283,11 +205,11 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: min(350px, 88vw);
+    width: min(380px, 92vw);
     height: 100%;
     background: #0E1726;
-    border-left: 1px solid rgba(214, 158, 46, 0.35);
-    box-shadow: -8px 0 35px rgba(0, 0, 0, 0.85);
+    border-left: 2px solid rgba(214, 158, 46, 0.45);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.9);
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -309,9 +231,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 1.1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(27, 54, 93, 0.95);
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(27, 54, 93, 0.98);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -320,29 +242,40 @@
 .drawer-brand {
     display: flex;
     align-items: center;
-    gap: 0.7rem;
+    gap: 0.8rem;
+}
+
+.drawer-brand .brand-logo {
+    width: 32px;
+    height: 32px;
+    font-size: 1.15rem;
 }
 
 .drawer-title {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: #FFFFFF;
     letter-spacing: 0.4px;
 }
 
 .drawer-subtitle {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--accent);
+    font-weight: 600;
 }
 
 .drawer-close-btn {
     background: transparent;
     border: none;
-    color: #A0AEC0;
-    font-size: 1.8rem;
+    color: #CBD5E0;
+    font-size: 2.2rem;
     line-height: 1;
-    padding: 0.2rem 0.5rem;
+    padding: 0.3rem 0.6rem;
     cursor: pointer;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .drawer-close-btn:active {
@@ -350,57 +283,57 @@
 }
 
 .drawer-body {
-    padding: 1rem;
+    padding: 1.1rem;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.4rem;
 }
 
 .drawer-nav-group {
     display: flex;
     flex-direction: column;
-    gap: 0.45rem;
+    gap: 0.55rem;
 }
 
 .drawer-group-title {
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size: 0.78rem;
+    font-weight: 800;
     color: var(--accent);
     letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 0 0.5rem 0.25rem;
+    padding: 0 0.5rem 0.35rem;
 }
 
 .drawer-nav-item, .drawer-action-item {
     display: flex;
     align-items: center;
-    gap: 0.85rem;
+    gap: 0.95rem;
     width: 100%;
-    padding: 0.65rem 0.85rem;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
     color: #E2E8F0;
     text-align: left;
     cursor: pointer;
     transition: all 0.15s ease;
-    min-height: 52px;
+    min-height: 58px;
 }
 
 .drawer-nav-item:active, .drawer-action-item:active {
-    background: rgba(214, 158, 46, 0.18);
+    background: rgba(214, 158, 46, 0.22);
     border-color: var(--accent);
     transform: scale(0.98);
 }
 
 .drawer-nav-item.active {
-    background: rgba(214, 158, 46, 0.22);
+    background: rgba(214, 158, 46, 0.25);
     border-color: var(--accent);
     color: #FFFFFF;
 }
 
 .drawer-item-icon {
-    font-size: 1.45rem;
+    font-size: 1.65rem;
     line-height: 1;
     flex-shrink: 0;
 }
@@ -408,18 +341,19 @@
 .drawer-item-text {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.2rem;
 }
 
 .drawer-item-title {
-    font-size: 0.92rem;
+    font-size: 1.02rem;
     font-weight: 700;
     color: #FFFFFF;
 }
 
 .drawer-item-desc {
-    font-size: 0.72rem;
-    color: #A0AEC0;
+    font-size: 0.82rem;
+    color: #CBD5E0;
+    line-height: 1.35;
 }
 
 .drawer-nav-item.active .drawer-item-desc {
@@ -432,14 +366,14 @@
 #orientation-tip-banner {
     display: none;
     position: fixed;
-    bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 10px);
+    bottom: calc(var(--safe-bottom) + 12px);
     left: 50%;
     transform: translateX(-50%);
     background: rgba(14, 23, 38, 0.95);
     border: 1px solid rgba(56, 189, 248, 0.6);
     border-radius: 20px;
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.82rem;
     font-weight: 600;
     color: #E2E8F0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
@@ -450,55 +384,26 @@
 }
 
 /* ==========================================================================
-   Comprehensive Mobile & Tablet Adaptation (Applies to all touch / narrow screens)
+   Comprehensive Mobile & Tablet Adaptation — Full Readable Size Flow
    ========================================================================== */
 @media (max-width: 1024px), (pointer: coarse) {
-    /* 1. Prevent any horizontal content blowout that triggers desktop zoom-out */
+    /* 1. Base typography & layout sizing */
     html, body {
+        font-size: 16px !important;
         width: 100% !important;
         max-width: 100vw !important;
-        overflow-x: hidden !important;
-        position: relative !important;
-        height: 100vh !important;
-        height: 100dvh !important;
     }
 
-    /* 2. Show bottom navigation */
-    #mobile-bottom-nav {
-        display: flex !important;
-    }
-
-    /* 3. Hide redundant desktop top navigation ribbon */
-    .header-ribbon-row,
-    .header-ribbon-row .nav-tabs,
-    .nav-tabs {
-        display: none !important;
-    }
-
-    /* 4. Hide desktop header action buttons */
-    .header-ribbon-row .header-actions {
-        display: none !important;
-    }
-
-    /* 5. Hide desktop subtitle strip */
-    .header-bottom-bar {
-        display: none !important;
-    }
-
-    /* 6. Compact header row */
+    /* 2. Sticky Header with prominent Menu button */
     header.app-header {
         position: sticky !important;
         top: 0 !important;
         z-index: 10000 !important;
         background: #0E1726 !important;
-        padding: 0.5rem 0.85rem !important;
+        padding: 0.65rem 1rem !important;
         gap: 0 !important;
         width: 100% !important;
         max-width: 100vw !important;
-    }
-
-    .mobile-menu-toggle-btn {
-        display: inline-flex !important;
     }
 
     .header-top-bar {
@@ -509,19 +414,34 @@
     }
 
     .header-top-bar .tool-title {
-        font-size: 0.92rem !important;
-        letter-spacing: 0.4px !important;
+        font-size: 1.1rem !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.5px !important;
     }
 
     .header-top-bar .brand-logo {
-        width: 22px !important;
-        height: 22px !important;
-        font-size: 0.85rem !important;
+        width: 28px !important;
+        height: 28px !important;
+        font-size: 1.0rem !important;
     }
 
-    /* 7. Viewport padding so content is never covered by bottom nav */
+    .mobile-menu-toggle-btn {
+        display: inline-flex !important;
+    }
+
+    /* 3. Hide redundant desktop top ribbon & bottom ribbon */
+    .header-ribbon-row,
+    .header-ribbon-row .nav-tabs,
+    .nav-tabs,
+    .header-ribbon-row .header-actions,
+    .header-bottom-bar,
+    #mobile-bottom-nav {
+        display: none !important;
+    }
+
+    /* 4. Main Viewport & Home Page */
     main#app-viewport {
-        padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 8px) !important;
+        padding-bottom: 2.5rem !important;
         width: 100% !important;
         max-width: 100vw !important;
         overflow-x: hidden !important;
@@ -529,64 +449,130 @@
         -webkit-overflow-scrolling: touch !important;
     }
 
-    /* 8. Home Hero & Container Mobile Adjustments */
     .home-container {
-        padding: 1rem 0.85rem 3rem !important;
+        padding: 1.25rem 1rem 3rem !important;
         width: 100% !important;
         max-width: 100vw !important;
-        overflow-x: hidden !important;
-        gap: 1.25rem !important;
+        gap: 1.5rem !important;
     }
 
     .home-hero {
         width: 100% !important;
         max-width: 100% !important;
         padding: 0 !important;
+        gap: 0.85rem !important;
     }
 
     .home-hero-badge {
-        font-size: 0.65rem !important;
-        padding: 0.25rem 0.65rem !important;
-        text-align: center !important;
+        font-size: 0.82rem !important;
+        padding: 0.35rem 0.85rem !important;
+        border-radius: 20px !important;
     }
 
     .home-hero-title {
-        font-size: 1.4rem !important;
-        line-height: 1.2 !important;
+        font-size: 1.65rem !important;
+        line-height: 1.25 !important;
         word-break: break-word !important;
     }
 
     .home-hero-subtitle {
-        font-size: 0.85rem !important;
-        line-height: 1.4 !important;
+        font-size: 1.05rem !important;
+        line-height: 1.5 !important;
+        color: #CBD5E0 !important;
     }
 
     .home-hero-purpose {
-        font-size: 0.78rem !important;
-        padding: 0.75rem 0.9rem !important;
-        line-height: 1.5 !important;
+        font-size: 0.95rem !important;
+        padding: 1rem 1.15rem !important;
+        line-height: 1.6 !important;
         width: 100% !important;
     }
 
     .home-stats-strip {
         flex-direction: column !important;
         width: 100% !important;
-        gap: 0.4rem !important;
+        gap: 0.55rem !important;
     }
 
     .home-stats-strip .stat-pill {
         width: 100% !important;
         justify-content: flex-start !important;
-        font-size: 0.74rem !important;
-        padding: 0.4rem 0.75rem !important;
+        font-size: 0.9rem !important;
+        padding: 0.6rem 1rem !important;
+        min-height: 44px !important;
     }
 
-    .quickstart-steps-grid {
+    /* 5. ALL GRIDS REFLOW INTO READABLE SINGLE-COLUMN (1fr) */
+    .home-cards-grid,
+    .quickstart-steps-grid,
+    .pillars-grid,
+    .levels-grid,
+    .journeys-grid,
+    .syllabus-grid,
+    .credits-grid,
+    .home-docs-grid {
+        display: grid !important;
         grid-template-columns: 1fr !important;
-        gap: 0.75rem !important;
+        gap: 1.25rem !important;
+        width: 100% !important;
     }
 
-    /* 9. Touch Ergonomics */
+    /* 6. Card typography and touch buttons */
+    .home-card,
+    .step-card,
+    .pillar-card,
+    .level-card,
+    .journey-card,
+    .doc-card,
+    .credit-card {
+        padding: 1.25rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .card-title,
+    .pillar-card-title,
+    .level-card-title,
+    .journey-card-title,
+    .doc-card-title {
+        font-size: 1.2rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .card-description,
+    .pillar-card-desc,
+    .level-card-desc,
+    .journey-card-desc,
+    .doc-card-desc {
+        font-size: 0.94rem !important;
+        line-height: 1.55 !important;
+        color: #CBD5E0 !important;
+    }
+
+    .card-action-btn,
+    .doc-card-btn {
+        font-size: 1.0rem !important;
+        min-height: 48px !important;
+        padding: 0.75rem 1.25rem !important;
+        border-radius: 8px !important;
+        font-weight: 700 !important;
+    }
+
+    .step-num {
+        font-size: 1.15rem !important;
+    }
+
+    .step-title {
+        font-size: 1.05rem !important;
+    }
+
+    .step-desc {
+        font-size: 0.90rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* 7. Touch Ergonomics */
     button, 
     .btn, 
     select, 
@@ -595,7 +581,8 @@
         min-height: 44px !important;
     }
 
-    /* 10. Horizontal Touch-Scroll Containers for Data Visualizers */
+    /* 8. Tables, Code blocks & Data Visualizers - Horizontal Touch Scrolling */
+    .arch-mapping-table-wrap,
     .visualizer-container,
     .canvas-wrapper,
     .gantt-chart-wrapper,
@@ -608,24 +595,34 @@
         -webkit-overflow-scrolling: touch !important;
     }
 
-    /* 11. Classroom & Workshop Layouts: Single-column flow */
+    .arch-mapping-table {
+        min-width: 540px !important;
+        font-size: 0.88rem !important;
+    }
+
+    .arch-mapping-table th,
+    .arch-mapping-table td {
+        padding: 0.65rem 0.75rem !important;
+    }
+
+    /* 9. Classroom & Workshop Layouts: Single-column flow */
     .classroom-layout,
     .workshop-layout,
     .solver-grid {
         flex-direction: column !important;
         grid-template-columns: 1fr !important;
-        gap: 1rem !important;
+        gap: 1.25rem !important;
         width: 100% !important;
     }
 
     .concept-sidebar,
     .solver-sidebar {
         width: 100% !important;
-        max-height: 250px !important;
+        max-height: 280px !important;
         overflow-y: auto !important;
     }
 
-    /* 12. Floating Windows in Living Desktop */
+    /* 10. Floating Windows in Living Desktop */
     .desktop-window {
         max-width: 96vw !important;
         left: 2vw !important;
@@ -640,6 +637,7 @@ html.mobile-layout header.app-header {
     top: 0 !important;
     z-index: 10000 !important;
     background: #0E1726 !important;
+    padding: 0.65rem 1rem !important;
 }
 
 html.mobile-layout .mobile-menu-toggle-btn {
@@ -650,23 +648,29 @@ html.mobile-layout .header-ribbon-row,
 html.mobile-layout .header-ribbon-row .nav-tabs,
 html.mobile-layout .nav-tabs,
 html.mobile-layout .header-ribbon-row .header-actions,
-html.mobile-layout .header-bottom-bar {
+html.mobile-layout .header-bottom-bar,
+html.mobile-layout #mobile-bottom-nav {
     display: none !important;
 }
 
-html.mobile-layout #mobile-bottom-nav {
-    display: flex !important;
+html.mobile-layout main#app-viewport {
+    padding-bottom: 2.5rem !important;
+    overflow-x: hidden !important;
 }
 
-html.mobile-layout main#app-viewport {
-    padding-bottom: calc(var(--mobile-nav-height) + var(--safe-bottom) + 8px) !important;
-    overflow-x: hidden !important;
+html.mobile-layout .home-cards-grid,
+html.mobile-layout .quickstart-steps-grid,
+html.mobile-layout .pillars-grid,
+html.mobile-layout .levels-grid,
+html.mobile-layout .journeys-grid,
+html.mobile-layout .syllabus-grid,
+html.mobile-layout .credits-grid,
+html.mobile-layout .home-docs-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
 }
 
 html.mobile-layout .home-stats-strip {
     flex-direction: column !important;
-}
-
-html.mobile-layout .quickstart-steps-grid {
-    grid-template-columns: 1fr !important;
 }

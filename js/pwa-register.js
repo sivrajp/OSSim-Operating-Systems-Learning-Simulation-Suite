@@ -46,7 +46,6 @@
     // 3. Setup Mobile UI Components after DOM ready
     document.addEventListener('DOMContentLoaded', () => {
         initInstallBanner();
-        initBottomNavigation();
         initMobileDrawer();
         initNetworkStatus();
         initOrientationHelper();
@@ -77,103 +76,12 @@
         }
     }
 
-    // 4. Synchronize Mobile Bottom Navigation with OSSim Master Tabs
-    function initBottomNavigation() {
-        const bottomNav = document.getElementById('mobile-bottom-nav');
-        if (!bottomNav) return;
-
-        const navItems = bottomNav.querySelectorAll('.mobile-nav-item');
-
-        navItems.forEach((item) => {
-            item.addEventListener('click', () => {
-                // Check if this is the "More / All" button
-                if (item.id === 'mobile-nav-more-btn') {
-                    toggleDrawer(true);
-                    return;
-                }
-
-                const targetTabId = item.getAttribute('data-tab');
-                if (!targetTabId) return;
-
-                // 1. Update active item state in bottom nav & drawer
-                syncActiveTab(targetTabId);
-
-                // 2. Trigger click on existing desktop header tab button to execute core suite routing
-                triggerTabSwitch(targetTabId);
-
-                // 3. Scroll active bottom nav button into view
-                item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-
-                // 4. Scroll to top of viewport
-                const viewport = document.getElementById('app-viewport');
-                if (viewport) viewport.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
-
-        // Listen to desktop tab changes to keep mobile bottom nav & drawer in sync
-        const desktopTabs = document.querySelectorAll('.nav-tab-btn');
-        desktopTabs.forEach((tab) => {
-            tab.addEventListener('click', () => {
-                const tabId = tab.getAttribute('data-tab');
-                if (tabId) {
-                    syncActiveTab(tabId);
-                    const matchingBottomItem = bottomNav.querySelector(`.mobile-nav-item[data-tab="${tabId}"]`);
-                    if (matchingBottomItem) {
-                        matchingBottomItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                    }
-                }
-            });
-        });
-    }
-
-    function syncActiveTab(tabId) {
-        document.querySelectorAll('.mobile-nav-item').forEach((item) => {
-            if (item.getAttribute('data-tab') === tabId) {
-                item.classList.add('active');
-            } else if (item.id !== 'mobile-nav-more-btn') {
-                item.classList.remove('active');
-            }
-        });
-        document.querySelectorAll('.drawer-nav-item').forEach((item) => {
-            if (item.getAttribute('data-tab') === tabId) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    }
-
-    function triggerTabSwitch(targetTabId) {
-        const desktopTabBtn = document.querySelector(`.nav-tab-btn[data-tab="${targetTabId}"]`);
-        if (desktopTabBtn) {
-            desktopTabBtn.click();
-        } else {
-            // Fallback direct view toggle
-            document.querySelectorAll('.tab-view').forEach((v) => v.classList.remove('active'));
-            const targetView = document.getElementById(`tab-view-${targetTabId}`);
-            if (targetView) targetView.classList.add('active');
-        }
-    }
-
-    function toggleDrawer(open) {
-        const drawer = document.getElementById('mobile-nav-drawer');
-        if (!drawer) return;
-        if (open) {
-            drawer.classList.add('open');
-            drawer.setAttribute('aria-hidden', 'false');
-            document.body.style.overflow = 'hidden';
-        } else {
-            drawer.classList.remove('open');
-            drawer.setAttribute('aria-hidden', 'true');
-            document.body.style.overflow = '';
-        }
-    }
-
-    // 5. Initialize Mobile Navigation Drawer (8 Environments & Suite Actions)
+    // 4. Initialize Mobile Navigation Drawer (8 Canonical Environments & Suite Actions)
     function initMobileDrawer() {
         const menuToggleBtn = document.getElementById('mobile-menu-toggle-btn');
         const drawerCloseBtn = document.getElementById('drawer-close-btn');
         const backdrop = document.getElementById('drawer-backdrop');
+        const drawerNavItems = document.querySelectorAll('.drawer-nav-item');
 
         if (menuToggleBtn) {
             menuToggleBtn.addEventListener('click', () => toggleDrawer(true));
@@ -188,23 +96,38 @@
         }
 
         // Drawer navigation items
-        const drawerNavItems = document.querySelectorAll('.drawer-nav-item');
         drawerNavItems.forEach((item) => {
             item.addEventListener('click', () => {
                 const targetTabId = item.getAttribute('data-tab');
                 if (!targetTabId) return;
 
-                syncActiveTab(targetTabId);
+                // Sync active class in drawer
+                drawerNavItems.forEach((d) => d.classList.remove('active'));
+                item.classList.add('active');
+
+                // Trigger desktop tab click to execute core suite routing
                 triggerTabSwitch(targetTabId);
                 toggleDrawer(false);
 
-                const matchingBottomItem = document.querySelector(`.mobile-nav-item[data-tab="${targetTabId}"]`);
-                if (matchingBottomItem) {
-                    matchingBottomItem.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-                }
-
                 const viewport = document.getElementById('app-viewport');
                 if (viewport) viewport.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Sync drawer active tab when tab is changed via other triggers (e.g. cards)
+        const desktopTabs = document.querySelectorAll('.nav-tab-btn');
+        desktopTabs.forEach((tab) => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                if (tabId) {
+                    drawerNavItems.forEach((item) => {
+                        if (item.getAttribute('data-tab') === tabId) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    });
+                }
             });
         });
 
@@ -243,6 +166,32 @@
                 toggleDrawer(false);
             }
         });
+    }
+
+    function toggleDrawer(open) {
+        const drawer = document.getElementById('mobile-nav-drawer');
+        if (!drawer) return;
+        if (open) {
+            drawer.classList.add('open');
+            drawer.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        } else {
+            drawer.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+    }
+
+    function triggerTabSwitch(targetTabId) {
+        const desktopTabBtn = document.querySelector(`.nav-tab-btn[data-tab="${targetTabId}"]`);
+        if (desktopTabBtn) {
+            desktopTabBtn.click();
+        } else {
+            // Fallback direct view toggle
+            document.querySelectorAll('.tab-view').forEach((v) => v.classList.remove('active'));
+            const targetView = document.getElementById(`tab-view-${targetTabId}`);
+            if (targetView) targetView.classList.add('active');
+        }
     }
 
     // 5. Network Status Monitoring

@@ -23,54 +23,53 @@
     })();
     </script>
     <style>
-        /* Immediate Critical Mobile Layout - Eliminates desktop zoom-out */
+        /* Immediate Critical Mobile Layout - Eliminates desktop zoom-out & enforces readable size */
         @media (max-width: 1024px), (pointer: coarse) {
             html, body {
                 width: 100% !important;
                 max-width: 100vw !important;
+                font-size: 16px !important;
             }
             header.app-header {
                 position: sticky !important;
                 top: 0 !important;
                 z-index: 10000 !important;
+                padding: 0.65rem 1rem !important;
             }
             .header-ribbon-row,
             .header-ribbon-row .nav-tabs,
             .nav-tabs,
             .header-ribbon-row .header-actions,
-            .header-bottom-bar {
+            .header-bottom-bar,
+            #mobile-bottom-nav {
                 display: none !important;
             }
             .mobile-menu-toggle-btn {
                 display: inline-flex !important;
             }
-            #mobile-bottom-nav {
-                display: flex !important;
-            }
             main#app-viewport {
-                padding-bottom: 74px !important;
+                padding-bottom: 24px !important;
             }
         }
         html.mobile-layout header.app-header {
             position: sticky !important;
             top: 0 !important;
             z-index: 10000 !important;
+            padding: 0.65rem 1rem !important;
         }
         html.mobile-layout .header-ribbon-row,
         html.mobile-layout .header-ribbon-row .nav-tabs,
         html.mobile-layout .nav-tabs,
         html.mobile-layout .header-ribbon-row .header-actions,
-        html.mobile-layout .header-bottom-bar {
+        html.mobile-layout .header-bottom-bar,
+        html.mobile-layout #mobile-bottom-nav {
             display: none !important;
         }
         html.mobile-layout .mobile-menu-toggle-btn {
             display: inline-flex !important;
         }
-        html.mobile-layout #mobile-bottom-nav {
-            display: flex !important;
-        }
         html.mobile-layout main#app-viewport {
-            padding-bottom: 74px !important;
+            padding-bottom: 24px !important;
         }
     </style>
     <!-- PWA Manifest & Mobile Web App Meta -->
@@ -1098,46 +1097,6 @@
     <div id="orientation-tip-banner">
         <span>🔄 Tip: Rotate to landscape for expanded view</span>
     </div>
-
-    <!-- Mobile Thumb-Friendly Bottom Navigation Bar (Scrollable Carousel with All 8 Environments) -->
-    <nav id="mobile-bottom-nav" aria-label="Mobile Navigation">
-        <button class="mobile-nav-item active" data-tab="home" title="1. Home">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-label">Home</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="desktop" title="2. The Playground">
-            <span class="nav-icon">🎮</span>
-            <span class="nav-label">Playground</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="workbench" title="3. The Classroom">
-            <span class="nav-icon">📚</span>
-            <span class="nav-label">Classroom</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="algorithms" title="4. The Workshop">
-            <span class="nav-icon">⚙️</span>
-            <span class="nav-label">Workshop</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="challenge" title="5. The Test Centre">
-            <span class="nav-icon">🎯</span>
-            <span class="nav-label">Tests</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="quest" title="6. OS Builder Quest">
-            <span class="nav-icon">🏗️</span>
-            <span class="nav-label">OS Builder</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="capstone" title="7. The Capstone Studio">
-            <span class="nav-icon">🏭</span>
-            <span class="nav-label">Capstone</span>
-        </button>
-        <button class="mobile-nav-item" data-tab="capstone-playground" title="8. Capstone Playground">
-            <span class="nav-icon">⚡</span>
-            <span class="nav-label">Hardware</span>
-        </button>
-        <button class="mobile-nav-item" id="mobile-nav-more-btn" title="Open All Environments Menu">
-            <span class="nav-icon">☰</span>
-            <span class="nav-label">All</span>
-        </button>
-    </nav>
 
     <!-- Mobile Navigation Drawer (Full Menu with All 8 Environments & Learning Actions) -->
     <div id="mobile-nav-drawer" class="mobile-nav-drawer" aria-hidden="true">
