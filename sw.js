@@ -54,6 +54,8 @@ self.addEventListener('fetch', (event) => {
     if (event.request.method !== 'GET') return;
 
     const url = new URL(event.request.url);
+    // Bypass cross-origin requests (e.g. Google Analytics) to let the browser handle them directly
+    if (url.origin !== self.location.origin) return;
     const isHtmlOrCss = event.request.mode === 'navigate' ||
                         (event.request.headers.get('accept') && event.request.headers.get('accept').includes('text/html')) ||
                         url.pathname.endsWith('.html') ||
